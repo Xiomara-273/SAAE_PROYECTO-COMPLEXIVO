@@ -1,0 +1,477 @@
+<div class="nosotros-container">
+
+
+  <!-- HERO PRINCIPAL -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <span class="badge">
+        Información Institucional
+      </span>
+
+
+      <h1>
+        {{nombreSistema}}
+      </h1>
+
+
+      <h2>
+        {{institucion}}
+      </h2>
+
+
+      <p>
+        {{descripcion}}
+      </p>
+
+
+    </div>
+
+  </section>
+
+
+
+
+
+  <!-- QUIENES SOMOS -->
+
+  <section class="section-card">
+
+
+    <div class="section-title">
+
+      <span>
+        SAAE
+      </span>
+
+      <h2>
+        ¿Quiénes somos?
+      </h2>
+
+
+    </div>
+
+
+
+    <p>
+
+      El Sistema Analítico de Asistencia Estudiantil (SAAE)
+      es una plataforma tecnológica orientada al monitoreo,
+      análisis y seguimiento académico mediante el control
+      de asistencia y generación de alertas tempranas.
+
+    </p>
+
+
+  </section>
+
+
+
+
+
+
+
+  <!-- MISION Y VISION -->
+
+
+  <section class="mission-section">
+
+
+    <div class="mission-card">
+
+
+      <div class="icon">
+        🎯
+      </div>
+
+
+      <h2>
+        Nuestra Misión
+      </h2>
+
+
+      <p>
+        {{mision}}
+      </p>
+
+
+    </div>
+
+
+
+
+
+    <div class="mission-card">
+
+
+      <div class="icon">
+        🚀
+      </div>
+
+
+      <h2>
+        Nuestra Visión
+      </h2>
+
+
+      <p>
+        {{vision}}
+      </p>
+
+
+    </div>
+
+
+
+  </section>
+
+
+
+
+
+
+
+
+  <!-- VALORES -->
+
+
+  <section class="section-card">
+
+
+    <div class="section-title">
+
+
+      <span>
+        YAVIRAC
+      </span>
+
+
+      <h2>
+        Nuestros Valores
+      </h2>
+
+
+    </div>
+
+
+
+
+
+    <div class="grid-items">
+
+
+      <article
+      class="item-card"
+      *ngFor="let valor of valores">
+
+
+        <div class="item-icon">
+          ⭐
+        </div>
+
+
+        <p>
+          {{valor}}
+        </p>
+
+
+      </article>
+
+
+    </div>
+
+
+
+  </section>
+
+
+
+
+
+
+
+
+  <!-- TECNOLOGIAS -->
+
+
+  <section class="section-card">
+
+
+    <div class="section-title">
+
+
+      <span>
+        Tecnología
+      </span>
+
+
+      <h2>
+        Tecnologías utilizadas
+      </h2>
+
+
+    </div>
+
+
+
+
+
+    <div class="grid-items">
+
+
+      <article
+      class="tech-card"
+      *ngFor="let tecnologia of tecnologias">
+
+
+        {{tecnologia}}
+
+
+      </article>
+
+
+    </div>
+
+
+
+  </section>
+
+
+
+
+
+
+
+
+  <!-- BENEFICIOS -->
+
+
+  <section class="section-card">
+
+
+    <div class="section-title">
+
+
+      <span>
+        Sistema
+      </span>
+
+
+      <h2>
+        Beneficios del SAAE
+      </h2>
+
+
+    </div>
+
+
+
+
+
+    <div class="benefits">
+
+
+      <div
+      class="benefit"
+      *ngFor="let beneficio of beneficios">
+
+
+        <span>
+          ✓
+        </span>
+
+
+        <p>
+          {{beneficio}}
+        </p>
+
+
+      </div>
+
+
+    </div>
+
+
+
+  </section>
+
+
+
+
+
+
+
+
+
+  <!-- INFORMACION INSTITUCIONAL -->
+
+
+  <section class="contact-section">
+
+
+    <h2>
+      Instituto Superior Tecnológico Yavirac
+    </h2>
+
+
+
+    <div class="contact-grid">
+
+
+
+      <div>
+
+        <strong>
+          Dirección
+        </strong>
+
+
+        <p>
+          {{contacto.direccion}}
+        </p>
+
+
+      </div>
+
+
+
+
+
+      <div>
+
+
+        <strong>
+          Teléfono
+        </strong>
+
+
+        <p>
+          {{contacto.telefono}}
+        </p>
+
+
+      </div>
+
+
+
+
+
+      <div>
+
+
+        <strong>
+          Correo
+        </strong>
+
+
+        <p>
+          {{contacto.correo}}
+        </p>
+
+
+      </div>
+
+
+
+
+
+      <div>
+
+
+        <strong>
+          Atención
+        </strong>
+
+
+        <p>
+          {{contacto.horario}}
+        </p>
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+  </section>
+
+
+
+
+
+
+
+
+
+  <!-- FOOTER -->
+
+
+  <footer class="footer">
+
+
+    <div class="footer-content">
+
+
+      <h3>
+        YAVIRAC
+      </h3>
+
+
+      <p>
+
+        Formamos profesionales de excelencia
+        de nivel Técnico y Tecnológico que
+        promueven, integran y aplican sus
+        conocimientos con la sociedad.
+
+      </p>
+
+
+
+
+      <div class="social">
+
+
+        <span
+        *ngFor="let red of redes">
+
+
+          {{red}}
+
+
+        </span>
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+
+
+    <div class="copyright">
+
+
+      © 2026 - Instituto Superior Tecnológico
+      de Turismo y Patrimonio Yavirac | Quito
+
+
+    </div>
+
+
+
+  </footer>
+
+
+
+
+
+</div>

@@ -1,0 +1,747 @@
+<section class="gestion-container">
+
+
+  <!-- HEADER -->
+  <section class="page-header">
+
+    <div>
+
+      <h1>
+        Gestión de Carreras y Cursos
+      </h1>
+
+      <p>
+        Administra las carreras y cursos académicos registrados.
+      </p>
+
+    </div>
+
+
+    <div class="new-actions">
+
+      <button
+        class="btn-primary"
+        (click)="abrirSelectorRegistro()">
+
+        + Nuevo registro
+
+      </button>
+
+
+    </div>
+
+
+  </section>
+
+
+
+
+
+  <!-- KPI -->
+
+  <section class="kpi-grid">
+
+
+    <article class="kpi-card">
+
+      <div class="kpi-icon">
+        🎓
+      </div>
+
+
+      <div>
+
+        <span>
+          Carreras registradas
+        </span>
+
+
+        <strong>
+          {{ carreras.length }}
+        </strong>
+
+      </div>
+
+
+    </article>
+
+
+
+
+
+    <article class="kpi-card">
+
+
+      <div class="kpi-icon">
+        📚
+      </div>
+
+
+      <div>
+
+        <span>
+          Cursos registrados
+        </span>
+
+
+        <strong>
+          {{ cursos.length }}
+        </strong>
+
+
+      </div>
+
+
+    </article>
+
+
+  </section>
+
+
+
+
+
+  <!-- TABS -->
+
+  <section class="tabs-card">
+
+
+    <button
+      [class.active]="pestanaActiva === 'carreras'"
+      (click)="pestanaActiva='carreras'">
+
+      🎓 Carreras
+
+    </button>
+
+
+
+    <button
+      [class.active]="pestanaActiva === 'cursos'"
+      (click)="pestanaActiva='cursos'">
+
+      📚 Cursos
+
+    </button>
+
+
+  </section>
+
+
+
+
+
+  <!-- TABLA CARRERAS -->
+
+
+  <section
+    class="table-card"
+    *ngIf="pestanaActiva === 'carreras'">
+
+
+    <div class="table-header">
+
+
+      <h2>
+        Carreras registradas
+      </h2>
+
+
+      <span>
+        {{ carreras.length }} registros
+      </span>
+
+
+    </div>
+
+
+
+
+    <div
+      class="loading"
+      *ngIf="cargandoCarreras">
+
+      Cargando carreras...
+
+    </div>
+
+
+
+
+    <div
+      class="error"
+      *ngIf="errorCarreras">
+
+      {{ errorCarreras }}
+
+    </div>
+
+
+
+
+    <div
+      class="table-responsive"
+      *ngIf="!cargandoCarreras">
+
+
+      <table>
+
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Nombre
+            </th>
+
+            <th>
+              Código
+            </th>
+
+            <th>
+              Descripción
+            </th>
+
+            <th>
+              Estado
+            </th>
+
+            <th>
+              Acciones
+            </th>
+
+
+          </tr>
+
+
+        </thead>
+
+
+
+        <tbody>
+
+
+          <tr *ngFor="let carrera of carreras">
+
+
+            <td>
+              {{ carrera.nombre }}
+            </td>
+
+
+            <td>
+              {{ carrera.codigo }}
+            </td>
+
+
+            <td>
+              {{ carrera.descripcion }}
+            </td>
+
+
+            <td>
+
+              <span class="estado">
+
+                {{ carrera.estado }}
+
+              </span>
+
+            </td>
+
+
+
+            <td class="actions">
+
+
+              <button
+                (click)="editarCarrera(carrera)">
+
+                ✏️
+
+              </button>
+
+
+
+              <button
+                (click)="eliminarCarrera(carrera.id)">
+
+                🗑️
+
+              </button>
+
+
+            </td>
+
+
+          </tr>
+
+
+        </tbody>
+
+
+      </table>
+
+
+    </div>
+
+
+  </section>
+    <!-- TABLA CURSOS -->
+
+
+  <section
+    class="table-card"
+    *ngIf="pestanaActiva === 'cursos'">
+
+
+    <div class="table-header">
+
+
+      <h2>
+        Cursos registrados
+      </h2>
+
+
+      <span>
+        {{ cursos.length }} registros
+      </span>
+
+
+    </div>
+
+
+
+
+    <div
+      class="loading"
+      *ngIf="cargandoCursos">
+
+      Cargando cursos...
+
+    </div>
+
+
+
+
+    <div
+      class="error"
+      *ngIf="errorCursos">
+
+      {{ errorCursos }}
+
+    </div>
+
+
+
+
+
+    <div
+      class="table-responsive"
+      *ngIf="!cargandoCursos">
+
+
+      <table>
+
+
+        <thead>
+
+
+          <tr>
+
+
+            <th>
+              Curso
+            </th>
+
+
+            <th>
+              Código
+            </th>
+
+
+            <th>
+              Carrera
+            </th>
+
+
+            <th>
+              Semestre
+            </th>
+
+
+            <th>
+              Estado
+            </th>
+
+
+            <th>
+              Acciones
+            </th>
+
+
+          </tr>
+
+
+        </thead>
+
+
+
+
+
+        <tbody>
+
+
+          <tr *ngFor="let curso of cursos">
+
+
+            <td>
+              {{ curso.nombreCurso }}
+            </td>
+
+
+            <td>
+              {{ curso.codigoCurso }}
+            </td>
+
+
+            <td>
+              {{ curso.carrera }}
+            </td>
+
+
+            <td>
+              {{ curso.semestre }}
+            </td>
+
+
+            <td>
+
+              <span class="estado">
+
+                {{ curso.estado }}
+
+              </span>
+
+            </td>
+
+
+
+
+            <td class="actions">
+
+
+              <button
+                (click)="editarCurso(curso)">
+
+                ✏️
+
+              </button>
+
+
+
+              <button
+                (click)="eliminarCurso(curso.id)">
+
+                🗑️
+
+              </button>
+
+
+            </td>
+
+
+          </tr>
+
+
+        </tbody>
+
+
+      </table>
+
+
+    </div>
+
+
+  </section>
+
+
+
+
+
+
+
+  <!-- MODAL SELECTOR NUEVO REGISTRO -->
+
+
+  <div
+    class="modal-overlay"
+    *ngIf="mostrarSelectorRegistro">
+
+
+    <div class="modal-container selector-modal">
+
+
+      <div class="modal-header">
+
+
+        <h2>
+          Nuevo registro
+        </h2>
+
+
+
+        <button
+          class="close-btn"
+          (click)="cerrarSelectorRegistro()">
+
+          ✕
+
+        </button>
+
+
+      </div>
+
+
+
+
+      <p>
+        ¿Qué desea crear?
+      </p>
+
+
+
+
+      <div class="modal-actions">
+
+
+
+        <button
+          class="btn-primary"
+          (click)="abrirModal('carrera')">
+
+          🎓 Carrera
+
+        </button>
+
+
+
+
+        <button
+          class="btn-primary"
+          (click)="abrirModal('curso')">
+
+          📚 Curso
+
+        </button>
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+
+
+  <!-- MODAL FORMULARIO -->
+
+
+  <div
+    class="modal-overlay"
+    *ngIf="mostrarModal">
+
+
+    <div class="modal-container">
+
+
+
+      <div class="modal-header">
+
+
+        <h2>
+
+          {{ modoEdicion ? 'Editar' : 'Nuevo' }}
+
+          {{ tipoRegistro === 'carrera' ? 'Carrera' : 'Curso' }}
+
+        </h2>
+
+
+
+        <button
+          class="close-btn"
+          (click)="cerrarModal()">
+
+          ✕
+
+        </button>
+
+
+      </div>
+
+
+
+
+
+
+      <form
+        class="materia-form"
+        (ngSubmit)="guardar()">
+
+
+
+        <ng-container *ngIf="tipoRegistro === 'carrera'">
+
+
+          <label>
+            Nombre de carrera
+          </label>
+
+
+          <input
+            type="text"
+            [(ngModel)]="formulario.nombre"
+            name="nombre">
+
+
+
+          <label>
+            Código
+          </label>
+
+
+          <input
+            type="text"
+            [(ngModel)]="formulario.codigo"
+            name="codigo">
+
+
+
+          <label>
+            Descripción
+          </label>
+
+
+          <textarea
+            [(ngModel)]="formulario.descripcion"
+            name="descripcion">
+          </textarea>
+
+
+        </ng-container>
+                <ng-container *ngIf="tipoRegistro === 'curso'">
+
+
+          <label>
+            Nombre del curso
+          </label>
+
+
+          <input
+            type="text"
+            [(ngModel)]="formulario.nombreCurso"
+            name="nombreCurso">
+
+
+
+          <label>
+            Código del curso
+          </label>
+
+
+          <input
+            type="text"
+            [(ngModel)]="formulario.codigoCurso"
+            name="codigoCurso">
+
+
+
+          <label>
+            Carrera
+          </label>
+
+
+          <input
+            type="text"
+            [(ngModel)]="formulario.carrera"
+            name="carrera">
+
+
+
+          <label>
+            Semestre
+          </label>
+
+
+          <input
+            type="text"
+            [(ngModel)]="formulario.semestre"
+            name="semestre">
+
+
+
+        </ng-container>
+
+
+
+
+
+
+
+        <div class="modal-actions">
+
+
+
+          <button
+            type="button"
+            class="btn-secondary"
+            (click)="cerrarModal()">
+
+            Cancelar
+
+          </button>
+
+
+
+
+
+          <button
+            type="submit"
+            class="btn-primary">
+
+            Guardar
+
+          </button>
+
+
+
+        </div>
+
+
+
+      </form>
+
+
+
+    </div>
+
+
+  </div>
+
+
+
+
+
+
+
+</section>

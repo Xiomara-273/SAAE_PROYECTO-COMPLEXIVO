@@ -1,0 +1,349 @@
+<aside class="sidebar">
+
+
+  <!-- LOGO -->
+  <div class="sidebar-header">
+
+    <div class="logo-circle">
+      S
+    </div>
+
+    <div class="logo-text">
+
+      <h2>
+        SAAE
+      </h2>
+
+      <span>
+        Yavirac
+      </span>
+
+    </div>
+
+  </div>
+
+
+
+  <nav>
+
+
+    <!-- DASHBOARD -->
+
+    <a
+      routerLink="/docente/dashboard"
+      routerLinkActive="active">
+
+      <span>🏠</span>
+
+      Panel General de Analítica
+
+    </a>
+
+
+
+
+
+    <!-- SEGUIMIENTO ACADEMICO -->
+
+    <button
+      class="menu-toggle"
+      (click)="toggleSeguimiento()">
+
+      <span>📋</span>
+
+      Seguimiento Académico
+
+
+      <span class="arrow">
+        {{ seguimientoAbierto ? '▼' : '▶' }}
+      </span>
+
+    </button>
+
+
+
+    <div
+      class="submenu"
+      *ngIf="seguimientoAbierto">
+
+
+      <a
+        routerLink="/docente/asistencia"
+        routerLinkActive="active">
+
+        ✔ Control y Registro de Asistencia
+
+      </a>
+
+
+
+      <a
+        routerLink="/docente/justificaciones"
+        routerLinkActive="active">
+
+        📄 Revisión de Justificaciones
+
+      </a>
+
+
+
+
+      <a
+        routerLink="/docente/materias"
+        routerLinkActive="active">
+
+        📚 Gestión de Materias
+
+      </a>
+
+
+
+
+      <a
+        routerLink="/docente/carreras"
+        routerLinkActive="active">
+
+        🏫 Gestión de Carreras y Cursos
+
+      </a>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- GESTION ESTUDIANTE -->
+
+
+    <button
+      class="menu-toggle"
+      (click)="toggleGestion()">
+
+
+
+      <span>🎓</span>
+
+      Gestión Académica Estudiante
+
+
+
+      <span class="arrow">
+
+        {{ gestionAbierta ? '▼' : '▶' }}
+
+      </span>
+
+
+
+    </button>
+
+
+
+
+    <div
+      class="submenu"
+      *ngIf="gestionAbierta">
+
+
+
+      <a
+        routerLink="/estudiante/dashboard"
+        routerLinkActive="active">
+
+        🎓 Dashboard General Estudiante
+
+      </a>
+
+
+
+
+      <a
+        routerLink="/estudiante/historial"
+        routerLinkActive="active">
+
+        📅 Historial de Asistencia
+
+      </a>
+
+
+
+
+      <!-- RUTA CORREGIDA -->
+
+      <a
+        routerLink="/estudiante/solicitar-justificacion"
+        routerLinkActive="active">
+
+        📝 Solicitar Justificación
+
+      </a>
+
+
+
+
+      <a
+        routerLink="/estudiante/cursos"
+        routerLinkActive="active">
+
+        📚 Mis Cursos
+
+      </a>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- REPORTES -->
+
+
+    <button
+      class="menu-toggle"
+      (click)="toggleReportes()">
+
+
+
+      <span>📈</span>
+
+      Reportes
+
+
+
+      <span class="arrow">
+
+        {{ reportesAbierto ? '▼' : '▶' }}
+
+      </span>
+
+
+
+    </button>
+
+
+
+
+    <div
+      class="submenu"
+      *ngIf="reportesAbierto">
+
+
+      <a
+        routerLink="/analitica/reportes"
+        routerLinkActive="active">
+
+
+        📊 Reportes y Analítica General
+
+
+      </a>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- SISTEMA -->
+
+
+    <button
+      class="menu-toggle"
+      (click)="toggleSistema()">
+
+
+
+      <span>⚙</span>
+
+      Sistema
+
+
+
+      <span class="arrow">
+
+        {{ sistemaAbierto ? '▼' : '▶' }}
+
+      </span>
+
+
+
+    </button>
+
+
+
+
+
+
+    <div
+      class="submenu"
+      *ngIf="sistemaAbierto">
+
+
+      <a
+        routerLink="/configuracion"
+        routerLinkActive="active">
+
+        ⚙ Configuración
+
+      </a>
+
+
+
+
+      <a
+        routerLink="/nosotros"
+        routerLinkActive="active">
+
+        ℹ Nosotros
+
+      </a>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- CERRAR SESION -->
+
+
+    <button
+      class="logout"
+      (click)="cerrarSesion()">
+
+
+      🚪 Cerrar sesión
+
+
+    </button>
+
+
+
+  </nav>
+
+
+</aside>

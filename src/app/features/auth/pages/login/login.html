@@ -1,0 +1,343 @@
+<div class="login-page">
+
+  <div class="background">
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+  </div>
+
+
+  <div class="login-card">
+
+
+    <section class="left-side">
+
+
+      <img 
+        src="images/saae-logo.png" 
+        class="main-logo" 
+        alt="SAAE">
+
+
+
+      <h1>
+        Sistema Analítico de<br>
+        Asistencia Estudiantil
+      </h1>
+
+
+
+      <p>
+        Plataforma inteligente para el monitoreo,
+        control y análisis de la asistencia académica.
+      </p>
+
+
+
+      <div class="features">
+
+
+        <div class="feature">
+          📊 Reportes Inteligentes
+        </div>
+
+
+        <div class="feature">
+          📈 Analítica en tiempo real
+        </div>
+
+
+        <div class="feature">
+          🎓 Gestión académica
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <section class="right-side">
+
+
+      <div class="form-box">
+
+
+        <h2>
+          Bienvenido
+        </h2>
+
+
+        <span>
+          Inicia sesión con tu cuenta institucional
+        </span>
+
+
+
+
+
+        <form 
+          [formGroup]="loginForm" 
+          (ngSubmit)="onSubmit()">
+
+
+
+
+
+          <div class="input-group">
+
+
+            <label>
+              Correo institucional
+            </label>
+
+
+
+            <input
+
+              type="email"
+
+              formControlName="email"
+
+              placeholder="usuario@yavirac.edu.ec">
+
+          </div>
+
+
+
+
+
+
+
+          <div class="input-group">
+
+
+            <label>
+              Contraseña
+            </label>
+
+
+
+
+
+            <div class="password-box">
+
+
+
+              <input
+
+                [type]="mostrarPassword ? 'text':'password'"
+
+                formControlName="password"
+
+                placeholder="********">
+
+
+
+
+
+              <button
+
+                type="button"
+
+                class="show-password"
+
+                (click)="mostrarPassword=!mostrarPassword">
+
+
+                {{mostrarPassword ? '🙈':'👁'}}
+
+
+              </button>
+
+
+
+            </div>
+
+
+
+          </div>
+
+
+
+
+
+
+
+
+
+          <button
+
+            type="submit"
+
+            class="btn-login"
+
+            [disabled]="loginForm.invalid || cargando">
+
+
+            {{ cargando ? 'Ingresando...' : 'Ingresar' }}
+
+
+
+          </button>
+
+
+
+
+
+        </form>
+
+
+
+
+
+
+
+        <div class="links">
+
+
+          <a 
+            (click)="abrirRecuperar()">
+
+            ¿Olvidaste tu contraseña?
+
+
+          </a>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <div class="register">
+
+
+          ¿No tienes cuenta?
+
+
+
+          <button 
+            routerLink="/register">
+
+            Crear cuenta
+
+
+          </button>
+
+
+
+        </div>
+
+
+
+
+
+      </div>
+
+
+    </section>
+
+
+
+  </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div 
+
+  class="modal-overlay"
+
+  *ngIf="mostrarRecuperar">
+
+
+
+
+
+  <div class="modal-box">
+
+
+
+
+
+    <button
+
+      class="close-modal"
+
+      (click)="cerrarRecuperar()">
+
+
+      ✕
+
+
+    </button>
+
+
+
+
+
+    <h2>
+      Recuperar contraseña
+    </h2>
+
+
+
+
+
+    <p>
+      Ingresa tu correo institucional.
+    </p>
+
+
+
+
+
+    <input
+
+      type="email"
+
+      placeholder="usuario@yavirac.edu.ec">
+
+
+
+
+
+    <button
+
+      class="btn-recover">
+
+
+      Enviar código
+
+
+
+    </button>
+
+
+
+
+
+  </div>
+
+
+
+
+
+</div>

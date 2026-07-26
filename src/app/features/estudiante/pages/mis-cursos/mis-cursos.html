@@ -1,0 +1,477 @@
+<div class="mis-cursos-container">
+
+
+  <!-- ===============================
+       BIENVENIDA ESTUDIANTE
+  ================================= -->
+
+  <section class="welcome-card">
+
+    <div class="welcome-content">
+
+      <div class="welcome-title">
+
+        <h1>
+          📚 Mis Cursos
+        </h1>
+
+        <p>
+          Consulta tus asignaturas inscritas,
+          horarios, docentes y tu progreso académico.
+        </p>
+
+      </div>
+
+
+      <div class="student-info">
+
+
+        <div class="info-item">
+
+          <span>👨‍🎓</span>
+
+          <div>
+
+            <small>
+              Estudiante
+            </small>
+
+            <strong>
+              {{ estudiante().nombreCompleto }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="info-item">
+
+          <span>🎓</span>
+
+          <div>
+
+            <small>
+              Carrera
+            </small>
+
+            <strong>
+              {{ estudiante().carrera }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="info-item">
+
+          <span>📧</span>
+
+          <div>
+
+            <small>
+              Correo
+            </small>
+
+            <strong>
+              {{ estudiante().correo }}
+            </strong>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+
+
+  <!-- ===============================
+       RESUMEN
+  ================================= -->
+
+  <section class="summary">
+
+
+    <div class="summary-card">
+
+      <span>
+        📚
+      </span>
+
+      <div>
+
+        <h3>
+          {{ cantidadCursos() }}
+        </h3>
+
+        <p>
+          Cursos inscritos
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+
+    <div class="summary-card">
+
+      <span>
+        ✅
+      </span>
+
+      <div>
+
+        <h3>
+          91%
+        </h3>
+
+        <p>
+          Asistencia promedio
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+
+    <div class="summary-card">
+
+      <span>
+        🎓
+      </span>
+
+      <div>
+
+        <h3>
+          Regular
+        </h3>
+
+        <p>
+          Estado académico
+        </p>
+
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+
+
+
+
+
+  <!-- ===============================
+       CURSOS
+  ================================= -->
+
+
+  <section class="courses-section">
+
+
+    <h2>
+      Mis asignaturas
+    </h2>
+
+
+
+
+    <div class="courses-grid">
+
+
+      <article
+
+      class="course-card"
+
+      *ngFor="let curso of cursos()"
+
+      >
+
+
+
+        <div class="course-header">
+
+
+          <div>
+
+
+            <h3>
+              {{ curso.nombreCurso }}
+            </h3>
+
+
+            <span>
+              {{ curso.codigoCurso }}
+            </span>
+
+
+          </div>
+
+
+
+          <span class="status">
+
+            {{ curso.estado }}
+
+          </span>
+
+
+
+        </div>
+
+
+
+
+
+        <p class="description">
+
+          {{ curso.descripcion }}
+
+        </p>
+
+
+
+
+
+
+        <div class="course-data">
+
+
+          <div>
+
+            👨‍🏫
+
+            <span>
+
+              {{ curso.docente.nombre }}
+              {{ curso.docente.apellido }}
+
+            </span>
+
+          </div>
+
+
+
+
+          <div>
+
+            🎓
+
+            <span>
+
+              {{ estudiante().carrera }}
+
+            </span>
+
+          </div>
+
+
+
+
+          <div>
+
+            🏫
+
+            <span>
+
+              {{ curso.aula }}
+
+            </span>
+
+          </div>
+
+
+
+
+          <div>
+
+            🕒
+
+            <span>
+
+              {{ curso.horario }}
+
+            </span>
+
+          </div>
+
+
+
+
+          <div>
+
+            📊
+
+            <span>
+
+              Asistencia: 95%
+
+            </span>
+
+          </div>
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <div class="actions">
+
+
+          <button
+
+          class="btn-primary"
+
+          (click)="verCurso(curso)"
+
+          >
+
+            Ver detalles
+
+          </button>
+
+
+
+
+          <button
+
+          class="btn-secondary"
+
+          (click)="verDocente(curso)"
+
+          >
+
+            Ver docente
+
+          </button>
+
+
+
+        </div>
+
+
+
+
+      </article>
+
+
+
+    </div>
+
+
+  </section>
+
+
+
+
+
+
+
+
+
+  <!-- ===============================
+       MODAL UNIVERSAL
+  ================================= -->
+
+
+  <div
+
+  class="modal-backdrop"
+
+  *ngIf="modalVisible()"
+
+  (click)="cerrarModal()"
+
+  >
+
+
+
+    <div
+
+    class="modal-box"
+
+    (click)="$event.stopPropagation()"
+
+    >
+
+
+
+      <button
+
+      class="close"
+
+      (click)="cerrarModal()"
+
+      >
+
+        ✖
+
+      </button>
+
+
+
+
+      <h2>
+
+        {{ modal().titulo }}
+
+      </h2>
+
+
+
+
+      <p>
+
+        {{ modal().mensaje }}
+
+      </p>
+
+
+
+
+      <button
+
+      class="btn-primary"
+
+      (click)="cerrarModal()"
+
+      >
+
+        Aceptar
+
+      </button>
+
+
+
+    </div>
+
+
+
+  </div>
+
+
+
+</div>

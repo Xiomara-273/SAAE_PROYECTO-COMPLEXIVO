@@ -1,0 +1,282 @@
+/* =====================================================
+   SAAE HEADER - Modern Dashboard UI
+   ===================================================== */
+
+
+.header{
+
+
+  height:80px;
+
+
+  display:flex;
+
+
+  justify-content:space-between;
+
+
+  align-items:center;
+
+
+
+  padding:0 35px;
+
+
+
+  background:
+
+  rgba(255,255,255,.75);
+
+
+
+  backdrop-filter:
+
+  blur(15px);
+
+
+
+  border-bottom:
+
+  1px solid rgba(148,163,184,.25);
+
+
+
+  box-shadow:
+
+  0 8px 25px rgba(15,23,42,.08);
+
+
+
+}
+
+
+
+
+
+
+/* =====================
+ TITULO
+===================== */
+
+
+.header-title h2{
+
+
+  margin:0;
+
+
+  color:#0f172a;
+
+
+  font-size:21px;
+
+
+  font-weight:800;
+
+
+  letter-spacing:.3px;
+
+
+}
+
+
+
+.header-title span{
+
+
+  display:block;
+
+
+  margin-top:5px;
+
+
+  color:#64748b;
+
+
+  font-size:13px;
+
+
+}
+
+
+
+
+
+
+
+/* =====================
+ USUARIO
+===================== */
+
+
+.header-user{
+
+
+  display:flex;
+
+
+  align-items:center;
+
+
+  gap:15px;
+
+
+}
+
+
+
+.user-info{
+
+
+  display:flex;
+
+
+  flex-direction:column;
+
+
+  text-align:right;
+
+
+}
+
+
+
+.user-info strong{
+
+
+  color:#0f172a;
+
+
+  font-size:14px;
+
+
+}
+
+
+
+.user-info small{
+
+
+  color:#64748b;
+
+
+  font-size:12px;
+
+
+}
+
+
+
+
+
+
+
+
+/* AVATAR */
+
+
+.avatar{
+
+
+  width:48px;
+
+
+  height:48px;
+
+
+
+  border-radius:16px;
+
+
+
+  display:flex;
+
+
+  justify-content:center;
+
+
+  align-items:center;
+
+
+
+  font-size:22px;
+
+
+
+  background:
+
+
+  linear-gradient(
+    135deg,
+    #2563eb,
+    #7c3aed
+  );
+
+
+
+  color:white;
+
+
+
+  box-shadow:
+
+
+  0 8px 20px rgba(37,99,235,.35);
+
+
+
+}
+
+
+
+
+
+
+
+/* Responsive */
+
+
+@media(max-width:700px){
+
+
+
+.header{
+
+
+  padding:0 15px;
+
+
+}
+
+
+
+.header-title h2{
+
+
+  font-size:15px;
+
+
+}
+
+
+
+.header-title span{
+
+
+  display:none;
+
+
+}
+
+
+
+.user-info{
+
+
+  display:none;
+
+
+}
+
+
+}

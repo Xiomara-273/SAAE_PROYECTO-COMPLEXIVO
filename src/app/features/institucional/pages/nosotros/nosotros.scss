@@ -1,0 +1,850 @@
+/* =========================================================
+   NOSOTROS - SAAE
+   Diseño institucional moderno
+========================================================= */
+
+
+.nosotros-container {
+
+  min-height:100vh;
+
+  background:
+
+  linear-gradient(
+    135deg,
+    #eef6ff,
+    #f8fafc,
+    #e8f1ff
+  );
+
+  font-family:'Inter','Segoe UI',sans-serif;
+
+  color:#1e293b;
+
+  animation:fadeIn .5s ease;
+
+}
+
+
+
+
+
+
+
+
+/* =========================================================
+   HERO PRINCIPAL
+========================================================= */
+
+
+.hero {
+
+
+  min-height:380px;
+
+  display:flex;
+
+  align-items:center;
+
+  padding:60px;
+
+  background:
+
+
+  linear-gradient(
+    135deg,
+    rgba(30,64,175,.95),
+    rgba(37,99,235,.85)
+  );
+
+
+  color:white;
+
+
+  border-radius:0 0 35px 35px;
+
+
+}
+
+
+
+
+.hero-content {
+
+
+  max-width:900px;
+
+
+}
+
+
+
+.badge {
+
+
+  display:inline-block;
+
+  padding:8px 18px;
+
+  border-radius:30px;
+
+  background:rgba(255,255,255,.18);
+
+  backdrop-filter:blur(10px);
+
+  font-size:14px;
+
+  margin-bottom:20px;
+
+
+}
+
+
+
+.hero h1 {
+
+
+  font-size:40px;
+
+  line-height:1.2;
+
+  margin:0 0 15px;
+
+  font-weight:800;
+
+
+}
+
+
+
+.hero h2 {
+
+
+  font-size:22px;
+
+  font-weight:500;
+
+  margin-bottom:20px;
+
+
+}
+
+
+
+.hero p {
+
+
+  font-size:17px;
+
+  line-height:1.7;
+
+  max-width:800px;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   CONTENIDO
+========================================================= */
+
+
+.section-card {
+
+
+  background:white;
+
+
+  margin:35px;
+
+
+  padding:35px;
+
+
+  border-radius:22px;
+
+
+  box-shadow:
+
+  0 15px 35px rgba(15,23,42,.08);
+
+
+}
+
+
+
+
+.section-title {
+
+
+  margin-bottom:25px;
+
+
+}
+
+
+
+.section-title span {
+
+
+  color:#2563eb;
+
+  font-size:14px;
+
+  font-weight:700;
+
+  text-transform:uppercase;
+
+
+}
+
+
+
+.section-title h2 {
+
+
+  margin:8px 0;
+
+  font-size:28px;
+
+  color:#0f172a;
+
+
+}
+
+
+
+
+.section-card p {
+
+
+  line-height:1.8;
+
+  color:#475569;
+
+  font-size:16px;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   MISION Y VISION
+========================================================= */
+
+
+.mission-section {
+
+
+  display:grid;
+
+
+  grid-template-columns:repeat(2,1fr);
+
+
+  gap:30px;
+
+
+  padding:0 35px;
+
+
+}
+
+
+
+.mission-card {
+
+
+  min-height:260px;
+
+
+  padding:35px;
+
+
+  border-radius:25px;
+
+
+  background:
+
+
+  linear-gradient(
+    145deg,
+    #ffffff,
+    #f1f5ff
+  );
+
+
+  box-shadow:
+
+  0 12px 30px rgba(37,99,235,.12);
+
+
+  transition:.3s;
+
+
+}
+
+
+
+.mission-card:hover {
+
+
+  transform:translateY(-8px);
+
+
+}
+
+
+
+.icon {
+
+
+  font-size:45px;
+
+  margin-bottom:15px;
+
+
+}
+
+
+
+.mission-card h2 {
+
+
+  color:#1d4ed8;
+
+  margin-bottom:15px;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   GRID ELEMENTOS
+========================================================= */
+
+
+.grid-items {
+
+
+  display:grid;
+
+  grid-template-columns:
+
+  repeat(3,1fr);
+
+  gap:20px;
+
+
+}
+
+
+
+.item-card,
+
+
+.tech-card {
+
+
+  background:#f8fafc;
+
+
+  border:1px solid #e2e8f0;
+
+
+  padding:20px;
+
+
+  border-radius:16px;
+
+
+  text-align:center;
+
+
+  transition:.3s;
+
+
+}
+
+
+
+.item-card:hover,
+
+
+.tech-card:hover {
+
+
+  transform:translateY(-5px);
+
+
+  border-color:#2563eb;
+
+
+}
+
+
+
+
+
+.item-icon {
+
+
+  font-size:28px;
+
+  margin-bottom:10px;
+
+
+}
+
+
+
+
+
+
+.tech-card {
+
+
+  color:#1d4ed8;
+
+  font-weight:700;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   BENEFICIOS
+========================================================= */
+
+
+.benefits {
+
+
+  display:grid;
+
+  grid-template-columns:repeat(2,1fr);
+
+  gap:18px;
+
+
+}
+
+
+
+
+.benefit {
+
+
+  display:flex;
+
+  align-items:center;
+
+  gap:15px;
+
+
+  background:#f8fafc;
+
+
+  padding:18px;
+
+
+  border-radius:15px;
+
+
+}
+
+
+
+.benefit span {
+
+
+  width:32px;
+
+  height:32px;
+
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+
+  background:#2563eb;
+
+  color:white;
+
+  border-radius:50%;
+
+
+  font-weight:bold;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   CONTACTO
+========================================================= */
+
+
+.contact-section {
+
+
+  margin:35px;
+
+
+  padding:40px;
+
+
+  border-radius:25px;
+
+
+  color:white;
+
+
+  background:
+
+
+  linear-gradient(
+    135deg,
+    #1e3a8a,
+    #2563eb
+  );
+
+
+}
+
+
+
+.contact-section h2 {
+
+
+  margin-bottom:30px;
+
+
+}
+
+
+
+.contact-grid {
+
+
+  display:grid;
+
+  grid-template-columns:repeat(4,1fr);
+
+  gap:25px;
+
+
+}
+
+
+
+.contact-grid strong {
+
+
+  font-size:15px;
+
+
+}
+
+
+
+.contact-grid p {
+
+
+  color:#dbeafe;
+
+  line-height:1.6;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+
+.footer {
+
+
+  width:100%;
+
+
+  margin-top:40px;
+
+
+  background:#0f172a;
+
+
+  color:white;
+
+
+}
+
+
+
+.footer-content {
+
+
+  padding:45px;
+
+
+  text-align:center;
+
+
+}
+
+
+
+.footer-content h3 {
+
+
+  font-size:30px;
+
+  margin-bottom:15px;
+
+
+}
+
+
+
+.footer-content p {
+
+
+  max-width:700px;
+
+  margin:auto;
+
+  color:#cbd5e1;
+
+  line-height:1.7;
+
+
+}
+
+
+
+.social {
+
+
+  margin-top:25px;
+
+
+  display:flex;
+
+  justify-content:center;
+
+  flex-wrap:wrap;
+
+  gap:15px;
+
+
+}
+
+
+
+.social span {
+
+
+  padding:10px 18px;
+
+
+  border-radius:20px;
+
+
+  background:#1e293b;
+
+
+  font-size:14px;
+
+
+}
+
+
+
+
+.copyright {
+
+
+  text-align:center;
+
+  padding:20px;
+
+  border-top:1px solid #334155;
+
+  color:#94a3b8;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   ANIMACIONES
+========================================================= */
+
+
+@keyframes fadeIn {
+
+
+  from {
+
+
+    opacity:0;
+
+    transform:translateY(15px);
+
+
+  }
+
+
+  to {
+
+
+    opacity:1;
+
+    transform:translateY(0);
+
+
+  }
+
+
+}
+
+
+
+
+
+
+
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+
+@media(max-width:1000px){
+
+
+  .mission-section,
+
+
+  .grid-items,
+
+
+  .benefits,
+
+
+  .contact-grid {
+
+
+    grid-template-columns:1fr;
+
+
+  }
+
+
+
+  .hero {
+
+
+    padding:35px;
+
+
+  }
+
+
+
+  .hero h1 {
+
+
+    font-size:32px;
+
+
+  }
+
+
+
+}
+
+
+
+@media(max-width:600px){
+
+
+  .section-card,
+
+  .contact-section {
+
+
+    margin:20px;
+
+    padding:25px;
+
+
+  }
+
+
+
+  .footer-content {
+
+
+    padding:30px 20px;
+
+
+  }
+
+
+}

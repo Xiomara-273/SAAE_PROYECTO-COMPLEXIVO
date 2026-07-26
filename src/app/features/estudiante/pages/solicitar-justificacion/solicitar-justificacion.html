@@ -1,0 +1,269 @@
+<section class="justificacion-container">
+
+  <!-- ===============================
+       CABECERA
+  ================================ -->
+
+  <section class="page-header">
+
+    <h1>
+      Solicitud de Justificación
+    </h1>
+
+    <p>
+      Registra una solicitud para justificar una inasistencia académica.
+    </p>
+
+  </section>
+
+  <!-- ===============================
+       CONTENIDO
+  ================================ -->
+
+  <section class="content-grid">
+
+    <!-- ===============================
+         FORMULARIO
+    ================================ -->
+
+    <section class="section-card">
+
+      <div class="card-header">
+
+        <div>
+
+          <h2>
+            Nueva solicitud
+          </h2>
+
+          <p>
+            Complete la información y adjunte una evidencia.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          Materia
+        </label>
+
+        <select
+          class="form-input"
+          [(ngModel)]="formulario.materia">
+
+          <option
+            *ngFor="let materia of materias"
+            [value]="materia">
+
+            {{ materia }}
+
+          </option>
+
+        </select>
+
+      </div>
+
+      <div class="form-row">
+
+        <div class="form-group">
+
+          <label>
+            Fecha de la inasistencia
+          </label>
+
+          <input
+            type="date"
+            class="form-input"
+            [(ngModel)]="formulario.fecha">
+
+        </div>
+
+        <div class="form-group">
+
+          <label>
+            Tipo de justificación
+          </label>
+
+          <select
+            class="form-input"
+            [(ngModel)]="formulario.tipo">
+
+            <option value="Médica">
+              Médica
+            </option>
+
+            <option value="Personal">
+              Personal
+            </option>
+
+            <option value="Académica">
+              Académica
+            </option>
+
+            <option value="Otra">
+              Otra
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          Motivo
+        </label>
+
+        <textarea
+          class="form-input textarea"
+          [(ngModel)]="formulario.motivo"
+          placeholder="Explique detalladamente el motivo de la inasistencia.">
+
+        </textarea>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          Evidencia
+        </label>
+
+        <input
+          type="file"
+          class="form-input"
+          (change)="seleccionarArchivo($event)">
+
+        <small
+          class="file-name"
+          *ngIf="nombreArchivo">
+
+          📎 {{ nombreArchivo }}
+
+        </small>
+
+      </div>
+
+      <div class="actions">
+
+        <button
+          class="btn-primary"
+          (click)="enviarSolicitud()">
+
+          Enviar solicitud
+
+        </button>
+
+        <button
+          class="btn-secondary"
+          (click)="limpiarFormulario()">
+
+          Limpiar
+
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- ===============================
+         HISTORIAL
+    ================================ -->
+
+    <section class="section-card">
+
+      <div class="card-header">
+
+        <div>
+
+          <h2>
+            Historial de solicitudes
+          </h2>
+
+          <p>
+            Estado de todas tus solicitudes enviadas.
+          </p>
+
+        </div>
+
+      </div>
+
+      <div
+        class="request-card"
+        *ngFor="let solicitud of solicitudes">
+
+        <div class="request-info">
+
+          <h4>
+
+            {{ solicitud.materia }}
+
+          </h4>
+
+          <p>
+
+            <strong>Fecha:</strong>
+            {{ solicitud.fecha }}
+
+          </p>
+
+          <p>
+
+            <strong>Tipo:</strong>
+            {{ solicitud.tipo }}
+
+          </p>
+
+          <p>
+
+            <strong>Motivo:</strong>
+            {{ solicitud.motivo }}
+
+          </p>
+
+          <p
+            *ngIf="solicitud.archivo">
+
+            <strong>Evidencia:</strong>
+
+            {{ solicitud.archivo }}
+
+          </p>
+
+          <p
+            *ngIf="solicitud.observacion">
+
+            <strong>Observación:</strong>
+
+            {{ solicitud.observacion }}
+
+          </p>
+
+        </div>
+
+        <div class="request-status">
+
+          <span
+            class="badge"
+            [class.pending]="solicitud.estado==='Pendiente'"
+            [class.approved]="solicitud.estado==='Aprobada'"
+            [class.rejected]="solicitud.estado==='Rechazada'">
+
+            {{ solicitud.estado }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </section>
+
+</section>

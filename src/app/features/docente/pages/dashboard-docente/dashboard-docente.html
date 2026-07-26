@@ -1,0 +1,613 @@
+<div class="dashboard-docente">
+
+
+  <!-- BIENVENIDA -->
+  <section class="welcome-card">
+
+    <div class="welcome-content">
+
+      <div>
+
+        <h1>
+          SAAE: Sistema Analítico de Asistencia Estudiantil
+        </h1>
+
+        <p>
+          Plataforma inteligente para el monitoreo,
+          control y análisis de asistencia académica.
+        </p>
+
+        <div class="security">
+
+          <span>
+            🔒 Privacidad y Seguridad
+          </span>
+
+          <span>
+            ⚡ Datos sincronizados
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="welcome-icon">
+
+        📊
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+
+
+  <!-- TITULO + FILTROS -->
+
+  <section class="toolbar">
+
+
+    <div class="section-title">
+
+      <h2>
+        Panel General de Analítica Docente
+      </h2>
+
+      <p>
+        Métricas consolidadas del periodo académico vigente
+      </p>
+
+    </div>
+
+
+
+    <div class="filters">
+
+
+      <select
+        class="filter-select"
+        (change)="onFiltrarMetricas($event,'carrera')"
+      >
+
+        <option value="Desarrollo de Software">
+          Desarrollo de Software
+        </option>
+
+      </select>
+
+
+
+      <select
+        class="filter-select"
+        (change)="onFiltrarMetricas($event,'paralelo')"
+      >
+
+        <option value="Todos">
+          Todos los paralelos
+        </option>
+
+        <option value="Paralelo A">
+          Paralelo A
+        </option>
+
+        <option value="Paralelo B">
+          Paralelo B
+        </option>
+
+
+      </select>
+
+
+
+      <button
+        class="refresh-btn"
+        (click)="forzarSincronizacionN8N()"
+      >
+
+        🔄
+
+      </button>
+
+
+    </div>
+
+
+  </section>
+
+
+
+
+
+  <!-- TARJETAS KPI -->
+
+
+  <section class="kpi-grid">
+
+
+    <article class="kpi-card blue">
+
+
+      <div class="icon">
+        📈
+      </div>
+
+
+      <div>
+
+        <span>
+          Asistencia promedio global
+        </span>
+
+
+        <h2>
+          {{ asistenciaGlobal }}
+        </h2>
+
+
+        <small>
+          Sincronizado en tiempo real
+        </small>
+
+
+      </div>
+
+
+    </article>
+
+
+
+
+
+    <article class="kpi-card red">
+
+
+      <div class="icon">
+        ⚠️
+      </div>
+
+
+      <div>
+
+        <span>
+          Estudiantes en riesgo crítico
+        </span>
+
+
+        <h2>
+          {{ totalEstudiantesRiesgo }}
+        </h2>
+
+
+        <small>
+          Requiere seguimiento
+        </small>
+
+
+      </div>
+
+
+    </article>
+
+
+
+
+
+
+    <article class="kpi-card orange">
+
+
+      <div class="icon">
+        📩
+      </div>
+
+
+      <div>
+
+        <span>
+          Justificaciones pendientes
+        </span>
+
+
+        <h2>
+          {{ justificacionesPendientes }}
+        </h2>
+
+
+        <small>
+          Solicitudes por revisar
+        </small>
+
+
+      </div>
+
+
+    </article>
+
+
+
+  </section>
+
+
+
+
+
+
+  <!-- GRAFICOS -->
+
+
+  <section class="charts-grid">
+
+
+    <div class="panel">
+
+
+      <div class="panel-header">
+
+        <h3>
+          📊 Índice de ausentismo semanal
+        </h3>
+
+
+      </div>
+
+
+
+      <div class="bars">
+
+
+        <div class="bar-item">
+
+          <div class="bar-value">
+            12%
+          </div>
+
+          <div class="bar one"></div>
+
+          <span>
+            Lunes
+          </span>
+
+
+        </div>
+
+
+
+        <div class="bar-item">
+
+          <div class="bar-value">
+            8%
+          </div>
+
+          <div class="bar two"></div>
+
+          <span>
+            Martes
+          </span>
+
+
+        </div>
+
+
+
+
+        <div class="bar-item">
+
+          <div class="bar-value">
+            5%
+          </div>
+
+          <div class="bar three"></div>
+
+          <span>
+            Miércoles
+          </span>
+
+
+        </div>
+
+
+
+
+
+        <div class="bar-item">
+
+          <div class="bar-value">
+            15%
+          </div>
+
+          <div class="bar four"></div>
+
+          <span>
+            Jueves
+          </span>
+
+
+        </div>
+
+
+
+
+
+        <div class="bar-item">
+
+          <div class="bar-value">
+            22%
+          </div>
+
+          <div class="bar five"></div>
+
+          <span>
+            Viernes
+          </span>
+
+
+        </div>
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+
+
+
+    <div class="panel">
+
+
+      <div class="panel-header">
+
+        <h3>
+          📉 Inasistencia por materia
+        </h3>
+
+
+      </div>
+
+
+
+      <div class="progress-list">
+
+
+        <div class="progress-item">
+
+          <span>
+            Software V
+          </span>
+
+          <div>
+
+            <b style="width:45%">
+              45%
+            </b>
+
+          </div>
+
+
+        </div>
+
+
+
+
+        <div class="progress-item">
+
+          <span>
+            Arquitectura Sistemas
+          </span>
+
+          <div>
+
+            <b class="danger"
+               style="width:78%">
+              78%
+            </b>
+
+          </div>
+
+
+        </div>
+
+
+
+
+        <div class="progress-item">
+
+          <span>
+            Base de Datos
+          </span>
+
+          <div>
+
+            <b class="success"
+               style="width:20%">
+              20%
+            </b>
+
+          </div>
+
+
+        </div>
+
+
+
+      </div>
+
+
+    </div>
+
+
+
+  </section>
+
+
+
+
+
+
+
+  <!-- TABLA + ALERTAS -->
+
+
+  <section class="bottom-grid">
+
+
+    <div class="panel">
+
+
+      <div class="panel-header">
+
+        <h3>
+          📋 Estado actual de asistencia
+        </h3>
+
+      </div>
+
+
+
+
+      <table>
+
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Asignatura
+            </th>
+
+            <th>
+              Paralelo
+            </th>
+
+            <th>
+              Horario
+            </th>
+
+            <th>
+              Asistencia
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+
+        <tbody>
+
+
+          <tr>
+
+            <td>
+              Desarrollo Software V
+            </td>
+
+            <td>
+              A
+            </td>
+
+            <td>
+              08:00 - 10:00
+            </td>
+
+            <td class="good">
+              88%
+            </td>
+
+
+          </tr>
+
+
+
+          <tr>
+
+            <td>
+              Arquitectura Sistemas
+            </td>
+
+            <td>
+              B
+            </td>
+
+            <td>
+              10:30 - 12:30
+            </td>
+
+            <td class="bad">
+              73%
+            </td>
+
+
+          </tr>
+
+
+
+        </tbody>
+
+
+      </table>
+
+
+    </div>
+
+
+
+
+
+
+    <div class="panel alerts">
+
+
+      <div class="panel-header">
+
+        <h3>
+          🔔 Alertas críticas
+        </h3>
+
+
+      </div>
+
+
+
+      <div
+        class="alert-item"
+        *ngFor="let alerta of alertasCriticas"
+      >
+
+
+        <strong>
+          {{ alerta.estudiante }}
+        </strong>
+
+
+        <p>
+          {{ alerta.detalle }}
+        </p>
+
+
+        <small>
+          {{ alerta.materia }} - {{ alerta.porcentaje }}%
+        </small>
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+  </section>
+
+
+
+</div>

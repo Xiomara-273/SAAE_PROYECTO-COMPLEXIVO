@@ -1,0 +1,1297 @@
+<section class="gestion-materias-container">
+
+
+  <!-- ===============================
+       HEADER
+  ================================ -->
+
+  <section class="page-header">
+
+    <div class="header-content">
+
+      <div>
+
+        <h1>
+          Gestión de Materias
+        </h1>
+
+        <p>
+          Administra las asignaturas, docentes, cursos y horarios académicos registrados.
+        </p>
+
+      </div>
+
+
+      <button 
+        class="btn-primary"
+        (click)="abrirModalCrear()">
+
+        <span>
+          +
+        </span>
+
+        Nueva Materia
+
+      </button>
+
+
+    </div>
+
+
+  </section>
+
+
+
+
+
+  <!-- ===============================
+       TARJETAS KPI
+  ================================ -->
+
+  <section class="kpi-grid">
+
+
+    <article class="kpi-card">
+
+      <div class="kpi-icon">
+        📚
+      </div>
+
+      <div class="kpi-info">
+
+        <h3>
+          Total Materias
+        </h3>
+
+        <strong>
+          {{ materias.length }}
+        </strong>
+
+        <p>
+          Asignaturas registradas
+        </p>
+
+      </div>
+
+
+    </article>
+
+
+
+
+
+    <article class="kpi-card">
+
+      <div class="kpi-icon">
+        👨‍🏫
+      </div>
+
+
+      <div class="kpi-info">
+
+        <h3>
+          Docentes
+        </h3>
+
+        <strong>
+          {{ docentesActivos }}
+        </strong>
+
+        <p>
+          Profesores asignados
+        </p>
+
+      </div>
+
+
+    </article>
+
+
+
+
+
+    <article class="kpi-card">
+
+      <div class="kpi-icon">
+        🎓
+      </div>
+
+
+      <div class="kpi-info">
+
+        <h3>
+          Cursos Activos
+        </h3>
+
+
+        <strong>
+          {{ cursosActivos }}
+        </strong>
+
+
+        <p>
+          Paralelos disponibles
+        </p>
+
+
+      </div>
+
+
+    </article>
+
+
+
+
+
+    <article class="kpi-card">
+
+      <div class="kpi-icon">
+        ✅
+      </div>
+
+
+      <div class="kpi-info">
+
+        <h3>
+          Estado
+        </h3>
+
+
+        <strong>
+          Activo
+        </strong>
+
+
+        <p>
+          Gestión académica
+        </p>
+
+
+      </div>
+
+
+    </article>
+
+
+
+  </section>
+
+
+
+
+
+
+
+  <!-- ===============================
+       FILTROS Y BUSQUEDA
+  ================================ -->
+
+
+  <section class="filters-card">
+
+
+    <div class="search-box">
+
+
+      <label>
+        Buscar materia
+      </label>
+
+
+      <div class="input-search">
+
+
+        <span>
+          🔍
+        </span>
+
+
+        <input
+          type="text"
+          placeholder="Nombre, código o docente..."
+          [(ngModel)]="textoBusqueda"
+          (input)="filtrarMaterias()">
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+
+    <div class="filter-group">
+
+
+      <label>
+        Carrera
+      </label>
+
+
+      <select
+        [(ngModel)]="carreraSeleccionada"
+        (change)="filtrarMaterias()">
+
+
+        <option value="">
+          Todas las carreras
+        </option>
+
+
+        <option
+          *ngFor="let carrera of carreras"
+          [value]="carrera">
+
+
+          {{ carrera }}
+
+
+        </option>
+
+
+      </select>
+
+
+    </div>
+
+
+
+
+
+
+    <div class="filter-group">
+
+
+      <label>
+        Estado
+      </label>
+
+
+      <select
+        [(ngModel)]="estadoSeleccionado"
+        (change)="filtrarMaterias()">
+
+
+        <option value="">
+          Todos
+        </option>
+
+
+        <option value="Activo">
+          Activo
+        </option>
+
+
+        <option value="Inactivo">
+          Inactivo
+        </option>
+
+
+      </select>
+
+
+    </div>
+
+
+
+  </section>
+
+
+
+
+
+
+  <!-- ===============================
+       TABLA DE MATERIAS
+  ================================ -->
+
+
+  <section class="table-card">
+
+
+    <div class="table-header">
+
+
+      <h2>
+        Materias registradas
+      </h2>
+
+
+      <span>
+        {{ materiasFiltradas.length }} registros
+      </span>
+
+
+    </div>
+
+
+
+
+
+    <div class="table-responsive">
+
+
+      <table>
+
+
+        <thead>
+
+
+          <tr>
+
+
+            <th>
+              Código
+            </th>
+
+
+            <th>
+              Materia
+            </th>
+
+
+            <th>
+              Carrera
+            </th>
+
+
+            <th>
+              Docente
+            </th>
+
+
+            <th>
+              Curso
+            </th>
+
+
+            <th>
+              Horario
+            </th>
+
+
+            <th>
+              Estado
+            </th>
+
+
+            <th>
+              Acciones
+            </th>
+
+
+          </tr>
+
+
+        </thead>
+
+
+
+        <tbody>
+
+
+          <tr
+            *ngFor="let materia of materiasFiltradas">
+
+
+
+            <td>
+
+              <span class="codigo">
+
+                {{ materia.codigo }}
+
+              </span>
+
+            </td>
+
+
+
+            <td>
+
+
+              <div class="materia-info">
+
+
+                <strong>
+
+                  {{ materia.nombre }}
+
+                </strong>
+
+
+                <small>
+
+                  {{ materia.descripcion }}
+
+                </small>
+
+
+              </div>
+
+
+            </td>
+
+
+
+            <td>
+
+              {{ materia.carrera }}
+
+            </td>
+
+
+
+            <td>
+
+              {{ materia.docente }}
+
+            </td>
+
+
+
+            <td>
+
+              {{ materia.curso }}
+
+            </td>
+
+
+
+            <td>
+
+              {{ materia.horario }}
+
+            </td>
+
+
+
+            <td>
+
+
+              <span
+                class="estado"
+                [class.activo]="materia.estado === 'Activo'"
+                [class.inactivo]="materia.estado === 'Inactivo'">
+
+
+                {{ materia.estado }}
+
+
+              </span>
+
+
+            </td>
+                        <td>
+
+
+              <div class="actions">
+
+
+                <button
+                  class="btn-view"
+                  title="Ver detalles"
+                  (click)="verDetalles(materia)">
+
+
+                  👁️
+
+
+                </button>
+
+
+
+
+
+                <button
+                  class="btn-edit"
+                  title="Editar materia"
+                  (click)="editarMateria(materia)">
+
+
+                  ✏️
+
+
+                </button>
+
+
+
+
+
+                <button
+                  class="btn-delete"
+                  title="Eliminar materia"
+                  (click)="eliminarMateria(materia.id)">
+
+
+                  🗑️
+
+
+                </button>
+
+
+              </div>
+
+
+            </td>
+
+
+
+          </tr>
+
+
+
+
+
+          <!-- SIN DATOS -->
+
+          <tr
+            *ngIf="materiasFiltradas.length === 0">
+
+
+            <td
+              colspan="8"
+              class="empty">
+
+
+              <div>
+
+
+                <span>
+                  📭
+                </span>
+
+
+                <h3>
+                  No existen materias registradas
+                </h3>
+
+
+                <p>
+                  Intenta cambiar los filtros de búsqueda.
+                </p>
+
+
+              </div>
+
+
+            </td>
+
+
+          </tr>
+
+
+
+        </tbody>
+
+
+      </table>
+
+
+    </div>
+
+
+  </section>
+
+
+
+
+
+
+  <!-- ===============================
+       MODAL CREAR / EDITAR
+  ================================ -->
+
+
+  <div
+    class="modal-overlay"
+    *ngIf="mostrarModal"
+    (click)="cerrarModal()">
+
+
+
+    <section
+      class="modal-container"
+      (click)="$event.stopPropagation()">
+
+
+
+
+
+      <header class="modal-header">
+
+
+        <div>
+
+
+          <h2>
+
+            {{ modoEdicion ? 'Editar Materia' : 'Nueva Materia' }}
+
+          </h2>
+
+
+          <p>
+
+            Complete la información académica de la asignatura.
+
+          </p>
+
+
+        </div>
+
+
+
+
+
+        <button
+          class="close-btn"
+          (click)="cerrarModal()">
+
+
+          ✕
+
+
+        </button>
+
+
+      </header>
+
+
+
+
+
+
+
+
+      <form
+        class="materia-form"
+        (ngSubmit)="guardarMateria()">
+
+
+
+
+
+        <div class="form-grid">
+
+
+
+
+
+          <div class="form-group">
+
+
+            <label>
+              Código
+            </label>
+
+
+            <input
+              type="text"
+              [(ngModel)]="materiaActual.codigo"
+              name="codigo"
+              placeholder="Ej: MAT-001">
+
+
+          </div>
+
+
+
+
+
+
+          <div class="form-group">
+
+
+            <label>
+              Nombre de la materia
+            </label>
+
+
+            <input
+              type="text"
+              [(ngModel)]="materiaActual.nombre"
+              name="nombre"
+              placeholder="Ej: Programación Web">
+
+
+          </div>
+
+
+
+
+
+
+          <div class="form-group">
+
+
+            <label>
+              Carrera
+            </label>
+
+
+            <select
+              [(ngModel)]="materiaActual.carrera"
+              name="carrera">
+
+
+
+              <option value="">
+                Seleccione carrera
+              </option>
+
+
+
+              <option
+                *ngFor="let carrera of carreras"
+                [value]="carrera">
+
+
+                {{ carrera }}
+
+
+              </option>
+
+
+            </select>
+
+
+          </div>
+
+
+
+
+
+
+
+          <div class="form-group">
+
+
+            <label>
+              Curso
+            </label>
+
+
+            <select
+              [(ngModel)]="materiaActual.curso"
+              name="curso">
+
+
+              <option value="">
+                Seleccione curso
+              </option>
+
+
+              <option
+                *ngFor="let curso of cursos"
+                [value]="curso">
+
+
+                {{ curso }}
+
+
+              </option>
+
+
+            </select>
+
+
+          </div>
+
+
+
+
+
+
+
+          <div class="form-group">
+
+
+            <label>
+              Docente asignado
+            </label>
+
+
+            <select
+              [(ngModel)]="materiaActual.docente"
+              name="docente">
+
+
+              <option value="">
+                Seleccione docente
+              </option>
+
+
+              <option
+                *ngFor="let docente of docentes"
+                [value]="docente">
+
+
+                {{ docente }}
+
+
+              </option>
+
+
+            </select>
+
+
+          </div>
+
+
+
+
+
+
+
+          <div class="form-group">
+
+
+            <label>
+              Horario
+            </label>
+
+
+            <input
+              type="text"
+              [(ngModel)]="materiaActual.horario"
+              name="horario"
+              placeholder="Ej: Lunes 08:00 - 10:00">
+
+
+          </div>
+
+
+
+
+
+
+          <div class="form-group">
+
+
+            <label>
+              Aula
+            </label>
+
+
+            <input
+              type="text"
+              [(ngModel)]="materiaActual.aula"
+              name="aula"
+              placeholder="Ej: Laboratorio 2">
+
+
+          </div>
+
+
+
+
+
+
+
+          <div class="form-group">
+
+
+            <label>
+              Estado
+            </label>
+
+
+            <select
+              [(ngModel)]="materiaActual.estado"
+              name="estado">
+
+
+
+              <option value="Activo">
+                Activo
+              </option>
+
+
+
+              <option value="Inactivo">
+                Inactivo
+              </option>
+
+
+            </select>
+
+
+          </div>
+
+
+
+
+
+        </div>
+
+
+
+
+
+
+
+        <div class="form-group full">
+
+
+          <label>
+            Descripción
+          </label>
+
+
+          <textarea
+            rows="4"
+            [(ngModel)]="materiaActual.descripcion"
+            name="descripcion"
+            placeholder="Descripción de la materia">
+
+
+          </textarea>
+
+
+        </div>
+                <!-- BOTONES MODAL -->
+
+
+        <footer class="modal-actions">
+
+
+          <button
+            type="button"
+            class="btn-secondary"
+            (click)="cerrarModal()">
+
+
+            Cancelar
+
+
+          </button>
+
+
+
+
+
+          <button
+            type="submit"
+            class="btn-primary">
+
+
+            {{ modoEdicion ? 'Actualizar Materia' : 'Guardar Materia' }}
+
+
+          </button>
+
+
+        </footer>
+
+
+
+      </form>
+
+
+    </section>
+
+
+  </div>
+
+
+
+
+
+
+
+
+  <!-- ===============================
+       MODAL DETALLES
+  ================================ -->
+
+
+  <div
+    class="modal-overlay"
+    *ngIf="mostrarDetalles"
+    (click)="cerrarDetalles()">
+
+
+
+    <section
+      class="modal-container details"
+      (click)="$event.stopPropagation()">
+
+
+
+
+
+      <header class="modal-header">
+
+
+        <div>
+
+
+          <h2>
+            Detalle de Materia
+          </h2>
+
+
+          <p>
+            Información completa de la asignatura.
+          </p>
+
+
+        </div>
+
+
+
+
+
+        <button
+          class="close-btn"
+          (click)="cerrarDetalles()">
+
+
+          ✕
+
+
+        </button>
+
+
+      </header>
+
+
+
+
+
+
+
+      <section
+        class="details-content"
+        *ngIf="materiaSeleccionada">
+
+
+
+
+
+        <article>
+
+
+          <span>
+            Código
+          </span>
+
+
+          <strong>
+            {{ materiaSeleccionada.codigo }}
+          </strong>
+
+
+        </article>
+
+
+
+
+
+
+        <article>
+
+
+          <span>
+            Materia
+          </span>
+
+
+          <strong>
+            {{ materiaSeleccionada.nombre }}
+          </strong>
+
+
+        </article>
+
+
+
+
+
+
+        <article>
+
+
+          <span>
+            Carrera
+          </span>
+
+
+          <strong>
+            {{ materiaSeleccionada.carrera }}
+          </strong>
+
+
+        </article>
+
+
+
+
+
+
+        <article>
+
+
+          <span>
+            Docente
+          </span>
+
+
+          <strong>
+            {{ materiaSeleccionada.docente }}
+          </strong>
+
+
+        </article>
+
+
+
+
+
+
+        <article>
+
+
+          <span>
+            Curso
+          </span>
+
+
+          <strong>
+            {{ materiaSeleccionada.curso }}
+          </strong>
+
+
+        </article>
+
+
+
+
+
+
+        <article>
+
+
+          <span>
+            Horario
+          </span>
+
+
+          <strong>
+            {{ materiaSeleccionada.horario }}
+          </strong>
+
+
+        </article>
+
+
+
+
+
+
+        <article>
+
+
+          <span>
+            Aula
+          </span>
+
+
+          <strong>
+            {{ materiaSeleccionada.aula }}
+          </strong>
+
+
+        </article>
+
+
+
+
+
+
+        <article>
+
+
+          <span>
+            Estado
+          </span>
+
+
+          <strong
+            class="estado activo">
+
+
+            {{ materiaSeleccionada.estado }}
+
+
+          </strong>
+
+
+        </article>
+
+
+
+
+
+
+        <article class="description">
+
+
+          <span>
+            Descripción
+          </span>
+
+
+          <p>
+
+            {{ materiaSeleccionada.descripcion }}
+
+          </p>
+
+
+        </article>
+
+
+
+
+      </section>
+
+
+
+
+
+
+
+      <footer class="modal-actions">
+
+
+        <button
+          class="btn-primary"
+          (click)="cerrarDetalles()">
+
+
+
+          Cerrar
+
+
+
+        </button>
+
+
+      </footer>
+
+
+
+
+
+    </section>
+
+
+  </div>
+
+
+
+</section>

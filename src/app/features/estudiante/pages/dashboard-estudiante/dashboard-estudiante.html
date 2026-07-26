@@ -1,0 +1,272 @@
+<section class="student-dashboard">
+
+
+  <!-- PERFIL DEL ESTUDIANTE -->
+
+  <section class="profile-card">
+
+
+    <div class="profile-info">
+
+      <h1>
+        Bienvenido, {{nombreEstudiante}}
+      </h1>
+
+      <p>
+        {{carrera}} - {{semestre}}
+      </p>
+
+      <span class="status">
+        Seguimiento activo mediante SAAE
+      </span>
+
+    </div>
+
+
+
+    <div class="attendance-circle">
+
+      <strong>
+        {{asistenciaGeneral}}%
+      </strong>
+
+      <span>
+        Asistencia General
+      </span>
+
+    </div>
+
+
+  </section>
+
+
+
+
+
+  <!-- INDICADORES -->
+
+  <section class="metrics-grid">
+
+
+    <div class="metric-card success">
+
+      <h3>
+        Asistencia
+      </h3>
+
+      <strong>
+        {{asistenciaGeneral}}%
+      </strong>
+
+      <p>
+        Estado actual
+      </p>
+
+    </div>
+
+
+
+
+    <div class="metric-card primary">
+
+      <h3>
+        Materias activas
+      </h3>
+
+      <strong>
+        {{materias.length}}
+      </strong>
+
+      <p>
+        Asignaturas registradas
+      </p>
+
+    </div>
+
+
+
+
+    <div class="metric-card warning">
+
+      <h3>
+        Alertas
+      </h3>
+
+      <strong>
+        {{alertas.length}}
+      </strong>
+
+      <p>
+        Revisar seguimiento
+      </p>
+
+    </div>
+
+
+
+  </section>
+
+
+
+
+
+
+
+  <!-- ASISTENCIA POR MATERIA -->
+
+
+  <section class="section-card">
+
+
+    <div class="card-header">
+
+      <h2>
+        Asistencia por Materia
+      </h2>
+
+      <span>
+        Periodo académico vigente
+      </span>
+
+    </div>
+
+
+
+
+
+    <table>
+
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Materia
+          </th>
+
+
+          <th>
+            Docente
+          </th>
+
+
+          <th>
+            Porcentaje
+          </th>
+
+
+          <th>
+            Estado
+          </th>
+
+
+        </tr>
+
+
+      </thead>
+
+
+
+
+
+      <tbody>
+
+
+        <tr *ngFor="let materia of materias">
+
+
+          <td>
+            {{materia.materia}}
+          </td>
+
+
+          <td>
+            {{materia.docente}}
+          </td>
+
+
+          <td>
+
+            <strong>
+              {{materia.porcentaje}}%
+            </strong>
+
+          </td>
+
+
+
+          <td>
+
+
+            <span
+            class="badge"
+            [class.excelente]="materia.estado==='Excelente'"
+            [class.bueno]="materia.estado==='Bueno'"
+            [class.riesgo]="materia.estado==='Riesgo'">
+
+              {{materia.estado}}
+
+            </span>
+
+
+          </td>
+
+
+        </tr>
+
+
+      </tbody>
+
+
+    </table>
+
+
+  </section>
+
+
+
+
+
+
+
+
+
+<!-- ALERTAS -->
+
+
+<section class="section-card">
+
+
+<div class="card-header">
+
+<h2>
+Alertas Académicas
+</h2>
+
+
+</div>
+
+
+
+<div
+class="alert"
+*ngFor="let alerta of alertas"
+[class.warning]="alerta.tipo==='warning'"
+[class.success]="alerta.tipo==='success'">
+
+
+{{alerta.mensaje}}
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+</section>

@@ -1,0 +1,751 @@
+/* =========================================================
+   CONFIGURACIÓN SISTEMA SAAE
+   Diseño moderno
+========================================================= */
+
+
+.configuracion-container {
+
+  width:100%;
+
+  padding:30px;
+
+  animation:fadeIn .4s ease;
+
+}
+
+
+
+/* =========================================================
+   CABECERA
+========================================================= */
+
+
+.page-header {
+
+  margin-bottom:30px;
+
+
+  h1 {
+
+    font-size:32px;
+
+    font-weight:750;
+
+    color:#0f172a;
+
+    margin-bottom:8px;
+
+  }
+
+
+
+  p {
+
+    color:#64748b;
+
+    font-size:15px;
+
+  }
+
+}
+
+
+
+/* =========================================================
+   DISTRIBUCIÓN PRINCIPAL
+========================================================= */
+
+
+.config-grid {
+
+  display:grid;
+
+  grid-template-columns:repeat(2,1fr);
+
+  gap:25px;
+
+}
+
+
+
+/* PERFIL OCUPA TODO EL ANCHO */
+
+
+.config-card:first-child {
+
+  grid-column:1 / -1;
+
+}
+
+
+
+
+
+/* =========================================================
+   TARJETAS
+========================================================= */
+
+
+.config-card {
+
+
+  background:rgba(255,255,255,.95);
+
+  border-radius:18px;
+
+  padding:30px;
+
+  border:1px solid #e2e8f0;
+
+
+  box-shadow:
+
+  0 10px 30px rgba(15,23,42,.08);
+
+
+}
+
+
+
+
+
+/* =========================================================
+   CABECERA DE TARJETAS
+========================================================= */
+
+
+.card-header {
+
+
+  margin-bottom:30px;
+
+
+  h2 {
+
+    color:#0f172a;
+
+    font-size:22px;
+
+    margin-bottom:8px;
+
+  }
+
+
+
+  p {
+
+    color:#64748b;
+
+    font-size:14px;
+
+  }
+
+
+}
+
+
+
+
+
+
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+
+.profile-header {
+
+
+  display:flex;
+
+  align-items:center;
+
+  gap:20px;
+
+  margin-bottom:20px;
+
+
+}
+
+
+
+.avatar {
+
+
+  width:75px;
+
+  height:75px;
+
+  border-radius:50%;
+
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+
+  background:
+
+  linear-gradient(
+
+    135deg,
+
+    #2563eb,
+
+    #1d4ed8
+
+  );
+
+
+  color:white;
+
+  font-size:30px;
+
+  font-weight:700;
+
+
+}
+
+
+
+.role {
+
+  color:#64748b;
+
+  font-size:14px;
+
+}
+
+
+
+
+
+/* =========================================================
+   CAMPOS FORMULARIO
+========================================================= */
+
+
+.form-grid {
+
+
+  display:grid;
+
+
+  grid-template-columns:repeat(2,1fr);
+
+
+  column-gap:30px;
+
+
+  row-gap:25px;
+
+
+}
+
+
+
+
+
+.form-group {
+
+
+  display:flex;
+
+
+  flex-direction:column;
+
+
+  gap:10px;
+
+
+  width:100%;
+
+
+
+  label {
+
+
+    font-size:14px;
+
+    font-weight:600;
+
+    color:#334155;
+
+
+  }
+
+
+}
+
+
+
+
+
+
+
+.form-input {
+
+
+  width:100%;
+
+
+  height:46px;
+
+
+  padding:0 15px;
+
+
+  border-radius:12px;
+
+
+  border:1px solid #cbd5e1;
+
+
+  outline:none;
+
+
+  font-size:14px;
+
+
+  color:#1e293b;
+
+
+  background:white;
+
+
+  transition:.25s;
+
+
+
+  box-sizing:border-box;
+
+
+
+  &:focus {
+
+
+    border-color:#2563eb;
+
+
+    box-shadow:
+
+
+    0 0 0 3px rgba(37,99,235,.15);
+
+
+  }
+
+
+}
+
+
+
+
+
+/* separación entre campos individuales */
+
+.config-card > .form-group {
+
+
+  margin-bottom:22px;
+
+
+}
+
+
+
+
+
+
+
+/* =========================================================
+   SWITCH
+========================================================= */
+
+
+.switch-container {
+
+
+  display:flex;
+
+
+  align-items:center;
+
+
+  justify-content:space-between;
+
+
+  padding:18px;
+
+
+  border-radius:12px;
+
+
+  background:#f8fafc;
+
+
+  margin-bottom:18px;
+
+
+}
+
+
+
+
+
+
+
+.switch {
+
+
+  position:relative;
+
+
+  width:50px;
+
+
+  height:26px;
+
+
+}
+
+
+
+.switch input {
+
+
+  display:none;
+
+
+}
+
+
+
+.slider {
+
+
+  position:absolute;
+
+
+  inset:0;
+
+
+  background:#cbd5e1;
+
+
+  border-radius:30px;
+
+
+  cursor:pointer;
+
+
+  transition:.3s;
+
+
+}
+
+
+
+.slider:before {
+
+
+  content:"";
+
+
+  position:absolute;
+
+
+  width:20px;
+
+
+  height:20px;
+
+
+  left:3px;
+
+
+  top:3px;
+
+
+  background:white;
+
+
+  border-radius:50%;
+
+
+  transition:.3s;
+
+
+}
+
+
+
+
+
+.switch input:checked + .slider {
+
+
+  background:#2563eb;
+
+
+}
+
+
+
+
+
+.switch input:checked + .slider:before {
+
+
+  transform:translateX(24px);
+
+
+}
+
+
+
+
+
+
+
+/* =========================================================
+   BOTONES
+========================================================= */
+
+
+.actions {
+
+
+  margin-top:30px;
+
+
+  display:flex;
+
+  gap:15px;
+
+
+}
+
+
+
+
+.btn-primary {
+
+
+  background:
+
+  linear-gradient(
+
+    135deg,
+
+    #2563eb,
+
+    #1d4ed8
+
+  );
+
+
+  color:white;
+
+
+  border:none;
+
+
+  padding:13px 25px;
+
+
+  border-radius:12px;
+
+
+  cursor:pointer;
+
+
+  font-weight:600;
+
+
+  transition:.25s;
+
+
+
+  &:hover {
+
+
+    transform:translateY(-2px);
+
+
+    box-shadow:
+
+    0 8px 20px rgba(37,99,235,.25);
+
+
+  }
+
+
+}
+
+
+
+
+
+
+.btn-secondary {
+
+
+  background:#e2e8f0;
+
+
+  color:#334155;
+
+
+  border:none;
+
+
+  padding:13px 25px;
+
+
+  border-radius:12px;
+
+
+}
+
+
+
+
+
+
+
+/* =========================================================
+   MENSAJE
+========================================================= */
+
+
+.message {
+
+
+  margin-top:20px;
+
+
+  padding:15px;
+
+
+  border-radius:12px;
+
+
+  background:#dcfce7;
+
+
+  color:#166534;
+
+
+  font-weight:600;
+
+
+}
+
+
+
+
+
+
+
+/* =========================================================
+   ANIMACIÓN
+========================================================= */
+
+
+@keyframes fadeIn {
+
+
+  from {
+
+
+    opacity:0;
+
+
+    transform:translateY(10px);
+
+
+  }
+
+
+
+  to {
+
+
+    opacity:1;
+
+
+    transform:translateY(0);
+
+
+  }
+
+
+}
+
+
+
+
+
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+
+@media(max-width:1100px){
+
+
+  .config-grid {
+
+
+    grid-template-columns:1fr;
+
+
+  }
+
+
+}
+
+
+
+
+
+@media(max-width:700px){
+
+
+  .configuracion-container {
+
+
+    padding:20px;
+
+
+  }
+
+
+
+  .form-grid {
+
+
+    grid-template-columns:1fr;
+
+
+  }
+
+
+
+  .actions {
+
+
+    flex-direction:column;
+
+
+  }
+
+
+}

@@ -1,0 +1,636 @@
+<section class="reportes-container">
+
+
+  <!-- =================================================
+       CABECERA
+  ================================================== -->
+
+  <section class="page-header">
+
+    <div>
+
+      <h1>
+        Reportes y Analítica General
+      </h1>
+
+
+      <p>
+        Consulta indicadores, tendencias y resultados
+        del control de asistencia académica.
+      </p>
+
+    </div>
+
+
+  </section>
+
+
+
+
+
+  <!-- =================================================
+       FILTROS
+  ================================================== -->
+
+
+  <section class="filter-card">
+
+
+    <div class="card-title">
+
+
+      <h2>
+        Filtros de consulta
+      </h2>
+
+
+      <p>
+        Seleccione los parámetros para generar el reporte.
+      </p>
+
+
+    </div>
+
+
+
+
+    <div class="filters-grid">
+
+
+
+      <div class="form-group">
+
+
+        <label>
+          Periodo académico
+        </label>
+
+
+        <select
+          class="form-input"
+          [(ngModel)]="filtros.periodo">
+
+
+          <option value="">
+            Seleccionar
+          </option>
+
+
+          <option
+            *ngFor="let periodo of periodos"
+            [value]="periodo">
+
+            {{ periodo }}
+
+          </option>
+
+
+        </select>
+
+
+      </div>
+
+
+
+
+
+      <div class="form-group">
+
+
+        <label>
+          Carrera
+        </label>
+
+
+        <select
+          class="form-input"
+          [(ngModel)]="filtros.carrera">
+
+
+          <option value="">
+            Seleccionar
+          </option>
+
+
+          <option
+            *ngFor="let carrera of carreras"
+            [value]="carrera">
+
+
+            {{ carrera }}
+
+
+          </option>
+
+
+        </select>
+
+
+      </div>
+
+
+
+
+
+
+      <div class="form-group">
+
+
+        <label>
+          Curso
+        </label>
+
+
+        <select
+          class="form-input"
+          [(ngModel)]="filtros.curso">
+
+
+          <option value="">
+            Seleccionar
+          </option>
+
+
+          <option
+            *ngFor="let curso of cursos"
+            [value]="curso">
+
+
+            {{ curso }}
+
+
+          </option>
+
+
+        </select>
+
+
+      </div>
+
+
+
+
+
+
+      <div class="form-group">
+
+
+        <label>
+          Materia
+        </label>
+
+
+        <select
+          class="form-input"
+          [(ngModel)]="filtros.materia">
+
+
+          <option value="">
+            Seleccionar
+          </option>
+
+
+          <option
+            *ngFor="let materia of materias"
+            [value]="materia">
+
+
+            {{ materia }}
+
+
+          </option>
+
+
+        </select>
+
+
+      </div>
+
+
+
+
+    </div>
+
+
+
+
+    <div class="filter-actions">
+
+
+      <button
+        class="btn-primary"
+        (click)="generarReporte()">
+
+
+        🔎 Generar reporte
+
+
+      </button>
+
+
+
+      <button
+        class="btn-secondary"
+        (click)="limpiarFiltros()">
+
+
+        Limpiar
+
+
+      </button>
+
+
+
+    </div>
+
+
+
+  </section>
+
+
+
+
+
+
+
+
+  <!-- =================================================
+       KPI
+  ================================================== -->
+
+
+  <section class="kpi-grid">
+
+
+
+    <article class="kpi-card">
+
+
+      <div class="icon">
+        📊
+      </div>
+
+
+      <div>
+
+        <h3>
+          {{ indicadores.asistencia }}%
+        </h3>
+
+
+        <p>
+          Asistencia promedio
+        </p>
+
+      </div>
+
+
+    </article>
+
+
+
+
+
+    <article class="kpi-card">
+
+
+      <div class="icon">
+        👨‍🎓
+      </div>
+
+
+      <div>
+
+
+        <h3>
+          {{ indicadores.estudiantes }}
+        </h3>
+
+
+        <p>
+          Estudiantes evaluados
+        </p>
+
+
+      </div>
+
+
+    </article>
+
+
+
+
+
+    <article class="kpi-card danger">
+
+
+      <div class="icon">
+        ⚠️
+      </div>
+
+
+      <div>
+
+
+        <h3>
+          {{ indicadores.riesgo }}
+        </h3>
+
+
+        <p>
+          En riesgo académico
+        </p>
+
+
+      </div>
+
+
+    </article>
+
+
+
+
+
+
+    <article class="kpi-card warning">
+
+
+      <div class="icon">
+        📄
+      </div>
+
+
+      <div>
+
+
+        <h3>
+          {{ indicadores.justificaciones }}
+        </h3>
+
+
+        <p>
+          Justificaciones pendientes
+        </p>
+
+
+      </div>
+
+
+    </article>
+
+
+
+  </section>
+
+
+
+
+
+
+
+
+
+
+  <!-- =================================================
+       GRAFICOS
+  ================================================== -->
+
+
+  <section class="charts-grid">
+
+
+
+    <article class="chart-card">
+
+
+      <h2>
+        Tendencia de asistencia
+      </h2>
+
+
+      <div class="chart-placeholder">
+
+
+        <canvas id="asistenciaLinea">
+        </canvas>
+
+
+      </div>
+
+
+    </article>
+
+
+
+
+
+    <article class="chart-card">
+
+
+      <h2>
+        Asistencia por materia
+      </h2>
+
+
+      <div class="chart-placeholder">
+
+
+        <canvas id="asistenciaMateria">
+        </canvas>
+
+
+      </div>
+
+
+    </article>
+
+
+
+
+
+  </section>
+
+
+
+
+
+
+
+
+
+  <!-- =================================================
+       TABLA
+  ================================================== -->
+
+
+  <section class="table-card">
+
+
+
+    <div class="table-header">
+
+
+      <div>
+
+
+        <h2>
+          Detalle del reporte
+        </h2>
+
+
+        <p>
+          Información académica generada.
+        </p>
+
+
+      </div>
+
+
+      <div>
+
+
+        <button
+          class="btn-export pdf"
+          (click)="exportarPDF()">
+
+
+          📄 PDF
+
+
+        </button>
+
+
+
+
+        <button
+          class="btn-export excel"
+          (click)="exportarExcel()">
+
+
+          📊 Excel
+
+
+        </button>
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+
+    <div class="table-container">
+
+
+      <table>
+
+
+        <thead>
+
+
+          <tr>
+
+            <th>
+              Estudiante
+            </th>
+
+
+            <th>
+              Carrera
+            </th>
+
+
+            <th>
+              Curso
+            </th>
+
+
+            <th>
+              Asistencia
+            </th>
+
+
+            <th>
+              Estado
+            </th>
+
+
+          </tr>
+
+
+        </thead>
+
+
+
+
+        <tbody>
+
+
+          <tr
+            *ngFor="let reporte of reportes">
+
+
+            <td>
+              {{ reporte.estudiante }}
+            </td>
+
+
+            <td>
+              {{ reporte.carrera }}
+            </td>
+
+
+            <td>
+              {{ reporte.curso }}
+            </td>
+
+
+            <td>
+              {{ reporte.asistencia }}%
+            </td>
+
+
+            <td>
+
+
+              <span
+                class="badge"
+                [class.normal]="reporte.estado==='Normal'"
+                [class.riesgo]="reporte.estado==='Riesgo'">
+
+
+                {{ reporte.estado }}
+
+
+              </span>
+
+
+            </td>
+
+
+          </tr>
+
+
+
+        </tbody>
+
+
+      </table>
+
+
+    </div>
+
+
+
+
+  </section>
+
+
+
+
+
+
+</section>

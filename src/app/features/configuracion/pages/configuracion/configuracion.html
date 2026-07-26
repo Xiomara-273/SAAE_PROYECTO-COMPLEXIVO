@@ -1,0 +1,545 @@
+<section class="configuracion-container">
+
+
+  <!-- ===============================
+       CABECERA
+  ================================ -->
+
+  <section class="page-header">
+
+    <h1>
+      Configuración del Sistema
+    </h1>
+
+    <p>
+      Administra tu información personal y preferencias del sistema SAAE.
+    </p>
+
+  </section>
+
+
+
+
+
+  <section class="config-grid">
+
+
+
+    <!-- ===============================
+         PERFIL
+    ================================ -->
+
+
+    <section class="config-card">
+
+
+      <div class="card-header">
+
+
+        <div class="profile-header">
+
+
+          <div class="avatar">
+
+            {{ perfil.nombre.charAt(0) }}
+
+          </div>
+
+
+
+          <div>
+
+
+            <h2>
+
+              {{ perfil.nombre }}
+              {{ perfil.apellido }}
+
+            </h2>
+
+
+            <span class="role">
+
+              {{ perfil.rol }}
+
+            </span>
+
+
+          </div>
+
+
+
+        </div>
+
+
+        <p>
+          Información personal del usuario.
+        </p>
+
+
+      </div>
+
+
+
+
+
+      <div class="form-grid">
+
+
+
+        <div class="form-group">
+
+
+          <label>
+            Nombre
+          </label>
+
+
+          <input
+
+            class="form-input"
+
+            type="text"
+
+            [(ngModel)]="perfil.nombre">
+
+        </div>
+
+
+
+
+
+        <div class="form-group">
+
+
+          <label>
+            Apellido
+          </label>
+
+
+          <input
+
+            class="form-input"
+
+            type="text"
+
+            [(ngModel)]="perfil.apellido">
+
+        </div>
+
+
+
+
+
+        <div class="form-group">
+
+
+          <label>
+            Correo electrónico
+          </label>
+
+
+          <input
+
+            class="form-input"
+
+            type="email"
+
+            [(ngModel)]="perfil.correo">
+
+        </div>
+
+
+
+
+
+        <div class="form-group">
+
+
+          <label>
+            Teléfono
+          </label>
+
+
+          <input
+
+            class="form-input"
+
+            type="text"
+
+            [(ngModel)]="perfil.telefono">
+
+        </div>
+
+
+
+      </div>
+
+
+
+
+
+      <div class="actions">
+
+
+        <button
+
+          class="btn-primary"
+
+          (click)="guardarPerfil()">
+
+
+          Guardar perfil
+
+
+        </button>
+
+
+      </div>
+
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+    <!-- ===============================
+         PREFERENCIAS
+    ================================ -->
+
+
+    <section class="config-card">
+
+
+      <div class="card-header">
+
+
+        <h2>
+          Preferencias del sistema
+        </h2>
+
+
+        <p>
+          Personaliza el comportamiento de la plataforma.
+        </p>
+
+
+      </div>
+
+
+
+
+
+
+
+      <div class="switch-container">
+
+
+        <span>
+          Notificaciones
+        </span>
+
+
+
+        <label class="switch">
+
+
+          <input
+
+            type="checkbox"
+
+            [(ngModel)]="sistema.notificaciones">
+
+
+
+          <span class="slider"></span>
+
+
+        </label>
+
+
+
+      </div>
+
+
+
+
+
+
+
+      <div class="switch-container">
+
+
+        <span>
+          Modo oscuro
+        </span>
+
+
+
+        <label class="switch">
+
+
+          <input
+
+            type="checkbox"
+
+            [(ngModel)]="sistema.modoOscuro">
+
+
+
+          <span class="slider"></span>
+
+
+        </label>
+
+
+
+      </div>
+
+
+
+
+
+
+
+      <div class="form-group">
+
+
+        <label>
+          Idioma
+        </label>
+
+
+
+        <select
+
+          class="form-input"
+
+          [(ngModel)]="sistema.idioma">
+
+
+          <option value="Español">
+            Español
+          </option>
+
+
+          <option value="English">
+            English
+          </option>
+
+
+        </select>
+
+
+      </div>
+
+
+
+
+
+
+
+      <div class="actions">
+
+
+        <button
+
+          class="btn-primary"
+
+          (click)="guardarConfiguracion()">
+
+
+
+          Guardar configuración
+
+
+
+        </button>
+
+
+      </div>
+
+
+
+
+    </section>
+
+
+
+
+
+
+
+
+
+    <!-- ===============================
+         SEGURIDAD
+    ================================ -->
+
+
+    <section class="config-card">
+
+
+
+      <div class="card-header">
+
+
+        <h2>
+          Seguridad
+        </h2>
+
+
+        <p>
+          Actualiza la contraseña de tu cuenta.
+        </p>
+
+
+      </div>
+
+
+
+
+
+
+
+      <div class="form-group">
+
+
+        <label>
+          Contraseña actual
+        </label>
+
+
+        <input
+
+          class="form-input"
+
+          type="password"
+
+          [(ngModel)]="password.actual">
+
+
+      </div>
+
+
+
+
+
+
+
+      <div class="form-group">
+
+
+        <label>
+          Nueva contraseña
+        </label>
+
+
+        <input
+
+          class="form-input"
+
+          type="password"
+
+          [(ngModel)]="password.nueva">
+
+
+      </div>
+
+
+
+
+
+
+
+      <div class="form-group">
+
+
+        <label>
+          Confirmar contraseña
+        </label>
+
+
+        <input
+
+          class="form-input"
+
+          type="password"
+
+          [(ngModel)]="password.confirmar">
+
+
+      </div>
+
+
+
+
+
+
+      <div class="actions">
+
+
+        <button
+
+          class="btn-primary"
+
+          (click)="cambiarPassword()">
+
+
+
+          Cambiar contraseña
+
+
+
+        </button>
+
+
+
+      </div>
+
+
+
+    </section>
+
+
+
+
+
+
+  </section>
+
+
+
+
+
+
+
+
+  <!-- ===============================
+       MENSAJE
+  ================================ -->
+
+
+  <div
+
+    class="message"
+
+    *ngIf="mensaje">
+
+
+    {{ mensaje }}
+
+
+  </div>
+
+
+
+
+
+</section>

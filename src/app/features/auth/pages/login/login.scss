@@ -1,0 +1,778 @@
+/* =====================================================
+   SAAE LOGIN - Premium Dark Glass UI
+   ===================================================== */
+
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+
+body{
+  overflow:hidden;
+  font-family:'Inter',sans-serif;
+}
+
+
+
+/* =========================
+   PAGINA LOGIN
+========================= */
+
+
+.login-page{
+
+  min-height:100vh;
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  position:relative;
+
+  overflow:hidden;
+
+
+  background:
+
+  linear-gradient(
+    135deg,
+    #020617,
+    #172554,
+    #1e40af,
+    #38bdf8
+  );
+
+
+  background-size:300% 300%;
+
+  animation:bgMove 16s ease infinite;
+
+
+}
+
+
+
+
+
+/* =========================
+   FONDO
+========================= */
+
+
+.background{
+
+  position:absolute;
+
+  inset:0;
+
+}
+
+
+
+.circle{
+
+  position:absolute;
+
+  border-radius:50%;
+
+  filter:blur(45px);
+
+  opacity:.35;
+
+  animation:float 10s ease-in-out infinite;
+
+}
+
+
+
+.circle1{
+
+  width:350px;
+
+  height:350px;
+
+  background:#38bdf8;
+
+  top:-100px;
+
+  left:-80px;
+
+}
+
+
+
+.circle2{
+
+  width:300px;
+
+  height:300px;
+
+  background:#2563eb;
+
+  bottom:-100px;
+
+  right:-60px;
+
+  animation-delay:3s;
+
+}
+
+
+
+.circle3{
+
+  width:200px;
+
+  height:200px;
+
+  background:#60a5fa;
+
+  top:40%;
+
+  left:55%;
+
+  animation-delay:5s;
+
+}
+
+
+
+
+
+/* =========================
+   TARJETA PRINCIPAL
+========================= */
+
+
+.login-card{
+
+
+  position:relative;
+
+  z-index:2;
+
+
+  width:1100px;
+
+  max-width:92%;
+
+
+  min-height:650px;
+
+
+  display:flex;
+
+
+  overflow:hidden;
+
+
+  border-radius:30px;
+
+
+  background:
+
+  rgba(255,255,255,.10);
+
+
+  backdrop-filter:blur(20px);
+
+
+  border:
+
+  1px solid rgba(255,255,255,.20);
+
+
+
+  box-shadow:
+
+  0 30px 80px rgba(0,0,0,.45);
+
+
+
+}
+
+
+
+
+
+
+/* =========================
+   PARTE IZQUIERDA
+========================= */
+
+
+.left-side{
+
+
+  flex:1;
+
+
+  padding:55px;
+
+
+  color:white;
+
+
+  display:flex;
+
+
+  flex-direction:column;
+
+
+  justify-content:center;
+
+
+
+}
+
+
+
+.main-logo{
+
+
+  width:160px;
+
+
+  margin-bottom:25px;
+
+
+}
+
+
+
+
+.left-side h1{
+
+
+  font-size:40px;
+
+
+  line-height:1.2;
+
+
+  margin-bottom:20px;
+
+
+}
+
+
+
+.left-side p{
+
+
+  font-size:17px;
+
+
+  line-height:1.6;
+
+
+  color:#dbeafe;
+
+
+}
+
+
+
+
+.features{
+
+
+  margin-top:35px;
+
+
+}
+
+
+
+.feature{
+
+
+  margin-bottom:15px;
+
+
+  padding:14px 18px;
+
+
+  border-radius:14px;
+
+
+  background:
+
+  rgba(255,255,255,.12);
+
+
+  border:
+
+  1px solid rgba(255,255,255,.12);
+
+
+}
+
+
+
+
+
+/* =========================
+   FORMULARIO
+========================= */
+
+
+.right-side{
+
+
+  width:45%;
+
+
+  background:
+
+  rgba(255,255,255,.90);
+
+
+
+  display:flex;
+
+
+  align-items:center;
+
+
+  justify-content:center;
+
+
+
+  padding:45px;
+
+
+
+}
+
+
+
+
+
+.form-box{
+
+
+  width:100%;
+
+
+  max-width:360px;
+
+
+}
+
+
+
+.form-box h2{
+
+
+  color:#020617;
+
+
+  font-size:34px;
+
+
+  margin-bottom:5px;
+
+
+}
+
+
+
+.form-box span{
+
+
+  display:block;
+
+
+  color:#64748b;
+
+
+  margin-bottom:30px;
+
+
+}
+
+
+
+
+.input-group{
+
+
+  margin-bottom:20px;
+
+
+}
+
+
+
+.input-group label{
+
+
+  display:block;
+
+
+  color:#334155;
+
+
+  font-weight:600;
+
+
+  margin-bottom:7px;
+
+
+}
+
+
+
+
+.input-group input{
+
+
+  width:100%;
+
+
+  height:50px;
+
+
+  border-radius:12px;
+
+
+  border:1px solid #cbd5e1;
+
+
+  padding:0 15px;
+
+
+  font-size:14px;
+
+
+  background:white;
+
+
+  transition:.25s;
+
+
+
+}
+
+
+
+
+.input-group input:focus{
+
+
+  outline:none;
+
+
+  border-color:#2563eb;
+
+
+  box-shadow:
+
+  0 0 0 4px rgba(37,99,235,.15);
+
+
+}
+
+
+
+
+
+/* PASSWORD */
+
+
+.password-box{
+
+
+  position:relative;
+
+
+}
+
+
+
+.show-password{
+
+
+  position:absolute;
+
+
+  right:12px;
+
+
+  top:50%;
+
+
+  transform:translateY(-50%);
+
+
+  border:none;
+
+
+  background:none;
+
+
+  cursor:pointer;
+
+
+  font-size:18px;
+
+
+}
+
+
+
+
+/* BOTON */
+
+
+.btn-login,
+
+
+.btn-recover{
+
+
+  width:100%;
+
+
+  height:50px;
+
+
+  border:none;
+
+
+  border-radius:12px;
+
+
+  cursor:pointer;
+
+
+  color:white;
+
+
+  font-weight:700;
+
+
+  font-size:15px;
+
+
+  background:
+
+
+  linear-gradient(
+    135deg,
+    #2563eb,
+    #38bdf8
+  );
+
+
+  transition:.3s;
+
+
+}
+
+
+
+.btn-login:hover,
+
+
+.btn-recover:hover{
+
+
+  transform:translateY(-3px);
+
+
+  box-shadow:
+
+  0 15px 30px rgba(37,99,235,.35);
+
+
+}
+
+
+
+
+
+/* LINKS */
+
+
+.links,
+
+.register{
+
+
+  text-align:center;
+
+
+  margin-top:18px;
+
+
+}
+
+
+
+.links a,
+
+.register button{
+
+
+  color:#2563eb;
+
+
+  font-weight:700;
+
+
+  cursor:pointer;
+
+
+  background:none;
+
+
+  border:none;
+
+
+}
+
+
+
+
+/* =========================
+   MODAL
+========================= */
+
+
+.modal-overlay{
+
+
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(0,0,0,.55);
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  z-index:1000;
+
+
+}
+
+
+
+.modal-box{
+
+
+  width:380px;
+
+
+  padding:30px;
+
+
+  border-radius:22px;
+
+
+  background:white;
+
+
+  box-shadow:
+
+  0 20px 50px rgba(0,0,0,.35);
+
+
+}
+
+
+
+
+/* =========================
+   ANIMACIONES
+========================= */
+
+
+@keyframes bgMove{
+
+
+0%{
+background-position:0% 50%;
+}
+
+
+50%{
+background-position:100% 50%;
+}
+
+
+100%{
+background-position:0% 50%;
+}
+
+
+}
+
+
+
+@keyframes float{
+
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+
+50%{
+
+transform:translateY(-30px);
+
+}
+
+
+}
+
+
+
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+
+@media(max-width:950px){
+
+
+.left-side{
+
+display:none;
+
+}
+
+
+
+.right-side{
+
+width:100%;
+
+}
+
+
+
+.login-card{
+
+min-height:auto;
+
+}
+
+
+
+}

@@ -1,0 +1,460 @@
+<div class="page-container">
+
+
+  <!-- TITULO DE PAGINA -->
+
+  <section class="page-header">
+
+    <div>
+
+      <h1>
+        Control y Registro de Asistencia
+      </h1>
+
+      <p>
+        Seleccione la asignatura y registre la asistencia diaria de los estudiantes.
+      </p>
+
+    </div>
+
+
+  </section>
+
+
+
+
+
+  <!-- FILTROS -->
+
+  <section class="card">
+
+
+    <div class="filters-container">
+
+
+      <div class="filter-group">
+
+
+        <label>
+          Asignatura / Paralelo
+        </label>
+
+
+        <select
+          class="filter-select"
+          [(ngModel)]="asignaturaSeleccionada"
+        >
+
+
+          <option
+            *ngFor="let materia of asignaturas"
+            [value]="materia"
+          >
+
+            {{materia}}
+
+          </option>
+
+
+        </select>
+
+
+      </div>
+
+
+
+
+
+      <div class="filter-group">
+
+
+        <label>
+          Fecha de registro
+        </label>
+
+
+        <input
+          type="date"
+          class="filter-input"
+          [(ngModel)]="fechaRegistro"
+        >
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+  </section>
+
+
+
+
+
+
+
+  <!-- TARJETAS DE RESUMEN -->
+
+
+  <section class="stats-grid">
+
+
+
+    <div class="stat-card success">
+
+
+      <div class="stat-icon">
+        ✔
+      </div>
+
+
+      <div>
+
+        <span>
+          Presentes
+        </span>
+
+
+        <h2>
+          {{totalPresentes}}
+        </h2>
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+
+
+    <div class="stat-card warning">
+
+
+      <div class="stat-icon">
+        ⏰
+      </div>
+
+
+      <div>
+
+        <span>
+          Atrasos
+        </span>
+
+
+        <h2>
+          {{totalAtrasos}}
+        </h2>
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+
+
+
+    <div class="stat-card danger">
+
+
+      <div class="stat-icon">
+        ✖
+      </div>
+
+
+      <div>
+
+        <span>
+          Faltas
+        </span>
+
+
+        <h2>
+          {{totalFaltas}}
+        </h2>
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+  </section>
+
+
+
+
+
+
+
+
+
+
+  <!-- TABLA DE ASISTENCIA -->
+
+
+  <section class="card">
+
+
+
+    <div class="table-header">
+
+
+      <h2>
+        Lista de estudiantes
+      </h2>
+
+
+      <span>
+        Registro diario de asistencia
+      </span>
+
+
+    </div>
+
+
+
+
+
+
+
+    <div class="table-responsive">
+
+
+      <table class="custom-table">
+
+
+
+        <thead>
+
+
+          <tr>
+
+
+            <th>
+              Estudiante
+            </th>
+
+
+            <th>
+              Estado
+            </th>
+
+
+            <th>
+              Observación
+            </th>
+
+
+          </tr>
+
+
+        </thead>
+
+
+
+
+
+
+
+        <tbody>
+
+
+          <tr
+            *ngFor="let alumno of estudiantes"
+          >
+
+
+
+            <td>
+
+
+              <div class="student-info">
+
+
+
+                <div class="avatar">
+
+                  {{alumno.iniciales}}
+
+                </div>
+
+
+
+                <div>
+
+
+                  <strong>
+                    {{alumno.nombre}}
+                  </strong>
+
+
+                  <small>
+                    {{alumno.correo}}
+                  </small>
+
+
+
+                </div>
+
+
+              </div>
+
+
+            </td>
+
+
+
+
+
+
+
+
+
+            <td>
+
+
+              <div class="status-buttons">
+
+
+                <button
+                  class="status-btn presente"
+                  [class.active]="alumno.estado==='P'"
+                  (click)="cambiarEstado(alumno.id,'P')"
+                >
+
+                  P
+
+                </button>
+
+
+
+
+
+                <button
+                  class="status-btn atraso"
+                  [class.active]="alumno.estado==='A'"
+                  (click)="cambiarEstado(alumno.id,'A')"
+                >
+
+                  A
+
+                </button>
+
+
+
+
+
+                <button
+                  class="status-btn falta"
+                  [class.active]="alumno.estado==='F'"
+                  (click)="cambiarEstado(alumno.id,'F')"
+                >
+
+                  F
+
+                </button>
+
+
+
+              </div>
+
+
+
+            </td>
+
+
+
+
+
+
+
+
+            <td>
+
+
+              <input
+
+                type="text"
+
+                class="observation-input"
+
+                placeholder="Añadir comentario..."
+
+                [(ngModel)]="alumno.observacion"
+
+              >
+
+
+            </td>
+
+
+
+
+
+          </tr>
+
+
+
+
+        </tbody>
+
+
+
+
+
+      </table>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- BOTON GUARDAR -->
+
+
+    <div class="actions">
+
+
+      <button
+        class="save-button"
+        (click)="guardarAsistencia()"
+      >
+
+        💾 Guardar y sincronizar asistencia
+
+
+      </button>
+
+
+    </div>
+
+
+
+
+
+  </section>
+
+
+
+
+
+</div>

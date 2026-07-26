@@ -1,0 +1,62 @@
+<div
+  class="modal-backdrop"
+  *ngIf="visible"
+>
+
+  <div class="modal-container">
+
+    <!-- HEADER -->
+
+    <div class="modal-header">
+
+      <div>
+
+        <h2>
+          {{ titulo }}
+        </h2>
+
+        <p *ngIf="subtitulo">
+          {{ subtitulo }}
+        </p>
+
+      </div>
+
+      <button
+        class="btn-close"
+        (click)="cerrarModal()"
+      >
+        ✕
+      </button>
+
+    </div>
+
+
+
+    <!-- CONTENIDO -->
+
+    <div class="modal-body">
+
+      <ng-content></ng-content>
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="modal-footer">
+
+      <button
+        class="btn-secondary"
+        (click)="cerrarModal()"
+      >
+
+        Cerrar
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

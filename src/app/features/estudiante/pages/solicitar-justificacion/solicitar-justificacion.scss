@@ -1,0 +1,511 @@
+/* =========================================================
+   SOLICITAR JUSTIFICACIÓN
+   Diseño moderno - SAAE
+========================================================= */
+
+.justificacion-container {
+
+  width: 100%;
+  padding: 30px;
+  animation: fadeIn 0.4s ease-in-out;
+
+}
+
+
+/* =========================================================
+   CABECERA
+========================================================= */
+
+.page-header {
+
+  margin-bottom: 30px;
+
+  h1 {
+
+    font-size: 32px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 8px;
+
+  }
+
+
+  p {
+
+    color: #64748b;
+    font-size: 15px;
+
+  }
+
+}
+
+
+/* =========================================================
+   GRID PRINCIPAL
+========================================================= */
+
+.content-grid {
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  align-items: start;
+
+}
+
+
+/* =========================================================
+   TARJETAS
+========================================================= */
+
+.section-card {
+
+  background: rgba(255,255,255,0.95);
+  border-radius: 18px;
+  padding: 25px;
+
+  box-shadow:
+    0 10px 30px rgba(15,23,42,0.08);
+
+  border: 1px solid rgba(226,232,240,0.8);
+
+}
+
+
+/* =========================================================
+   HEADER TARJETAS
+========================================================= */
+
+.card-header {
+
+  margin-bottom: 25px;
+
+
+  h2 {
+
+    font-size: 22px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 6px;
+
+  }
+
+
+  p {
+
+    color: #64748b;
+    font-size: 14px;
+
+  }
+
+}
+
+
+/* =========================================================
+   FORMULARIO
+========================================================= */
+
+.form-group {
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+
+
+  label {
+
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+
+  }
+
+}
+
+
+.form-row {
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+
+}
+
+
+
+.form-input {
+
+  width: 100%;
+  padding: 13px 15px;
+
+  border-radius: 12px;
+
+  border: 1px solid #cbd5e1;
+
+  background: #ffffff;
+
+  font-size: 14px;
+
+  color: #1e293b;
+
+  outline: none;
+
+  transition: all .25s ease;
+
+
+  &:focus {
+
+    border-color: #2563eb;
+
+    box-shadow:
+      0 0 0 3px rgba(37,99,235,0.15);
+
+  }
+
+
+  &:hover {
+
+    border-color: #94a3b8;
+
+  }
+
+}
+
+
+
+.textarea {
+
+  min-height: 120px;
+
+  resize: vertical;
+
+  font-family: inherit;
+
+}
+
+
+
+/* =========================================================
+   ARCHIVO
+========================================================= */
+
+
+.file-name {
+
+  margin-top: 8px;
+
+  color: #2563eb;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+}
+
+
+
+/* =========================================================
+   BOTONES
+========================================================= */
+
+.actions {
+
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+
+}
+
+
+
+.btn-primary,
+.btn-secondary {
+
+  padding: 13px 25px;
+
+  border-radius: 12px;
+
+  border: none;
+
+  cursor: pointer;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  transition: all .25s ease;
+
+}
+
+
+
+.btn-primary {
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #1d4ed8
+    );
+
+  color: white;
+
+
+  &:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+      0 8px 20px rgba(37,99,235,.25);
+
+  }
+
+}
+
+
+
+.btn-secondary {
+
+  background: #e2e8f0;
+
+  color: #334155;
+
+
+  &:hover {
+
+    background: #cbd5e1;
+
+  }
+
+}
+
+
+/* =========================================================
+   HISTORIAL
+========================================================= */
+
+
+.request-card {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 20px;
+
+  border-radius: 15px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  margin-bottom: 15px;
+
+  transition: all .25s ease;
+
+
+
+  &:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+      0 8px 20px rgba(15,23,42,.08);
+
+  }
+
+}
+
+
+
+.request-info {
+
+
+  h4 {
+
+    font-size: 17px;
+
+    color: #0f172a;
+
+    margin-bottom: 12px;
+
+  }
+
+
+  p {
+
+    margin: 6px 0;
+
+    font-size: 14px;
+
+    color: #475569;
+
+    line-height: 1.5;
+
+
+    strong {
+
+      color: #1e293b;
+
+    }
+
+  }
+
+}
+
+
+
+/* =========================================================
+   ESTADOS
+========================================================= */
+
+.request-status {
+
+  display: flex;
+
+  align-items: flex-start;
+
+}
+
+
+
+.badge {
+
+  padding: 7px 14px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  background: #e2e8f0;
+
+  color: #475569;
+
+
+}
+
+
+
+.badge.pending {
+
+  background: #fef3c7;
+
+  color: #92400e;
+
+}
+
+
+
+.badge.approved {
+
+  background: #dcfce7;
+
+  color: #166534;
+
+}
+
+
+
+.badge.rejected {
+
+  background: #fee2e2;
+
+  color: #991b1b;
+
+}
+
+
+
+/* =========================================================
+   ANIMACIÓN
+========================================================= */
+
+@keyframes fadeIn {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(10px);
+
+  }
+
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+  }
+
+}
+
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width: 1100px) {
+
+
+  .content-grid {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+}
+
+
+
+@media(max-width: 700px) {
+
+
+  .justificacion-container {
+
+    padding: 20px;
+
+  }
+
+
+
+  .form-row {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+
+  .request-card {
+
+    flex-direction: column;
+
+  }
+
+
+
+  .actions {
+
+    flex-direction: column;
+
+  }
+
+
+  .btn-primary,
+  .btn-secondary {
+
+    width: 100%;
+
+  }
+
+
+}

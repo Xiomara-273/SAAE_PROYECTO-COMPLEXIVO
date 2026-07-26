@@ -1,0 +1,352 @@
+<div class="register-page">
+
+  <!-- Fondo animado -->
+  <div class="background-animation">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+
+  <div class="register-card">
+
+
+    <!-- HEADER -->
+
+    <div class="register-header">
+
+      <div class="logo">
+
+        <img 
+          src="images/saae-logo.png"
+          alt="SAAE">
+
+      </div>
+
+
+      <h1>Crear cuenta</h1>
+
+      <p>
+        Regístrate para acceder al sistema
+      </p>
+
+    </div>
+
+
+
+
+    <!-- FORMULARIO -->
+
+    <form 
+      class="register-form"
+      (ngSubmit)="registrar()">
+
+
+
+      <div class="form-row">
+
+
+        <!-- Nombre -->
+
+        <div class="input-group">
+
+          <label>
+            Nombre completo
+          </label>
+
+
+          <div class="input-box">
+
+            <i class="fas fa-user"></i>
+
+
+            <input
+              type="text"
+              placeholder="Nombre completo"
+              [(ngModel)]="usuario.nombre"
+              name="nombre"
+              required>
+
+
+          </div>
+
+
+        </div>
+
+
+
+
+        <!-- Correo -->
+
+
+        <div class="input-group">
+
+          <label>
+            Correo electrónico
+          </label>
+
+
+          <div class="input-box">
+
+            <i class="fas fa-envelope"></i>
+
+
+            <input
+              type="email"
+              placeholder="correo institucional"
+              [(ngModel)]="usuario.correo"
+              name="correo"
+              required>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+
+
+
+      <div class="form-row">
+
+
+
+        <!-- Usuario -->
+
+
+        <div class="input-group">
+
+          <label>
+            Usuario
+          </label>
+
+
+          <div class="input-box">
+
+
+            <i class="fas fa-user-circle"></i>
+
+
+            <input
+              type="text"
+              placeholder="Usuario"
+              [(ngModel)]="usuario.username"
+              name="username"
+              required>
+
+
+          </div>
+
+
+        </div>
+
+
+
+
+
+        <!-- Password -->
+
+
+        <div class="input-group">
+
+
+          <label>
+            Contraseña
+          </label>
+
+
+          <div class="input-box">
+
+
+            <i class="fas fa-lock"></i>
+
+
+            <input
+              [type]="mostrarPassword ? 'text':'password'"
+              placeholder="Contraseña"
+              [(ngModel)]="usuario.password"
+              name="password"
+              (input)="evaluarPassword()"
+              required>
+
+
+
+            <button
+              type="button"
+              class="show-password"
+              (click)="mostrarPassword=!mostrarPassword">
+
+
+              <i 
+                [class]="mostrarPassword 
+                ? 'fas fa-eye-slash'
+                : 'fas fa-eye'">
+              </i>
+
+
+            </button>
+
+
+          </div>
+
+
+
+
+        </div>
+
+
+      </div>
+
+
+
+
+
+
+      <!-- Fuerza contraseña -->
+
+
+      <div class="password-strength">
+
+
+        <div class="strength-bar">
+
+
+          <span [class.active]="nivelPassword>=1"></span>
+
+          <span [class.active]="nivelPassword>=2"></span>
+
+          <span [class.active]="nivelPassword>=3"></span>
+
+          <span [class.active]="nivelPassword>=4"></span>
+
+
+        </div>
+
+
+
+        <small>
+          {{mensajePassword}}
+        </small>
+
+
+      </div>
+
+
+
+
+
+
+
+      <!-- Confirmar -->
+
+
+      <div class="input-group confirm">
+
+
+        <label>
+          Confirmar contraseña
+        </label>
+
+
+        <div class="input-box">
+
+
+          <i class="fas fa-lock"></i>
+
+
+          <input
+            [type]="mostrarConfirmacion ? 'text':'password'"
+            placeholder="Repita contraseña"
+            [(ngModel)]="confirmarPassword"
+            name="confirmarPassword"
+            required>
+
+
+
+
+          <button
+            type="button"
+            class="show-password"
+            (click)="mostrarConfirmacion=!mostrarConfirmacion">
+
+
+            <i 
+              [class]="mostrarConfirmacion
+              ? 'fas fa-eye-slash'
+              : 'fas fa-eye'">
+            </i>
+
+
+          </button>
+
+
+        </div>
+
+
+
+        <small
+          class="password-match"
+          [class.error]="!passwordCoincide && confirmarPassword">
+
+
+          {{
+          confirmarPassword
+          ? (
+            passwordCoincide
+            ? '✓ Las contraseñas coinciden'
+            : '✗ Las contraseñas no coinciden'
+          )
+          : ''
+          }}
+
+
+        </small>
+
+
+
+      </div>
+
+
+
+
+
+
+      <button 
+        class="register-button"
+        type="submit">
+
+        Crear cuenta
+
+      </button>
+
+
+
+
+
+      <div class="login-link">
+
+        ¿Ya tienes una cuenta?
+
+        <a routerLink="/login">
+          Iniciar sesión
+        </a>
+
+      </div>
+
+
+
+
+    </form>
+
+
+
+  </div>
+
+
+
+</div>

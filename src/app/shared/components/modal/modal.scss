@@ -1,0 +1,269 @@
+/* =====================================================
+   SAAE - MODAL UNIVERSAL
+===================================================== */
+
+.modal-backdrop{
+
+  position:fixed;
+
+  inset:0;
+
+  background:rgba(15,23,42,.65);
+
+  backdrop-filter:blur(5px);
+
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  z-index:9999;
+
+  animation:fadeIn .25s ease;
+
+}
+
+
+
+
+
+.modal-container{
+
+  width:min(700px,92vw);
+
+  max-height:90vh;
+
+  overflow-y:auto;
+
+  background:white;
+
+  border-radius:24px;
+
+  box-shadow:
+  0 20px 60px rgba(15,23,42,.35);
+
+  animation:scaleIn .25s ease;
+
+}
+
+
+
+
+
+/* ============================
+   HEADER
+============================ */
+
+.modal-header{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-start;
+
+  padding:24px 28px;
+
+  border-bottom:1px solid #e2e8f0;
+
+}
+
+
+
+.modal-header h2{
+
+  margin:0;
+
+  color:#0f172a;
+
+  font-size:24px;
+
+}
+
+
+
+.modal-header p{
+
+  margin-top:6px;
+
+  color:#64748b;
+
+  font-size:14px;
+
+}
+
+
+
+
+
+.btn-close{
+
+  width:42px;
+
+  height:42px;
+
+  border:none;
+
+  border-radius:12px;
+
+  cursor:pointer;
+
+  font-size:18px;
+
+  background:#f1f5f9;
+
+  transition:.25s;
+
+}
+
+
+
+.btn-close:hover{
+
+  background:#e2e8f0;
+
+}
+
+
+
+
+
+/* ============================
+   BODY
+============================ */
+
+.modal-body{
+
+  padding:30px;
+
+}
+
+
+
+
+
+/* ============================
+   FOOTER
+============================ */
+
+.modal-footer{
+
+  display:flex;
+
+  justify-content:flex-end;
+
+  gap:12px;
+
+  padding:22px 28px;
+
+  border-top:1px solid #e2e8f0;
+
+}
+
+
+
+.btn-secondary{
+
+  padding:12px 24px;
+
+  border:none;
+
+  border-radius:12px;
+
+  cursor:pointer;
+
+  font-weight:600;
+
+  color:white;
+
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #1e40af
+  );
+
+  transition:.25s;
+
+}
+
+
+
+.btn-secondary:hover{
+
+  transform:translateY(-2px);
+
+  box-shadow:
+  0 10px 25px rgba(37,99,235,.30);
+
+}
+
+
+
+
+
+/* ============================
+   ANIMACIONES
+============================ */
+
+@keyframes fadeIn{
+
+  from{
+
+    opacity:0;
+
+  }
+
+  to{
+
+    opacity:1;
+
+  }
+
+}
+
+
+
+@keyframes scaleIn{
+
+  from{
+
+    opacity:0;
+
+    transform:scale(.92);
+
+  }
+
+  to{
+
+    opacity:1;
+
+    transform:scale(1);
+
+  }
+
+}
+
+
+
+
+
+/* ============================
+   RESPONSIVE
+============================ */
+
+@media(max-width:768px){
+
+  .modal-container{
+
+    width:95vw;
+
+  }
+
+  .modal-body{
+
+    padding:20px;
+
+  }
+
+}

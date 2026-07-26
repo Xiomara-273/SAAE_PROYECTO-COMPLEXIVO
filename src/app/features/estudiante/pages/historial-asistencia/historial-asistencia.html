@@ -1,0 +1,223 @@
+<div class="dashboard-container">
+
+  <!-- ==========================
+       CONTENIDO
+  =========================== -->
+
+  <main class="main-content">
+
+    <!-- CABECERA -->
+
+    <section class="page-header">
+
+      <div>
+
+        <h1>
+          Historial de Asistencia
+        </h1>
+
+        <p>
+          Consulta detallada de todos tus registros de asistencia durante el período académico.
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- FILTROS -->
+
+    <section class="section-card">
+
+      <div class="filters">
+
+        <div class="filter-group">
+
+          <label>
+            Materia
+          </label>
+
+          <select
+            class="filter-input"
+            [(ngModel)]="materiaSeleccionada"
+            (change)="filtrarHistorial()">
+
+            <option value="Todas">
+              Todas las materias
+            </option>
+
+            <option
+              *ngFor="let materia of materias"
+              [value]="materia">
+
+              {{ materia }}
+
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="filter-group">
+
+          <label>
+            Período Académico
+          </label>
+
+          <input
+            class="filter-input"
+            value="2026"
+            readonly>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- KPI -->
+
+    <section class="metrics-grid">
+
+      <div class="metric-card success">
+
+        <h3>
+          Asistencia Total
+        </h3>
+
+        <strong>
+          {{ porcentajeTotal }}%
+        </strong>
+
+        <p>
+          Promedio acumulado
+        </p>
+
+      </div>
+
+      <div class="metric-card primary">
+
+        <h3>
+          Presentes
+        </h3>
+
+        <strong>
+          {{ presentes }}
+        </strong>
+
+        <p>
+          Registros presentes
+        </p>
+
+      </div>
+
+      <div class="metric-card warning">
+
+        <h3>
+          Atrasos
+        </h3>
+
+        <strong>
+          {{ atrasos }}
+        </strong>
+
+        <p>
+          Llegadas tardías
+        </p>
+
+      </div>
+
+      <div class="metric-card danger">
+
+        <h3>
+          Faltas
+        </h3>
+
+        <strong>
+          {{ faltas }}
+        </strong>
+
+        <p>
+          Inasistencias
+        </p>
+
+      </div>
+
+    </section>
+
+    <!-- TABLA -->
+
+    <section class="section-card">
+
+      <div class="card-title">
+
+        <h2>
+          Registro Histórico
+        </h2>
+
+      </div>
+
+      <div class="table-responsive">
+
+        <table>
+
+          <thead>
+
+            <tr>
+
+              <th>Fecha</th>
+
+              <th>Materia</th>
+
+              <th>Docente</th>
+
+              <th>Estado</th>
+
+              <th>Observación</th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <tr *ngFor="let registro of historialFiltrado">
+
+              <td>{{ registro.fecha }}</td>
+
+              <td>{{ registro.materia }}</td>
+
+              <td>{{ registro.docente }}</td>
+
+              <td>
+
+                <span
+                  class="badge"
+                  [class.presente]="registro.estado==='Presente'"
+                  [class.atraso]="registro.estado==='Atraso'"
+                  [class.falta]="registro.estado==='Falta'">
+
+                  {{ registro.estado }}
+
+                </span>
+
+              </td>
+
+              <td>
+
+                {{ registro.observacion }}
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>

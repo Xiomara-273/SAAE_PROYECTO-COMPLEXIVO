@@ -1,0 +1,376 @@
+<div class="page-container">
+
+
+  <!-- TITULO -->
+
+  <section class="page-header">
+
+    <div>
+
+      <h1>
+        Panel de Revisión de Justificaciones
+      </h1>
+
+      <p>
+        Gestión y revisión de solicitudes enviadas por los estudiantes.
+      </p>
+
+    </div>
+
+
+  </section>
+
+
+
+
+
+
+  <!-- ESTADISTICAS -->
+
+
+  <section class="stats-grid">
+
+
+    <div class="stat-card pending">
+
+
+      <div class="icon">
+        ⏳
+      </div>
+
+
+      <div>
+
+        <span>
+          Pendientes
+        </span>
+
+
+        <h2>
+          {{pendientes}}
+        </h2>
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+
+
+
+    <div class="stat-card approved">
+
+
+      <div class="icon">
+        ✔
+      </div>
+
+
+      <div>
+
+        <span>
+          Aprobadas
+        </span>
+
+
+        <h2>
+          {{aprobadas}}
+        </h2>
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+
+
+
+    <div class="stat-card rejected">
+
+
+      <div class="icon">
+        ✖
+      </div>
+
+
+      <div>
+
+        <span>
+          Rechazadas
+        </span>
+
+
+        <h2>
+          {{rechazadas}}
+        </h2>
+
+
+      </div>
+
+
+    </div>
+
+
+
+  </section>
+
+
+
+
+
+
+
+
+
+  <!-- TABLA -->
+
+
+  <section class="card">
+
+
+    <div class="table-header">
+
+
+      <div>
+
+        <h2>
+          Solicitudes de estudiantes
+        </h2>
+
+
+        <p>
+          Revisión de documentos y motivos registrados.
+        </p>
+
+
+      </div>
+
+
+    </div>
+
+
+
+
+
+
+
+    <div class="table-responsive">
+
+
+      <table class="custom-table">
+
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Estudiante
+            </th>
+
+
+            <th>
+              Materia
+            </th>
+
+
+            <th>
+              Fecha
+            </th>
+
+
+            <th>
+              Motivo
+            </th>
+
+
+            <th>
+              Estado
+            </th>
+
+
+            <th>
+              Acciones
+            </th>
+
+
+          </tr>
+
+
+        </thead>
+
+
+
+
+
+
+
+        <tbody>
+
+
+          <tr
+            *ngFor="let item of solicitudes"
+          >
+
+
+
+            <td>
+
+              <strong>
+                {{item.estudiante}}
+              </strong>
+
+            </td>
+
+
+
+
+
+            <td>
+              {{item.materia}}
+            </td>
+
+
+
+
+
+            <td>
+              {{item.fecha}}
+            </td>
+
+
+
+
+
+            <td>
+
+
+              <span>
+                {{item.motivo}}
+              </span>
+
+
+              <small class="file">
+
+                Archivo:
+                {{item.archivo}}
+
+              </small>
+
+
+            </td>
+
+
+
+
+
+
+
+
+            <td>
+
+
+              <span
+                class="badge"
+
+                [class.pending-badge]="item.estado==='Pendiente'"
+
+                [class.approved-badge]="item.estado==='Aprobada'"
+
+                [class.rejected-badge]="item.estado==='Rechazada'"
+              >
+
+                {{item.estado}}
+
+              </span>
+
+
+            </td>
+
+
+
+
+
+
+
+
+            <td>
+
+
+              <div class="actions">
+
+
+                <button
+
+                  class="btn approve"
+
+                  (click)="aprobar(item.id)"
+
+                >
+
+                  Aprobar
+
+                </button>
+
+
+
+
+
+                <button
+
+                  class="btn reject"
+
+                  (click)="rechazar(item.id)"
+
+                >
+
+                  Rechazar
+
+                </button>
+
+
+
+              </div>
+
+
+
+            </td>
+
+
+
+
+
+          </tr>
+
+
+
+
+
+        </tbody>
+
+
+
+
+      </table>
+
+
+    </div>
+
+
+
+
+  </section>
+
+
+
+
+
+</div>

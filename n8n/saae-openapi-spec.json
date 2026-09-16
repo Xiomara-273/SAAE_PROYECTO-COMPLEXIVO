@@ -1,0 +1,111 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API SAAE - Sistema de Analítica de Asistencia",
+    "version": "1.0.0",
+    "description": "Especificación OpenAPI para integrar los servicios de SAAE con n8n"
+  },
+  "servers": [
+    {
+      "url": "http://backend:5000",
+      "description": "Servidor Backend Docker Interno"
+    },
+    {
+      "url": "http://localhost:5000",
+      "description": "Servidor Backend Local"
+    }
+  ],
+  "paths": {
+    "/api/n8n/webhook": {
+      "post": {
+        "summary": "Recibir Webhook desde n8n",
+        "parameters": [
+          {
+            "name": "X-N8N-API-KEY",
+            "in": "header",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "accion": { "type": "string" },
+                  "datos": { "type": "object" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Acción procesada correctamente" }
+        }
+      }
+    },
+    "/api/n8n/test": {
+      "post": {
+        "summary": "Probar conexión de Webhooks con n8n",
+        "responses": {
+          "200": { "description": "Prueba enviada" }
+        }
+      }
+    },
+    "/api/asistencia": {
+      "get": {
+        "summary": "Obtener registros de asistencia",
+        "responses": {
+          "200": { "description": "Lista de asistencias" }
+        }
+      },
+      "post": {
+        "summary": "Registrar nueva asistencia",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "estudianteId": { "type": "integer" },
+                  "cursoId": { "type": "integer" },
+                  "fecha": { "type": "string" },
+                  "estado": { "type": "string" },
+                  "observacion": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Asistencia registrada" }
+        }
+      }
+    },
+    "/api/justificaciones": {
+      "get": {
+        "summary": "Obtener solicitudes de justificación",
+        "responses": {
+          "200": { "description": "Lista de solicitudes" }
+        }
+      },
+      "post": {
+        "summary": "Crear nueva solicitud de justificación",
+        "responses": {
+          "201": { "description": "Solicitud creada" }
+        }
+      }
+    },
+    "/api/reportes/analitica": {
+      "get": {
+        "summary": "Obtener reporte analítico consolidado",
+        "responses": {
+          "200": { "description": "Métricas e indicadores analíticos" }
+        }
+      }
+    }
+  }
+}

@@ -1,42 +1,48 @@
 {
-  // For more information, visit: https://go.microsoft.com/fwlink/?LinkId=733558
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Iniciar Backend (NestJS)",
       "type": "npm",
-      "script": "start",
+      "script": "start:dev",
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
       "isBackground": true,
       "problemMatcher": {
         "owner": "typescript",
         "pattern": "$tsc",
         "background": {
           "activeOnStart": true,
-          "beginsPattern": {
-            "regexp": "(.*?)"
-          },
-          "endsPattern": {
-            "regexp": "bundle generation complete"
-          }
+          "beginsPattern": "Starting Nest application",
+          "endsPattern": "Nest application successfully started"
         }
       }
     },
     {
+      "label": "Iniciar Frontend (Angular)",
       "type": "npm",
-      "script": "test",
+      "script": "start",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
       "isBackground": true,
       "problemMatcher": {
         "owner": "typescript",
         "pattern": "$tsc",
         "background": {
           "activeOnStart": true,
-          "beginsPattern": {
-            "regexp": "(.*?)"
-          },
-          "endsPattern": {
-            "regexp": "bundle generation complete"
-          }
+          "beginsPattern": "Building...",
+          "endsPattern": "Application bundle generation complete"
         }
       }
+    },
+    {
+      "label": "Iniciar Full-Stack (Backend + Frontend)",
+      "dependsOn": [
+        "Iniciar Backend (NestJS)",
+        "Iniciar Frontend (Angular)"
+      ]
     }
   ]
 }

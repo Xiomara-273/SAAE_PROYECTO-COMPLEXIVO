@@ -1,0 +1,71 @@
+services:
+  # Base de Datos PostgreSQL
+  db:
+    image: postgres:16-alpine
+    container_name: saae-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: saae_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d saae_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Backend NestJS + Prisma
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: saae-backend
+    restart: always
+    environment:
+      PORT: 5000
+      DATABASE_URL: "postgresql://postgres:postgrespassword@db:5432/saae_db?schema=public"
+      JWT_SECRET: "SAAE_CLAVE_SECRETA_DOCKER_2026"
+      N8N_WEBHOOK_URL: "http://n8n:5678/webhook/saae-eventos"
+      N8N_API_KEY: "SAAE_N8N_SECRET_KEY_2026"
+    ports:
+      - "5000:5000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Frontend Angular (Servido con Nginx)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: saae-frontend
+    restart: always
+    ports:
+      - "80:80"
+      - "4200:80"
+    depends_on:
+      - backend
+
+  # Plataforma de Automatización n8n
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: saae-n8n
+    restart: always
+    ports:
+      - "5678:5678"
+    environment:
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_PROTOCOL=http
+      - NODE_ENV=production
+      - WEBHOOK_URL=http://localhost:5678/
+    volumes:
+      - n8n_data:/home/node/.n8n
+
+volumes:
+  postgres_data:
+  n8n_data:

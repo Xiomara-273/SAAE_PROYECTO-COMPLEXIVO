@@ -1,0 +1,78 @@
+{
+  "name": "SAAE - Flujo de Reporte Diario de Analítica",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24
+            }
+          ]
+        }
+      },
+      "id": "node-cron-diario",
+      "name": "Disparador Diario (Cron 24h)",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "requestMethod": "GET",
+        "url": "http://backend:5000/api/reportes/analitica",
+        "options": {}
+      },
+      "id": "node-obtener-analitica",
+      "name": "Obtener Métricas de Analítica SAAE",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "resumenInforme",
+              "value": "=INFORME DIARIO DE ASISTENCIA SAAE: Porcentaje de Asistencia: {{ $json.indicadores.asistencia }}%, Estudiantes Registrados: {{ $json.indicadores.estudiantes }}, Casos en Riesgo (Faltas): {{ $json.indicadores.riesgo }}, Justificaciones Pendientes: {{ $json.indicadores.justificaciones }}."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-formatear-informe",
+      "name": "Formatear Informe Ejecutivo",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [700, 300]
+    }
+  ],
+  "connections": {
+    "Disparador Diario (Cron 24h)": {
+      "main": [
+        [
+          {
+            "node": "Obtener Métricas de Analítica SAAE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Métricas de Analítica SAAE": {
+      "main": [
+        [
+          {
+            "node": "Formatear Informe Ejecutivo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {}
+}

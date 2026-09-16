@@ -1,20 +1,29 @@
 {
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "ng serve",
-      "type": "chrome",
+      "name": "Depurar Backend (NestJS)",
+      "type": "node",
       "request": "launch",
-      "preLaunchTask": "npm: start",
-      "url": "http://localhost:4200/"
+      "args": ["${workspaceFolder}/backend/src/main.ts"],
+      "runtimeArgs": ["-r", "ts-node/register", "-r", "tsconfig-paths/register"],
+      "cwd": "${workspaceFolder}/backend",
+      "protocol": "inspector",
+      "internalConsoleOptions": "openOnSessionStart"
     },
     {
-      "name": "ng test",
+      "name": "Depurar Frontend (Angular Chrome)",
       "type": "chrome",
       "request": "launch",
-      "preLaunchTask": "npm: test",
-      "url": "http://localhost:9876/debug.html"
+      "preLaunchTask": "Iniciar Frontend (Angular)",
+      "url": "http://localhost:4200/",
+      "webRoot": "${workspaceFolder}/frontend/src"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Full-Stack (Backend + Frontend)",
+      "configurations": ["Depurar Backend (NestJS)", "Depurar Frontend (Angular Chrome)"]
     }
   ]
 }

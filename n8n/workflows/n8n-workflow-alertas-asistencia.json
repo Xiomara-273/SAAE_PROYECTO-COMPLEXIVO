@@ -1,0 +1,111 @@
+{
+  "name": "SAAE - Flujo de Alertas de Ausentismo",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "saae-eventos",
+        "options": {}
+      },
+      "id": "node-webhook-entrante",
+      "name": "Webhook SAAE (Alerta Asistencia)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body.evento }}",
+              "value2": "ALERTA_ASISTENCIA"
+            }
+          ]
+        }
+      },
+      "id": "node-filtrar-evento",
+      "name": "¿Es Alerta de Asistencia?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "mensajeNotificacion",
+              "value": "=ALERTA SAAE: El estudiante {{ $json.body.data.estudiante }} ha registrado estado {{ $json.body.data.estado }} en la materia {{ $json.body.data.materia }} el {{ $json.body.data.fecha }}."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-formatear-mensaje",
+      "name": "Formatear Notificación",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [700, 200]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://backend:5000/api/n8n/webhook",
+        "options": {},
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "SAAE_N8N_SECRET_KEY_2026"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"accion\": \"CONFIRMAR_NOTIFICACION_ENVIADA\",\n  \"datos\": {\n    \"estudiante\": \"{{ $json.mensajeNotificacion }}\",\n    \"fechaEnvio\": \"{{ $now.toISOString() }}\"\n  }\n}"
+      },
+      "id": "node-responder-backend",
+      "name": "Respuesta de Confirmación a SAAE Backend",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [920, 200]
+    }
+  ],
+  "connections": {
+    "Webhook SAAE (Alerta Asistencia)": {
+      "main": [
+        [
+          {
+            "node": "¿Es Alerta de Asistencia?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Es Alerta de Asistencia?": {
+      "main": [
+        [
+          {
+            "node": "Formatear Notificación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear Notificación": {
+      "main": [
+        [
+          {
+            "node": "Respuesta de Confirmación a SAAE Backend",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {}
+}

@@ -1,0 +1,73 @@
+{
+  "name": "SAAE - Flujo de Procesamiento de Justificaciones",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "saae-justificaciones",
+        "options": {}
+      },
+      "id": "node-webhook-justificacion",
+      "name": "Webhook Justificación Creada",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "resumenJustificacion",
+              "value": "=Nueva solicitud de justificación recibida. Estudiante: {{ $json.body.data.estudiante }} (Correo: {{ $json.body.data.correoEstudiante }}). Motivo: {{ $json.body.data.motivo }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-formatear-justificacion",
+      "name": "Formatear Aviso para Docente",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "requestMethod": "GET",
+        "url": "=http://backend:5000/api/justificaciones?estudianteId={{ $json.body.data.idJustificacion }}",
+        "options": {}
+      },
+      "id": "node-consultar-detalles",
+      "name": "Consultar Detalles de la Justificación",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [700, 300]
+    }
+  ],
+  "connections": {
+    "Webhook Justificación Creada": {
+      "main": [
+        [
+          {
+            "node": "Formatear Aviso para Docente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear Aviso para Docente": {
+      "main": [
+        [
+          {
+            "node": "Consultar Detalles de la Justificación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {}
+}

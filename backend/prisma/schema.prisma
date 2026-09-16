@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Rol {
+  ADMIN
+  DOCENTE
+  ESTUDIANTE
+}
+
+enum EstadoAsistencia {
+  PRESENTE
+  ATRASO
+  FALTA
+}
+
+enum EstadoJustificacion {
+  PENDIENTE
+  APROBADO
+  RECHAZADO
+}
+
+model Usuario {
+  id                 Int             @id @default(autoincrement())
+  cedula             String          @unique @db.VarChar(10)
+  nombres            String          @db.VarChar(100)
+  apellidos          String          @db.VarChar(100)
+  correo             String          @unique @db.VarChar(150)
+  password           String          @db.VarChar(255)
+  rol                Rol             @default(ESTUDIANTE)
+  estado             Boolean         @default(true)
+  fechaCreacion      DateTime        @default(now()) @map("fecha_creacion")
+  fechaActualizacion DateTime        @updatedAt @map("fecha_actualizacion")
+
+  cursosDocente       Curso[]         @relation("DocenteCursos")
+  asistencias         Asistencia[]    @relation("EstudianteAsistencias")
+  justificaciones     Justificacion[] @relation("EstudianteJustificaciones")
+
+  @@map("usuarios")
+}
+
+model Carrera {
+  id          Int       @id @default(autoincrement())
+  codigo      String    @unique @db.VarChar(20)
+  nombre      String    @db.VarChar(150)
+  descripcion String?   @db.Text
+  estado      Boolean   @default(true)
+  materias    Materia[]
+
+  @@map("carreras")
+}
+
+model Materia {
+  id        Int     @id @default(autoincrement())
+  codigo    String  @unique @db.VarChar(20)
+  nombre    String  @db.VarChar(150)
+  carreraId Int     @map("carrera_id")
+  estado    Boolean @default(true)
+
+  carrera Carrera @relation(fields: [carreraId], references: [id], onDelete: Cascade)
+  cursos  Curso[]
+
+  @@map("materias")
+}
+
+model Curso {
+  id        Int     @id @default(autoincrement())
+  nombre    String  @db.VarChar(100)
+  periodo   String  @db.VarChar(50)
+  materiaId Int     @map("materia_id")
+  docenteId Int     @map("docente_id")
+  estado    Boolean @default(true)
+
+  materia     Materia      @relation(fields: [materiaId], references: [id], onDelete: Cascade)
+  docente     Usuario      @relation("DocenteCursos", fields: [docenteId], references: [id], onDelete: Cascade)
+  asistencias Asistencia[]
+
+  @@map("cursos")
+}
+
+model Asistencia {
+  id            Int              @id @default(autoincrement())
+  estudianteId  Int              @map("estudiante_id")
+  cursoId       Int              @map("curso_id")
+  fecha         DateTime         @db.Date
+  estado        EstadoAsistencia @default(PRESENTE)
+  observacion   String?          @db.Text
+  registradoPor String?          @db.VarChar(100)
+  fechaRegistro DateTime         @default(now()) @map("fecha_registro")
+
+  estudiante      Usuario         @relation("EstudianteAsistencias", fields: [estudianteId], references: [id], onDelete: Cascade)
+  curso           Curso           @relation(fields: [cursoId], references: [id], onDelete: Cascade)
+  justificaciones Justificacion[]
+
+  @@map("asistencias")
+}
+
+model Justificacion {
+  id                 Int                 @id @default(autoincrement())
+  estudianteId       Int                 @map("estudiante_id")
+  asistenciaId       Int                 @map("asistencia_id")
+  motivo             String              @db.Text
+  archivoUrl         String?             @db.VarChar(255)
+  estado             EstadoJustificacion @default(PENDIENTE)
+  observacionDocente String?             @db.Text
+  fechaSolicitud     DateTime            @default(now()) @map("fecha_solicitud")
+
+  estudiante Usuario    @relation("EstudianteJustificaciones", fields: [estudianteId], references: [id], onDelete: Cascade)
+  asistencia Asistencia @relation(fields: [asistenciaId], references: [id], onDelete: Cascade)
+
+  @@map("justificaciones")
+}

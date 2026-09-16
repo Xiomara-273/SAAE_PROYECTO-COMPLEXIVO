@@ -1,6 +1,32 @@
-SAAE
-Sistema Analítico de Asistencia Estudiantil
-📌 Descripción del Proyecto
+# Sistema Analítico de Asistencia Estudiantil (SAAE)
+
+Aplicación full stack con Angular en el frontend y NestJS en el backend.
+
+## Estructura
+
+- `frontend/`: aplicación Angular.
+- `backend/`: API NestJS.
+- `n8n/`: flujos y automatizaciones.
+
+## Ejecutar el frontend
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+Disponible en `http://localhost:4200/`.
+
+## Ejecutar el backend
+
+```bash
+cd backend
+npm install
+npm run start:dev
+```
+
+
 
 El Sistema Analítico de Asistencia Estudiantil (SAAE) es una plataforma web orientada al monitoreo, control y análisis de la asistencia académica.
 

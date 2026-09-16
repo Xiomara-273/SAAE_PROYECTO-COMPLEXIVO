@@ -83,16 +83,40 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     border: 1px solid rgba(59, 130, 246, 0.4) !important;
   }
 
-  /* 5. TEXTOS SECUNDARIOS Y SUBTITULOS */
+  /* 5. ALERTAS Y NOTIFICACIONES DE SEGUIMIENTO */
+  .alert, .alert-box, .alert-item, .notification {
+    &.warning {
+      background: rgba(245, 158, 11, 0.15) !important;
+      color: #fbbf24 !important;
+      border: 1px solid rgba(245, 158, 11, 0.4) !important;
+    }
+    &.success {
+      background: rgba(34, 197, 94, 0.15) !important;
+      color: #4ade80 !important;
+      border: 1px solid rgba(34, 197, 94, 0.4) !important;
+    }
+    &.danger, &.error {
+      background: rgba(239, 68, 68, 0.15) !important;
+      color: #f87171 !important;
+      border: 1px solid rgba(239, 68, 68, 0.4) !important;
+    }
+    &.info, &.primary {
+      background: rgba(59, 130, 246, 0.15) !important;
+      color: #60a5fa !important;
+      border: 1px solid rgba(59, 130, 246, 0.4) !important;
+    }
+  }
+
+  /* 6. TEXTOS SECUNDARIOS Y SUBTITULOS */
   p, label, span, small, td, li, div, em, i, dt, dd,
   .page-header p, .card-header p, .subtitle, .description, .text-muted, .help-text, .hint,
   .stat-label, .metric-label, .switch-info p, .course-code {
-    &:not(.badge):not(.tag):not(.btn):not(.btn-primary):not(.btn-success):not(.btn-danger):not(.btn-warning):not(.btn-info):not(.stat-icon):not(.badge-status):not(.status-badge):not(.codigo):not(.status):not(.attendance-circle) {
+    &:not(.badge):not(.tag):not(.btn):not(.btn-primary):not(.btn-success):not(.btn-danger):not(.btn-warning):not(.btn-info):not(.stat-icon):not(.badge-status):not(.status-badge):not(.codigo):not(.status):not(.attendance-circle):not(.alert) {
       color: #cbd5e1 !important;
     }
   }
 
-  /* 6. INPUTS, SELECTS, TEXTAREAS Y CONTROLES DE FORMULARIO */
+  /* 7. INPUTS, SELECTS, TEXTAREAS Y CONTROLES DE FORMULARIO */
   input, select, textarea, .form-control, .form-input, .filter-select, .filter-input,
   .observation-input, .input-search input, select.filter-select,
   input[type="text"], input[type="email"], input[type="password"],
@@ -116,7 +140,7 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     }
   }
 
-  /* 7. TABLAS */
+  /* 8. TABLAS */
   table, .custom-table, .tabla-asistencia, .data-table, mat-table {
     background-color: #1e293b !important;
     color: #f8fafc !important;
@@ -141,7 +165,7 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     }
   }
 
-  /* 8. ETIQUETAS, CHIPS Y BADGES DE ESTADO (CULTURA VISUAL CON SOBRE-CONTRASTE) */
+  /* 9. ETIQUETAS, CHIPS Y BADGES DE ESTADO */
   .badge, .tag, .status-badge, .badge-status, .chip, [class*="badge"], span[class*="badge"] {
     &.success, &.aprobado, &.presente, &.aprobada, &.activo, &.Activo, &.excelente, &.Excelente {
       background-color: rgba(34, 197, 94, 0.25) !important;
@@ -165,7 +189,7 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     }
   }
 
-  /* 9. BARRAS DE NAVEGACION Y HEADER */
+  /* 10. BARRAS DE NAVEGACION Y HEADER */
   .sidebar, aside {
     background: linear-gradient(180deg, #020617, #0f172a) !important;
     border-right: 1px solid #1e293b !important;
@@ -177,7 +201,7 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     color: #f8fafc !important;
   }
 
-  /* 10. MODALES */
+  /* 11. MODALES */
   .modal-backdrop, .modal-overlay {
     background-color: rgba(0, 0, 0, 0.8) !important;
   }

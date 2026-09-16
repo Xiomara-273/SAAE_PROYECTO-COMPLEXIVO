@@ -849,4 +849,17 @@ align-items:flex-start;
   p, span, small, label, td, th {
     color: #cbd5e1 !important;
   }
-}
+  .alert-item {
+    background: rgba(245, 158, 11, 0.15) !important;
+    border: 1px solid rgba(245, 158, 11, 0.3) !important;
+    color: #fbbf24 !important;
+    border-radius: 10px !important;
+    padding: 12px 15px !important;
+    margin-bottom: 10px !important;
+
+    strong, p, small {
+      color: #f8fafc !important;
+    }
+  }
+}
+

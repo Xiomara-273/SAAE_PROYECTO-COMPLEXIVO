@@ -798,29 +798,38 @@ tbody tr {
   .filters-grid,
   .charts-grid,
   .kpi-grid {
-
-
-    grid-template-columns:
-
-    1fr;
-
-
+    grid-template-columns: 1fr;
   }
-
-
-
-  .table-header {
-
-
-    flex-direction:column;
-
-    align-items:flex-start;
-
-    gap:15px;
-
-
-  }
-
-
-
 }
+
+:host-context(.dark-mode) {
+  .reportes-container {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+  }
+  .filter-card, .kpi-card, .chart-card, .table-card {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  }
+  .page-header h1, .page-header p, h1, h2, h3, h4, .chart-header h3, .table-header h2 {
+    color: #f8fafc !important;
+  }
+  .filter-group label, p, span, small {
+    color: #cbd5e1 !important;
+  }
+  select, input, .filter-select {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+    border-color: #475569 !important;
+  }
+  table th {
+    background: #0f172a !important;
+    color: #94a3b8 !important;
+  }
+  table td {
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+  }
+}

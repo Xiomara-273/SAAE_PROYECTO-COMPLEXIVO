@@ -722,13 +722,33 @@ to {
 
 
 
-.modal-box {
-
-
- width:90%;
-
-
 }
 
-
-}
+:host-context(.dark-mode) {
+  .mis-cursos-container {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+  }
+  .welcome-card, .summary-card, .course-card, .modal-box {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  }
+  h1, h2, h3, h4, .course-title, .stat-value, .course-code {
+    color: #f8fafc !important;
+  }
+  p, span, small, .subtitle, .description, .stat-label, .meta-item span {
+    color: #cbd5e1 !important;
+  }
+  .summary-card {
+    h3, p, div, span, strong {
+      color: #f8fafc !important;
+    }
+  }
+  .course-card {
+    h3, p, div, span, strong {
+      color: #f8fafc !important;
+    }
+  }
+}

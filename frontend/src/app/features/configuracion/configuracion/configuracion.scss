@@ -730,22 +730,35 @@
 
 
   .form-grid {
-
-
     grid-template-columns:1fr;
-
-
   }
-
-
-
-  .actions {
-
-
-    flex-direction:column;
-
-
-  }
-
-
 }
+
+:host-context(.dark-mode) {
+  .configuracion-container {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+  }
+  .config-card, .setting-card, .profile-section {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  }
+  .switch-container {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+    border: 1px solid #334155 !important;
+  }
+  h1, h2, h3, h4, .card-header h2, .switch-info h4 {
+    color: #f8fafc !important;
+  }
+  p, label, span, small, .role, .switch-info p {
+    color: #cbd5e1 !important;
+  }
+  input, select, textarea, .form-input {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+    border-color: #475569 !important;
+  }
+}

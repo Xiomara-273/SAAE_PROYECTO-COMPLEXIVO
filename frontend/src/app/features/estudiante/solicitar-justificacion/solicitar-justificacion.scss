@@ -509,3 +509,44 @@
 
 
 }
+
+:host-context(.dark-mode) {
+  .justificacion-container {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+  }
+  .section-card, .request-card, .justificacion-card {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  }
+  h1, h2, h3, h4, .page-header h1, .section-header h2 {
+    color: #f8fafc !important;
+  }
+  p, label, span, small, .page-header p, .section-header p {
+    color: #cbd5e1 !important;
+  }
+  input, select, textarea, .form-control {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+    border-color: #475569 !important;
+  }
+  .badge {
+    &.approved, &.aprobada, &.aprobado {
+      background: rgba(34, 197, 94, 0.2) !important;
+      color: #4ade80 !important;
+      border: 1px solid rgba(34, 197, 94, 0.4) !important;
+    }
+    &.pending, &.pendiente {
+      background: rgba(245, 158, 11, 0.2) !important;
+      color: #fbbf24 !important;
+      border: 1px solid rgba(245, 158, 11, 0.4) !important;
+    }
+    &.rejected, &.rechazada, &.rechazado {
+      background: rgba(239, 68, 68, 0.2) !important;
+      color: #f87171 !important;
+      border: 1px solid rgba(239, 68, 68, 0.4) !important;
+    }
+  }
+}

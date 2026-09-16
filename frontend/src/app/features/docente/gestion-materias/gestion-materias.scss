@@ -1394,6 +1394,31 @@
 
   }
 
-
-
 }
+
+:host-context(.dark-mode) {
+  .gestion-materias-container {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+  }
+  .page-header h1, .page-header p, .header-content h1, .header-content p {
+    color: #f8fafc !important;
+  }
+  .kpi-card, .filters-card, .table-card, .modal-container {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  }
+  .search-box label, .filter-group label, .input-search span {
+    color: #f8fafc !important;
+  }
+  .input-search input, select, input {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+    border-color: #475569 !important;
+  }
+  .table-header h2, .table-header p, table th, table td {
+    color: #f8fafc !important;
+  }
+}

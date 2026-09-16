@@ -23,7 +23,7 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     border-color: #334155 !important;
   }
 
-  /* 1. TODOS los contenedores principales y vistas del sistema */
+  /* 1. VISTAS Y CONTENEDORES PRINCIPALES (Fondo Negro/Azul Oscuro #0f172a) */
   .layout, .content, main, .page-container, .main-content, .router-outlet,
   .dashboard-docente, .student-dashboard, .nosotros-container,
   .configuracion-container, .justificacion-container, .gestion-container,
@@ -39,18 +39,18 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     color: #f8fafc !important;
   }
 
-  /* 2. TODAS las Tarjetas, Paneles, Secciones y Cajas */
+  /* 2. TARJETAS, PANELES, CAJAS Y SECCIONES (Fondo Tarjeta Oscura #1e293b) */
   .card, .config-card, .section-card, .panel, .box,
   .welcome-card, .profile-card, .metric-card, .kpi-card,
   .hero, .contact-section, .mission-card, .item-card, .tech-card,
-  .request-card, .tabs-card, .table-card, .stat-card, .filter-card,
-  .filter-group, .filter-section, .table-responsive, .modal-container,
-  .modal-content, .modal-header, .modal-body, .modal-footer, .dialog-content,
-  .materia-card, .course-card, .detail-card, .summary-card, .chart-card,
-  .grafico-card, .tabla-card, .info-box, .stat-box, .summary-box,
-  .login-card, .register-card, .forgot-card, .filters-card, .justificacion-card,
-  .stats-grid, .summary-grid, .option-group, .setting-card, .profile-section,
-  div[class*="-card"], article[class*="-card"], section[class*="-card"] {
+  .request-card, .tabs-card, .table-card, .stat-card, .filter-card, .filters-card,
+  .summary-card, .course-card, .materia-card, .chart-card, .grafico-card, .tabla-card,
+  .filter-group, .filter-section, .table-responsive, .modal-container, .modal-content,
+  .modal-header, .modal-body, .modal-footer, .dialog-content, .dialog-container,
+  .info-box, .stat-box, .summary-box, .login-card, .register-card, .forgot-card,
+  .justificacion-card, .stats-grid, .summary-grid, .option-group, .setting-card,
+  .profile-section, .switch-container, .search-box, .input-search, .table-header,
+  .filters-card, .filter-grid, .kpi-grid, div[class*="-card"], article[class*="-card"], section[class*="-card"] {
     background-color: #1e293b !important;
     background: #1e293b !important;
     border-color: #334155 !important;
@@ -58,55 +58,28 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
   }
 
-  /* 3. Tarjetas Estadísticas (KPIs) con bordes de color */
-  .stat-card, .metric-card, .kpi-card {
-    background-color: #1e293b !important;
-
-    &.success { border-left: 5px solid #22c55e !important; }
-    &.warning { border-left: 5px solid #f59e0b !important; }
-    &.danger { border-left: 5px solid #ef4444 !important; }
-    &.primary, &.info { border-left: 5px solid #3b82f6 !important; }
-
-    .stat-icon, .icon-container, .metric-icon {
-      background: #0f172a !important;
-      color: #f8fafc !important;
-    }
-
-    span, h2, h3, strong, p, div {
-      color: #f8fafc !important;
-    }
-  }
-
-  /* 4. Pestanas (Tabs) */
-  .tabs-card button, .tab-btn, .nav-tab {
-    background: #334155 !important;
-    color: #cbd5e1 !important;
-
-    &.active, &.selected {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
-      color: #ffffff !important;
-    }
-  }
-
-  /* 5. Tipografía y Textos */
-  h1, h2, h3, h4, h5, h6, strong, b, th {
+  /* 3. ENCABEZADOS Y TITULOS EN GENERAL (Texto Blanco #f8fafc) */
+  h1, h2, h3, h4, h5, h6, strong, b, th,
+  .page-header h1, .card-header h2, .section-header h2, .welcome-text h1,
+  .course-title, .kpi-title, .kpi-value, .stat-value, .metric-value,
+  .table-header h2, .switch-info h4 {
     color: #f8fafc !important;
   }
 
-  p, label, span, small, td, li, div, em, i, dt, dd {
-    &:not(.badge):not(.tag):not(.btn):not(.btn-primary):not(.btn-success):not(.btn-danger):not(.btn-warning):not(.btn-info):not(.stat-icon):not(.badge-status) {
-      color: #e2e8f0 !important;
+  /* 4. TEXTOS SECUNDARIOS Y SUBTITULOS (Gris Claro #cbd5e1 / #94a3b8) */
+  p, label, span, small, td, li, div, em, i, dt, dd,
+  .page-header p, .card-header p, .subtitle, .description, .text-muted, .help-text, .hint,
+  .stat-label, .metric-label, .switch-info p, .course-code {
+    &:not(.badge):not(.tag):not(.btn):not(.btn-primary):not(.btn-success):not(.btn-danger):not(.btn-warning):not(.btn-info):not(.stat-icon):not(.badge-status):not(.status-badge) {
+      color: #cbd5e1 !important;
     }
   }
 
-  p, small, label, .subtitle, .text-muted, .description, .help-text, .hint {
-    color: #94a3b8 !important;
-  }
-
-  /* 6. Formularios, Inputs, Selects y Textareas */
-  .form-input, .filter-select, .filter-input, .observation-input, .textarea, .form-control,
+  /* 5. INPUTS, SELECTS, TEXTAREAS Y CONTROLES DE FORMULARIO */
+  input, select, textarea, .form-control, .form-input, .filter-select, .filter-input,
+  .observation-input, .input-search input, select.filter-select,
   input[type="text"], input[type="email"], input[type="password"],
-  input[type="date"], input[type="file"], input[type="number"], select, textarea {
+  input[type="date"], input[type="tel"], input[type="number"], input[type="file"] {
     background-color: #0f172a !important;
     color: #f8fafc !important;
     border: 1px solid #475569 !important;
@@ -126,18 +99,7 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     }
   }
 
-  /* 7. Cabecera (Header) */
-  .header, header {
-    background-color: #1e293b !important;
-    border-bottom: 1px solid #334155 !important;
-    color: #f8fafc !important;
-
-    h1, h2, h3, strong, span, small, p {
-      color: #f8fafc !important;
-    }
-  }
-
-  /* 8. Tablas de Datos */
+  /* 6. TABLAS */
   table, .custom-table, .tabla-asistencia, .data-table, mat-table {
     background-color: #1e293b !important;
     color: #f8fafc !important;
@@ -162,42 +124,51 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     }
   }
 
-  /* 9. Barra Lateral (Sidebar) */
+  /* 7. ETIQUETAS, CHIPS Y BADGES DE ESTADO */
+  .badge, .tag, .status-badge, .badge-status, .chip {
+    &.success, &.aprobado, &.presente, &.aprobada, &.activo {
+      background-color: rgba(34, 197, 94, 0.25) !important;
+      color: #4ade80 !important;
+      border: 1px solid rgba(34, 197, 94, 0.5) !important;
+    }
+    &.warning, &.pendiente, &.atraso {
+      background-color: rgba(245, 158, 11, 0.25) !important;
+      color: #fbbf24 !important;
+      border: 1px solid rgba(245, 158, 11, 0.5) !important;
+    }
+    &.danger, &.rechazado, &.ausente, &.falta, &.rechazada, &.inactivo {
+      background-color: rgba(239, 68, 68, 0.25) !important;
+      color: #f87171 !important;
+      border: 1px solid rgba(239, 68, 68, 0.5) !important;
+    }
+    &.primary, &.info, &.justificado, &.medica {
+      background-color: rgba(59, 130, 246, 0.25) !important;
+      color: #60a5fa !important;
+      border: 1px solid rgba(59, 130, 246, 0.5) !important;
+    }
+  }
+
+  /* 8. BARRAS DE NAVEGACION Y HEADER */
   .sidebar, aside {
     background: linear-gradient(180deg, #020617, #0f172a) !important;
     border-right: 1px solid #1e293b !important;
-
-    .sidebar-header, .sidebar-link, .nav-item {
-      color: #e2e8f0 !important;
-
-      &:hover, &.active {
-        background-color: #1e293b !important;
-        color: #ffffff !important;
-      }
-    }
   }
 
-  /* 10. Pie de Página (Footer) */
-  .footer, footer {
-    background-color: #0f172a !important;
-    border-top: 1px solid #334155 !important;
-    color: #94a3b8 !important;
-
-    h3, p, span, div, a {
-      color: #cbd5e1 !important;
-    }
+  .header, header {
+    background-color: #1e293b !important;
+    border-bottom: 1px solid #334155 !important;
+    color: #f8fafc !important;
   }
 
-  /* 11. Modales y Ventanas Emergentes */
+  /* 9. MODALES */
   .modal-backdrop, .modal-overlay {
     background-color: rgba(0, 0, 0, 0.8) !important;
   }
 
-  .modal-container, .modal-content, .dialog-container {
+  .modal-container, .modal-content, .dialog-container, .modal-box {
     background-color: #1e293b !important;
     color: #f8fafc !important;
     border: 1px solid #334155 !important;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7) !important;
   }
 
   .modal-header {
@@ -209,61 +180,5 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
 
   .modal-footer {
     border-top: 1px solid #334155 !important;
-  }
-
-  /* 12. Botones Secundarios y Cierre */
-  .btn-secondary, .btn-light, .btn-close, button.close {
-    background-color: #334155 !important;
-    color: #f8fafc !important;
-    border: 1px solid #475569 !important;
-
-    &:hover {
-      background-color: #475569 !important;
-      color: #ffffff !important;
-    }
-  }
-
-  /* 13. Badges, Chips y Etiquetas de Estado */
-  .badge, .tag, .status-badge, .badge-status, .chip {
-    &.success, &.aprobado, &.presente {
-      background-color: rgba(34, 197, 94, 0.2) !important;
-      color: #4ade80 !important;
-      border: 1px solid rgba(34, 197, 94, 0.4) !important;
-    }
-    &.warning, &.pendiente, &.atraso {
-      background-color: rgba(245, 158, 11, 0.2) !important;
-      color: #fbbf24 !important;
-      border: 1px solid rgba(245, 158, 11, 0.4) !important;
-    }
-    &.danger, &.rechazado, &.ausente, &.falta {
-      background-color: rgba(239, 68, 68, 0.2) !important;
-      color: #f87171 !important;
-      border: 1px solid rgba(239, 68, 68, 0.4) !important;
-    }
-    &.primary, &.info, &.justificado {
-      background-color: rgba(59, 130, 246, 0.2) !important;
-      color: #60a5fa !important;
-      border: 1px solid rgba(59, 130, 246, 0.4) !important;
-    }
-  }
-
-  /* 14. Gráficos (ApexCharts / Canvas / SVG) */
-  .apexcharts-canvas, .chart-container, .chart-wrapper {
-    text {
-      fill: #cbd5e1 !important;
-    }
-    .apexcharts-tooltip {
-      background-color: #1e293b !important;
-      color: #f8fafc !important;
-      border-color: #475569 !important;
-    }
-    .apexcharts-menu {
-      background-color: #1e293b !important;
-      border-color: #475569 !important;
-      color: #f8fafc !important;
-    }
-    .apexcharts-gridline, .apexcharts-xaxis-tick {
-      stroke: #334155 !important;
-    }
   }
 }

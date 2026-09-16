@@ -66,16 +66,33 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     color: #f8fafc !important;
   }
 
-  /* 4. TEXTOS SECUNDARIOS Y SUBTITULOS (Gris Claro #cbd5e1 / #94a3b8) */
+  /* 4. CIRCULOS Y BADGES ESPECIALES */
+  .attendance-circle {
+    background: rgba(34, 197, 94, 0.2) !important;
+    border: 2px solid #22c55e !important;
+    color: #4ade80 !important;
+
+    strong, span {
+      color: #4ade80 !important;
+    }
+  }
+
+  .codigo, .table-header span, .status {
+    background: rgba(59, 130, 246, 0.2) !important;
+    color: #60a5fa !important;
+    border: 1px solid rgba(59, 130, 246, 0.4) !important;
+  }
+
+  /* 5. TEXTOS SECUNDARIOS Y SUBTITULOS */
   p, label, span, small, td, li, div, em, i, dt, dd,
   .page-header p, .card-header p, .subtitle, .description, .text-muted, .help-text, .hint,
   .stat-label, .metric-label, .switch-info p, .course-code {
-    &:not(.badge):not(.tag):not(.btn):not(.btn-primary):not(.btn-success):not(.btn-danger):not(.btn-warning):not(.btn-info):not(.stat-icon):not(.badge-status):not(.status-badge) {
+    &:not(.badge):not(.tag):not(.btn):not(.btn-primary):not(.btn-success):not(.btn-danger):not(.btn-warning):not(.btn-info):not(.stat-icon):not(.badge-status):not(.status-badge):not(.codigo):not(.status):not(.attendance-circle) {
       color: #cbd5e1 !important;
     }
   }
 
-  /* 5. INPUTS, SELECTS, TEXTAREAS Y CONTROLES DE FORMULARIO */
+  /* 6. INPUTS, SELECTS, TEXTAREAS Y CONTROLES DE FORMULARIO */
   input, select, textarea, .form-control, .form-input, .filter-select, .filter-input,
   .observation-input, .input-search input, select.filter-select,
   input[type="text"], input[type="email"], input[type="password"],
@@ -99,7 +116,7 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     }
   }
 
-  /* 6. TABLAS */
+  /* 7. TABLAS */
   table, .custom-table, .tabla-asistencia, .data-table, mat-table {
     background-color: #1e293b !important;
     color: #f8fafc !important;
@@ -124,31 +141,31 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     }
   }
 
-  /* 7. ETIQUETAS, CHIPS Y BADGES DE ESTADO */
-  .badge, .tag, .status-badge, .badge-status, .chip {
-    &.success, &.aprobado, &.presente, &.aprobada, &.activo {
+  /* 8. ETIQUETAS, CHIPS Y BADGES DE ESTADO (CULTURA VISUAL CON SOBRE-CONTRASTE) */
+  .badge, .tag, .status-badge, .badge-status, .chip, [class*="badge"], span[class*="badge"] {
+    &.success, &.aprobado, &.presente, &.aprobada, &.activo, &.Activo, &.excelente, &.Excelente {
       background-color: rgba(34, 197, 94, 0.25) !important;
       color: #4ade80 !important;
       border: 1px solid rgba(34, 197, 94, 0.5) !important;
     }
-    &.warning, &.pendiente, &.atraso {
-      background-color: rgba(245, 158, 11, 0.25) !important;
-      color: #fbbf24 !important;
-      border: 1px solid rgba(245, 158, 11, 0.5) !important;
-    }
-    &.danger, &.rechazado, &.ausente, &.falta, &.rechazada, &.inactivo {
+    &.warning, &.pendiente, &.atraso, &.riesgo, &.Riesgo {
       background-color: rgba(239, 68, 68, 0.25) !important;
       color: #f87171 !important;
       border: 1px solid rgba(239, 68, 68, 0.5) !important;
     }
-    &.primary, &.info, &.justificado, &.medica {
+    &.danger, &.rechazado, &.ausente, &.falta, &.rechazada, &.inactivo, &.Inactivo {
+      background-color: rgba(239, 68, 68, 0.25) !important;
+      color: #f87171 !important;
+      border: 1px solid rgba(239, 68, 68, 0.5) !important;
+    }
+    &.primary, &.info, &.justificado, &.medica, &.bueno, &.Bueno {
       background-color: rgba(59, 130, 246, 0.25) !important;
       color: #60a5fa !important;
       border: 1px solid rgba(59, 130, 246, 0.5) !important;
     }
   }
 
-  /* 8. BARRAS DE NAVEGACION Y HEADER */
+  /* 9. BARRAS DE NAVEGACION Y HEADER */
   .sidebar, aside {
     background: linear-gradient(180deg, #020617, #0f172a) !important;
     border-right: 1px solid #1e293b !important;
@@ -160,7 +177,7 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     color: #f8fafc !important;
   }
 
-  /* 9. MODALES */
+  /* 10. MODALES */
   .modal-backdrop, .modal-overlay {
     background-color: rgba(0, 0, 0, 0.8) !important;
   }

@@ -369,68 +369,33 @@ color:#991b1b;
 
 /* ALERTAS */
 
-
-.alert{
-
-
-padding:15px;
-
-border-radius:10px;
-
-margin-bottom:12px;
-
-font-size:14px;
-
-
+.alert {
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  font-size: 14px;
 }
 
-
-
-.warning{
-
-background:#fef3c7;
-
-color:#92400e;
-
+.alert.warning, .warning {
+  background: #382a08 !important;
+  color: #fde047 !important;
+  border: 1px solid #854d0e !important;
 }
 
-
-
-.success{
-
-background:#dcfce7;
-
-color:#166534;
-
+.alert.success, .success {
+  background: #0c2b18 !important;
+  color: #86efac !important;
+  border: 1px solid #166534 !important;
 }
-
-
-
-
-
-
-
 
 @media(max-width:900px){
-
-
-.metrics-grid{
-
-grid-template-columns:1fr;
-
-}
-
-
-.profile-card{
-
-flex-direction:column;
-
-gap:25px;
-
-}
-
-
-
+  .metrics-grid{
+    grid-template-columns:1fr;
+  }
+  .profile-card{
+    flex-direction:column;
+    gap:25px;
+  }
 }
 
 :host-context(.dark-mode) {
@@ -464,27 +429,17 @@ gap:25px;
   p, label, td, th, .metric-label {
     color: #cbd5e1 !important;
   }
-  .alert {
-    border-radius: 10px !important;
-    padding: 15px !important;
-    font-size: 14px !important;
-
-    &.warning {
-      background: rgba(245, 158, 11, 0.15) !important;
-      color: #fbbf24 !important;
-      border: 1px solid rgba(245, 158, 11, 0.4) !important;
-    }
-    &.success {
-      background: rgba(34, 197, 94, 0.15) !important;
-      color: #4ade80 !important;
-      border: 1px solid rgba(34, 197, 94, 0.4) !important;
-    }
-    &.danger, &.error {
-      background: rgba(239, 68, 68, 0.15) !important;
-      color: #f87171 !important;
-      border: 1px solid rgba(239, 68, 68, 0.4) !important;
-    }
+  .alert.warning, .warning {
+    background: #382a08 !important;
+    color: #fde047 !important;
+    border: 1px solid #854d0e !important;
+  }
+  .alert.success, .success {
+    background: #0c2b18 !important;
+    color: #86efac !important;
+    border: 1px solid #166534 !important;
   }
 }
+
 
 

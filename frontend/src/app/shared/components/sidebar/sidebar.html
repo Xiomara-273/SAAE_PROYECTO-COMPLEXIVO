@@ -35,7 +35,7 @@
 
       <span>🏠</span>
 
-      Panel General de Analítica
+      {{ 'menu.analitica' | translate }}
 
     </a>
 
@@ -51,7 +51,7 @@
 
       <span>📋</span>
 
-      Seguimiento Académico
+      {{ 'menu.seguimiento' | translate }}
 
 
       <span class="arrow">
@@ -71,7 +71,7 @@
         routerLink="/docente/asistencia"
         routerLinkActive="active">
 
-        ✔ Control y Registro de Asistencia
+        ✔ {{ 'menu.asistencia' | translate }}
 
       </a>
 
@@ -81,7 +81,7 @@
         routerLink="/docente/justificaciones"
         routerLinkActive="active">
 
-        📄 Revisión de Justificaciones
+        📄 {{ 'menu.justificaciones' | translate }}
 
       </a>
 
@@ -92,7 +92,7 @@
         routerLink="/docente/materias"
         routerLinkActive="active">
 
-        📚 Gestión de Materias
+        📚 {{ 'menu.materias' | translate }}
 
       </a>
 
@@ -103,7 +103,7 @@
         routerLink="/docente/carreras"
         routerLinkActive="active">
 
-        🏫 Gestión de Carreras y Cursos
+        🏫 {{ 'menu.carreras' | translate }}
 
       </a>
 
@@ -130,7 +130,7 @@
 
       <span>🎓</span>
 
-      Gestión Académica Estudiante
+      {{ 'menu.estudiante' | translate }}
 
 
 
@@ -157,7 +157,7 @@
         routerLink="/estudiante/dashboard"
         routerLinkActive="active">
 
-        🎓 Dashboard General Estudiante
+        🎓 {{ 'menu.dashboard_estudiante' | translate }}
 
       </a>
 
@@ -168,7 +168,7 @@
         routerLink="/estudiante/historial"
         routerLinkActive="active">
 
-        📅 Historial de Asistencia
+        📅 {{ 'menu.historial' | translate }}
 
       </a>
 
@@ -181,7 +181,7 @@
         routerLink="/estudiante/solicitar-justificacion"
         routerLinkActive="active">
 
-        📝 Solicitar Justificación
+        📝 {{ 'menu.solicitar_justificacion' | translate }}
 
       </a>
 
@@ -192,7 +192,7 @@
         routerLink="/estudiante/cursos"
         routerLinkActive="active">
 
-        📚 Mis Cursos
+        📚 {{ 'menu.cursos' | translate }}
 
       </a>
 
@@ -219,7 +219,7 @@
 
       <span>📈</span>
 
-      Reportes
+      {{ 'menu.reportes' | translate }}
 
 
 
@@ -246,10 +246,11 @@
         routerLinkActive="active">
 
 
-        📊 Reportes y Analítica General
+        📊 {{ 'menu.reportes_general' | translate }}
 
 
       </a>
+
 
 
     </div>
@@ -273,7 +274,7 @@
 
       <span>⚙</span>
 
-      Sistema
+      {{ 'menu.sistema' | translate }}
 
 
 
@@ -301,7 +302,7 @@
         routerLink="/configuracion"
         routerLinkActive="active">
 
-        ⚙ Configuración
+        ⚙ {{ 'menu.configuracion' | translate }}
 
       </a>
 
@@ -312,7 +313,7 @@
         routerLink="/nosotros"
         routerLinkActive="active">
 
-        ℹ Nosotros
+        ℹ {{ 'menu.nosotros' | translate }}
 
       </a>
 
@@ -336,7 +337,7 @@
       (click)="cerrarSesion()">
 
 
-      🚪 Cerrar sesión
+      🚪 {{ 'menu.cerrar_sesion' | translate }}
 
 
     </button>

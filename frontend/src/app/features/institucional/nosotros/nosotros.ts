@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslatePipe } from '../../../core/services/translation.service';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { RouterModule } from '@angular/router';
   imports:[
 
     CommonModule,
-    RouterModule
+    RouterModule,
+    TranslatePipe
 
   ],
 

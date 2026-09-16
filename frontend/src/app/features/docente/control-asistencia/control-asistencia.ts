@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { TranslatePipe } from '../../../core/services/translation.service';
 
 import { AsistenciaService } from '../../../core/services/asistencia';
 
@@ -15,7 +16,8 @@ import { RegistroAsistencia } from '../../../shared/models/registro-asistencia';
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    TranslatePipe
   ],
   templateUrl: './control-asistencia.html',
   styleUrl: './control-asistencia.scss'

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { TranslatePipe } from '../../../core/services/translation.service';
 
 interface Solicitud {
 
@@ -21,8 +21,6 @@ interface Solicitud {
 
 }
 
-
-
 interface FormularioJustificacion {
 
   materia: string;
@@ -35,8 +33,6 @@ interface FormularioJustificacion {
 
 }
 
-
-
 @Component({
 
   selector: 'app-solicitar-justificacion',
@@ -47,7 +43,9 @@ interface FormularioJustificacion {
 
     CommonModule,
 
-    FormsModule
+    FormsModule,
+
+    TranslatePipe
 
   ],
 

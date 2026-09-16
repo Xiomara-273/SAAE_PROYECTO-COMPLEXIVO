@@ -7,6 +7,8 @@ import {
   PerfilUsuario,
   ConfiguracionSistema
 } from '../../../core/services/configuracion';
+import { TranslationService, TranslatePipe, Idioma } from '../../../core/services/translation.service';
+import { ThemeService } from '../../../core/services/theme.service';
 
 
 
@@ -20,7 +22,9 @@ import {
 
     CommonModule,
 
-    FormsModule
+    FormsModule,
+
+    TranslatePipe
 
   ],
 
@@ -37,6 +41,8 @@ export class Configuracion implements OnInit {
 
 
   private configuracionService = inject(ConfiguracionService);
+  public translationService = inject(TranslationService);
+  public themeService = inject(ThemeService);
 
 
 
@@ -119,13 +125,18 @@ export class Configuracion implements OnInit {
 
 
   ngOnInit():void{
-
-
     this.cargarPerfil();
-
     this.cargarConfiguracion();
+    this.sistema.idioma = this.translationService.idioma();
+    this.sistema.modoOscuro = this.themeService.modoOscuro();
+  }
 
+  onIdiomaChange(): void {
+    this.translationService.setIdioma(this.sistema.idioma as Idioma);
+  }
 
+  onModoOscuroChange(): void {
+    this.themeService.setModoOscuro(this.sistema.modoOscuro);
   }
 
 

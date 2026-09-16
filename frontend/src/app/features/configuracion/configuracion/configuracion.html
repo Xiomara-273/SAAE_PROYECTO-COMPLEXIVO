@@ -8,15 +8,14 @@
   <section class="page-header">
 
     <h1>
-      Configuración del Sistema
+      {{ 'title.configuracion' | translate }}
     </h1>
 
     <p>
-      Administra tu información personal y preferencias del sistema SAAE.
+      {{ 'desc.configuracion' | translate }}
     </p>
 
   </section>
-
 
 
 
@@ -73,7 +72,7 @@
 
 
         <p>
-          Información personal del usuario.
+          {{ 'header.perfil' | translate }}
         </p>
 
 
@@ -91,7 +90,7 @@
 
 
           <label>
-            Nombre
+            {{ 'label.nombre' | translate }}
           </label>
 
 
@@ -113,7 +112,7 @@
 
 
           <label>
-            Apellido
+            {{ 'label.apellido' | translate }}
           </label>
 
 
@@ -135,7 +134,7 @@
 
 
           <label>
-            Correo electrónico
+            {{ 'label.correo' | translate }}
           </label>
 
 
@@ -157,7 +156,7 @@
 
 
           <label>
-            Teléfono
+            {{ 'label.telefono' | translate }}
           </label>
 
 
@@ -189,7 +188,7 @@
           (click)="guardarPerfil()">
 
 
-          Guardar perfil
+          {{ 'btn.guardar_perfil' | translate }}
 
 
         </button>
@@ -221,12 +220,12 @@
 
 
         <h2>
-          Preferencias del sistema
+          {{ 'header.preferencias' | translate }}
         </h2>
 
 
         <p>
-          Personaliza el comportamiento de la plataforma.
+          {{ 'desc.preferencias' | translate }}
         </p>
 
 
@@ -242,7 +241,7 @@
 
 
         <span>
-          Notificaciones
+          {{ 'label.notificaciones' | translate }}
         </span>
 
 
@@ -277,7 +276,7 @@
 
 
         <span>
-          Modo oscuro
+          {{ 'label.modo_oscuro' | translate }}
         </span>
 
 
@@ -289,7 +288,9 @@
 
             type="checkbox"
 
-            [(ngModel)]="sistema.modoOscuro">
+            [(ngModel)]="sistema.modoOscuro"
+
+            (change)="onModoOscuroChange()">
 
 
 
@@ -312,7 +313,7 @@
 
 
         <label>
-          Idioma
+          {{ 'label.idioma' | translate }}
         </label>
 
 
@@ -321,7 +322,9 @@
 
           class="form-input"
 
-          [(ngModel)]="sistema.idioma">
+          [(ngModel)]="sistema.idioma"
+
+          (change)="onIdiomaChange()">
 
 
           <option value="Español">
@@ -356,7 +359,7 @@
 
 
 
-          Guardar configuración
+          {{ 'btn.guardar_configuracion' | translate }}
 
 
 
@@ -391,12 +394,12 @@
 
 
         <h2>
-          Seguridad
+          {{ 'header.seguridad' | translate }}
         </h2>
 
 
         <p>
-          Actualiza la contraseña de tu cuenta.
+          {{ 'desc.seguridad' | translate }}
         </p>
 
 
@@ -412,7 +415,7 @@
 
 
         <label>
-          Contraseña actual
+          {{ 'label.password_actual' | translate }}
         </label>
 
 
@@ -437,7 +440,7 @@
 
 
         <label>
-          Nueva contraseña
+          {{ 'label.password_nueva' | translate }}
         </label>
 
 
@@ -462,7 +465,7 @@
 
 
         <label>
-          Confirmar contraseña
+          {{ 'label.password_confirmar' | translate }}
         </label>
 
 
@@ -493,7 +496,7 @@
 
 
 
-          Cambiar contraseña
+          {{ 'btn.cambiar_password' | translate }}
 
 
 

@@ -8,11 +8,11 @@
     <div>
 
       <h1>
-        Control y Registro de Asistencia
+        {{ 'asistencia.title' | translate }}
       </h1>
 
       <p>
-        Seleccione la asignatura y registre la asistencia diaria de los estudiantes.
+        {{ 'dash.docente_subtitle' | translate }}
       </p>
 
     </div>
@@ -36,7 +36,7 @@
 
 
         <label>
-          Asignatura / Paralelo
+          {{ 'asistencia.seleccionar_materia' | translate }}
         </label>
 
 
@@ -69,7 +69,7 @@
 
 
         <label>
-          Fecha de registro
+          {{ 'asistencia.seleccionar_fecha' | translate }}
         </label>
 
 
@@ -114,7 +114,7 @@
       <div>
 
         <span>
-          Presentes
+          {{ 'asistencia.presente' | translate }}
         </span>
 
 
@@ -144,7 +144,7 @@
       <div>
 
         <span>
-          Atrasos
+          {{ 'asistencia.atraso' | translate }}
         </span>
 
 
@@ -175,7 +175,7 @@
       <div>
 
         <span>
-          Faltas
+          {{ 'asistencia.ausente' | translate }}
         </span>
 
 
@@ -214,12 +214,12 @@
 
 
       <h2>
-        Lista de estudiantes
+        {{ 'dash.total_estudiantes' | translate }}
       </h2>
 
 
       <span>
-        Registro diario de asistencia
+        {{ 'dash.sync_realtime' | translate }}
       </span>
 
 
@@ -245,12 +245,12 @@
 
 
             <th>
-              Estudiante
+              {{ 'asistencia.estudiante' | translate }}
             </th>
 
 
             <th>
-              Estado
+              {{ 'asistencia.estado' | translate }}
             </th>
 
 
@@ -439,7 +439,7 @@
         (click)="guardarAsistencia()"
       >
 
-        💾 Guardar y sincronizar asistencia
+        💾 {{ 'asistencia.guardar' | translate }}
 
 
       </button>

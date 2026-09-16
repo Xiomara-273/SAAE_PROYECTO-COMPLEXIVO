@@ -9,7 +9,7 @@
     <div class="profile-info">
 
       <h1>
-        Bienvenido, {{nombreEstudiante}}
+        {{ 'dash.welcome_title' | translate }}, {{nombreEstudiante}}
       </h1>
 
       <p>
@@ -17,7 +17,7 @@
       </p>
 
       <span class="status">
-        Seguimiento activo mediante SAAE
+        {{ 'dash.sync' | translate }}
       </span>
 
     </div>
@@ -31,7 +31,7 @@
       </strong>
 
       <span>
-        Asistencia General
+        {{ 'est.porcentaje_global' | translate }}
       </span>
 
     </div>
@@ -51,7 +51,7 @@
     <div class="metric-card success">
 
       <h3>
-        Asistencia
+        {{ 'dash.asistencia' | translate }}
       </h3>
 
       <strong>
@@ -59,7 +59,7 @@
       </strong>
 
       <p>
-        Estado actual
+        {{ 'dash.sync_realtime' | translate }}
       </p>
 
     </div>
@@ -70,7 +70,7 @@
     <div class="metric-card primary">
 
       <h3>
-        Materias activas
+        {{ 'est.materias_activas' | translate }}
       </h3>
 
       <strong>
@@ -78,7 +78,7 @@
       </strong>
 
       <p>
-        Asignaturas registradas
+        {{ 'dash.asignatura' | translate }}
       </p>
 
     </div>
@@ -89,7 +89,7 @@
     <div class="metric-card warning">
 
       <h3>
-        Alertas
+        {{ 'dash.alertas_criticas' | translate }}
       </h3>
 
       <strong>
@@ -97,7 +97,7 @@
       </strong>
 
       <p>
-        Revisar seguimiento
+        {{ 'dash.requiere_seguimiento' | translate }}
       </p>
 
     </div>
@@ -121,11 +121,11 @@
     <div class="card-header">
 
       <h2>
-        Asistencia por Materia
+        {{ 'dash.inasistencia_materia' | translate }}
       </h2>
 
       <span>
-        Periodo académico vigente
+        {{ 'dash.docente_subtitle' | translate }}
       </span>
 
     </div>
@@ -142,7 +142,7 @@
         <tr>
 
           <th>
-            Materia
+            {{ 'dash.asignatura' | translate }}
           </th>
 
 
@@ -152,12 +152,12 @@
 
 
           <th>
-            Porcentaje
+            {{ 'dash.asistencia' | translate }}
           </th>
 
 
           <th>
-            Estado
+            {{ 'asistencia.estado' | translate }}
           </th>
 
 
@@ -241,7 +241,7 @@
 <div class="card-header">
 
 <h2>
-Alertas Académicas
+{{ 'dash.alertas_criticas' | translate }}
 </h2>
 
 

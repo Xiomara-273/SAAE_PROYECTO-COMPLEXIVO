@@ -7,11 +7,11 @@
   <section class="page-header">
 
     <h1>
-      Solicitud de Justificación
+      {{ 'est.solicitar_title' | translate }}
     </h1>
 
     <p>
-      Registra una solicitud para justificar una inasistencia académica.
+      {{ 'est.motivo_label' | translate }}
     </p>
 
   </section>
@@ -33,11 +33,11 @@
         <div>
 
           <h2>
-            Nueva solicitud
+            {{ 'est.solicitar_title' | translate }}
           </h2>
 
           <p>
-            Complete la información y adjunte una evidencia.
+            {{ 'est.motivo_label' | translate }}
           </p>
 
         </div>
@@ -47,7 +47,7 @@
       <div class="form-group">
 
         <label>
-          Materia
+          {{ 'dash.asignatura' | translate }}
         </label>
 
         <select
@@ -71,7 +71,7 @@
         <div class="form-group">
 
           <label>
-            Fecha de la inasistencia
+            {{ 'just.fecha' | translate }}
           </label>
 
           <input
@@ -84,7 +84,7 @@
         <div class="form-group">
 
           <label>
-            Tipo de justificación
+            {{ 'asistencia.estado' | translate }}
           </label>
 
           <select
@@ -116,7 +116,7 @@
       <div class="form-group">
 
         <label>
-          Motivo
+          {{ 'just.motivo' | translate }}
         </label>
 
         <textarea
@@ -131,7 +131,7 @@
       <div class="form-group">
 
         <label>
-          Evidencia
+          {{ 'just.evidencia' | translate }}
         </label>
 
         <input
@@ -155,7 +155,7 @@
           class="btn-primary"
           (click)="enviarSolicitud()">
 
-          Enviar solicitud
+          {{ 'est.btn_enviar' | translate }}
 
         </button>
 
@@ -182,11 +182,11 @@
         <div>
 
           <h2>
-            Historial de solicitudes
+            {{ 'est.historial_title' | translate }}
           </h2>
 
           <p>
-            Estado de todas tus solicitudes enviadas.
+            {{ 'dash.sync_realtime' | translate }}
           </p>
 
         </div>

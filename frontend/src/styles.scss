@@ -5,4 +5,149 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* =====================================================
+   SISTEMA GLOBAL DE MODO OSCURO (DARK MODE)
+   ===================================================== */
+
+body.dark-mode, [data-theme="dark"], html.dark-mode {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
+
+  /* Forzar fondo oscuro en TODOS los contenedores principales */
+  *, ::before, ::after {
+    border-color: #334155 !important;
+  }
+
+  .layout, .content, main, .page-container,
+  .dashboard-docente, .student-dashboard, .nosotros-container,
+  .configuracion-container, .justificacion-container, .gestion-container {
+    background-color: #0f172a !important;
+    background: #0f172a !important;
+    color: #f8fafc !important;
+  }
+
+  /* Todas las tarjetas y paneles en modo oscuro */
+  .card, .config-card, .section-card, .panel,
+  .welcome-card, .profile-card, .metric-card, .kpi-card,
+  .hero, .contact-section, .mission-card, .item-card, .tech-card,
+  .request-card, .tabs-card, .table-card, .stat-card,
+  .filter-group, .table-responsive {
+    background-color: #1e293b !important;
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #f8fafc !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4) !important;
+  }
+
+  .stat-card {
+    background-color: #1e293b !important;
+
+    &.success { border-left: 5px solid #22c55e !important; }
+    &.warning { border-left: 5px solid #f59e0b !important; }
+    &.danger { border-left: 5px solid #ef4444 !important; }
+    &.primary { border-left: 5px solid #3b82f6 !important; }
+
+    .stat-icon {
+      background: #0f172a !important;
+      color: #f8fafc !important;
+    }
+
+    span, h2, strong, p {
+      color: #f8fafc !important;
+    }
+  }
+
+  .tabs-card button {
+    background: #334155 !important;
+    color: #cbd5e1 !important;
+
+    &.active {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+      color: #ffffff !important;
+    }
+  }
+
+  /* Color de texto en elementos tipográficos */
+  h1, h2, h3, h4, h5, h6, p, label, span, div, strong, small, b, td, th {
+    color: #f8fafc !important;
+  }
+
+  p, small, label, .subtitle {
+    color: #cbd5e1 !important;
+  }
+
+  /* Controles de Formulario, Campos de Texto y Desplegables */
+  .form-input, .filter-select, .filter-input, .observation-input, .textarea,
+  input[type="text"], input[type="email"], input[type="password"],
+  input[type="date"], input[type="file"], select, textarea {
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+    border: 1px solid #475569 !important;
+
+    &:focus {
+      border-color: #3b82f6 !important;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3) !important;
+    }
+
+    option {
+      background-color: #0f172a !important;
+      color: #f8fafc !important;
+    }
+  }
+
+  /* Cabecera */
+  .header {
+    background-color: #1e293b !important;
+    border-bottom: 1px solid #334155 !important;
+    color: #f8fafc !important;
+
+    h2, strong, span, small {
+      color: #f8fafc !important;
+    }
+  }
+
+  /* Tablas de Datos */
+  table, .custom-table {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+
+    thead, tr {
+      background-color: #0f172a !important;
+    }
+
+    th {
+      background-color: #0f172a !important;
+      color: #94a3b8 !important;
+      border-bottom: 2px solid #334155 !important;
+    }
+
+    td {
+      border-bottom: 1px solid #334155 !important;
+      color: #f8fafc !important;
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.05) !important;
+    }
+  }
+
+  /* Ajuste de Barra Lateral */
+  .sidebar {
+    background: linear-gradient(180deg, #020617, #0f172a) !important;
+    border-right: 1px solid #1e293b !important;
+  }
+
+  /* Pie de Página */
+  .footer {
+    background-color: #0f172a !important;
+    border-top: 1px solid #334155 !important;
+    color: #94a3b8 !important;
+
+    h3, p, span, div {
+      color: #cbd5e1 !important;
+    }
+  }
 }

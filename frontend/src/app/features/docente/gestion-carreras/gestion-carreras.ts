@@ -1,18 +1,17 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
+import { TranslatePipe } from '../../../core/services/translation.service';
 
 import { Carreras } from '../../../core/services/carreras';
 import { Cursos } from '../../../core/services/cursos';
-
-
 
 @Component({
   selector: 'app-gestion-carreras',
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    TranslatePipe
   ],
   templateUrl: './gestion-carreras.html',
   styleUrl: './gestion-carreras.scss',

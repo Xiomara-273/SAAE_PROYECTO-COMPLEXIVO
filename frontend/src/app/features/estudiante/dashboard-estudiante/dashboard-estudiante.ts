@@ -1,11 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
+import { TranslatePipe } from '../../../core/services/translation.service';
 
 import { DashboardEstudianteService } from '../../../core/services/dashboard-estudiante.service';
-
-
 
 interface MateriaAsistencia {
 
@@ -16,19 +14,12 @@ interface MateriaAsistencia {
 
 }
 
-
-
-
 interface AlertaEstudiante {
 
   tipo:string;
   mensaje:string;
 
 }
-
-
-
-
 
 @Component({
 
@@ -38,7 +29,8 @@ interface AlertaEstudiante {
 
   imports:[
     CommonModule,
-    RouterModule
+    RouterModule,
+    TranslatePipe
   ],
 
   templateUrl:'./dashboard-estudiante.html',

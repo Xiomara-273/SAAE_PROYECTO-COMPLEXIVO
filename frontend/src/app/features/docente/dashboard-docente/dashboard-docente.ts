@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslatePipe } from '../../../core/services/translation.service';
 
 import { AnaliticaService } from '../../../core/services/analitica';
 import { AlertaAsistencia } from '../../../shared/models/alerta-asistencia';
@@ -13,7 +14,8 @@ import { MetricasAsistencia } from '../../../shared/models/metricas-asistencia';
   standalone: true,
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    TranslatePipe
   ],
   templateUrl: './dashboard-docente.html',
   styleUrl: './dashboard-docente.scss'

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '../../../core/services/translation.service';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { CommonModule } from '@angular/common';
   imports:[
     CommonModule,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    TranslatePipe
   ],
 
   templateUrl:'./sidebar.html',

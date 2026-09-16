@@ -6,6 +6,8 @@ html, body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   transition: background-color 0.25s ease, color 0.25s ease;
+  background-color: #f8fafc;
+  color: #0f172a;
 }
 
 /* =====================================================
@@ -16,73 +18,95 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
   background-color: #0f172a !important;
   color: #f8fafc !important;
 
-  /* Forzar fondo oscuro en TODOS los contenedores principales */
+  /* Reseteo general de bordes */
   *, ::before, ::after {
     border-color: #334155 !important;
   }
 
-  .layout, .content, main, .page-container,
+  /* 1. TODOS los contenedores principales y vistas del sistema */
+  .layout, .content, main, .page-container, .main-content, .router-outlet,
   .dashboard-docente, .student-dashboard, .nosotros-container,
-  .configuracion-container, .justificacion-container, .gestion-container {
+  .configuracion-container, .justificacion-container, .gestion-container,
+  .analitica-container, .dashboard-analitico, .estadisticas-container,
+  .reportes-container, .reportes-analitica, .gestion-materias, .gestion-materias-container,
+  .gestion-carreras, .control-asistencia, .revision-justificaciones,
+  .historial-container, .historial-asistencia, .mis-cursos, .mis-cursos-container,
+  .auth-container, .login-container, .register-container, .forgot-password-container,
+  .welcome-container, .welcome-page, .app-container, .sidebar-layout,
+  div[class*="-container"], section[class*="-container"] {
     background-color: #0f172a !important;
     background: #0f172a !important;
     color: #f8fafc !important;
   }
 
-  /* Todas las tarjetas y paneles en modo oscuro */
-  .card, .config-card, .section-card, .panel,
+  /* 2. TODAS las Tarjetas, Paneles, Secciones y Cajas */
+  .card, .config-card, .section-card, .panel, .box,
   .welcome-card, .profile-card, .metric-card, .kpi-card,
   .hero, .contact-section, .mission-card, .item-card, .tech-card,
-  .request-card, .tabs-card, .table-card, .stat-card,
-  .filter-group, .table-responsive {
+  .request-card, .tabs-card, .table-card, .stat-card, .filter-card,
+  .filter-group, .filter-section, .table-responsive, .modal-container,
+  .modal-content, .modal-header, .modal-body, .modal-footer, .dialog-content,
+  .materia-card, .course-card, .detail-card, .summary-card, .chart-card,
+  .grafico-card, .tabla-card, .info-box, .stat-box, .summary-box,
+  .login-card, .register-card, .forgot-card, .filters-card, .justificacion-card,
+  .stats-grid, .summary-grid, .option-group, .setting-card, .profile-section,
+  div[class*="-card"], article[class*="-card"], section[class*="-card"] {
     background-color: #1e293b !important;
     background: #1e293b !important;
     border-color: #334155 !important;
     color: #f8fafc !important;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4) !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
   }
 
-  .stat-card {
+  /* 3. Tarjetas Estadísticas (KPIs) con bordes de color */
+  .stat-card, .metric-card, .kpi-card {
     background-color: #1e293b !important;
 
     &.success { border-left: 5px solid #22c55e !important; }
     &.warning { border-left: 5px solid #f59e0b !important; }
     &.danger { border-left: 5px solid #ef4444 !important; }
-    &.primary { border-left: 5px solid #3b82f6 !important; }
+    &.primary, &.info { border-left: 5px solid #3b82f6 !important; }
 
-    .stat-icon {
+    .stat-icon, .icon-container, .metric-icon {
       background: #0f172a !important;
       color: #f8fafc !important;
     }
 
-    span, h2, strong, p {
+    span, h2, h3, strong, p, div {
       color: #f8fafc !important;
     }
   }
 
-  .tabs-card button {
+  /* 4. Pestanas (Tabs) */
+  .tabs-card button, .tab-btn, .nav-tab {
     background: #334155 !important;
     color: #cbd5e1 !important;
 
-    &.active {
+    &.active, &.selected {
       background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
       color: #ffffff !important;
     }
   }
 
-  /* Color de texto en elementos tipográficos */
-  h1, h2, h3, h4, h5, h6, p, label, span, div, strong, small, b, td, th {
+  /* 5. Tipografía y Textos */
+  h1, h2, h3, h4, h5, h6, strong, b, th {
     color: #f8fafc !important;
   }
 
-  p, small, label, .subtitle {
-    color: #cbd5e1 !important;
+  p, label, span, small, td, li, div, em, i, dt, dd {
+    &:not(.badge):not(.tag):not(.btn):not(.btn-primary):not(.btn-success):not(.btn-danger):not(.btn-warning):not(.btn-info):not(.stat-icon):not(.badge-status) {
+      color: #e2e8f0 !important;
+    }
   }
 
-  /* Controles de Formulario, Campos de Texto y Desplegables */
-  .form-input, .filter-select, .filter-input, .observation-input, .textarea,
+  p, small, label, .subtitle, .text-muted, .description, .help-text, .hint {
+    color: #94a3b8 !important;
+  }
+
+  /* 6. Formularios, Inputs, Selects y Textareas */
+  .form-input, .filter-select, .filter-input, .observation-input, .textarea, .form-control,
   input[type="text"], input[type="email"], input[type="password"],
-  input[type="date"], input[type="file"], select, textarea {
+  input[type="date"], input[type="file"], input[type="number"], select, textarea {
     background-color: #0f172a !important;
     color: #f8fafc !important;
     border: 1px solid #475569 !important;
@@ -92,25 +116,29 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
       box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3) !important;
     }
 
+    &::placeholder {
+      color: #64748b !important;
+    }
+
     option {
       background-color: #0f172a !important;
       color: #f8fafc !important;
     }
   }
 
-  /* Cabecera */
-  .header {
+  /* 7. Cabecera (Header) */
+  .header, header {
     background-color: #1e293b !important;
     border-bottom: 1px solid #334155 !important;
     color: #f8fafc !important;
 
-    h2, strong, span, small {
+    h1, h2, h3, strong, span, small, p {
       color: #f8fafc !important;
     }
   }
 
-  /* Tablas de Datos */
-  table, .custom-table {
+  /* 8. Tablas de Datos */
+  table, .custom-table, .tabla-asistencia, .data-table, mat-table {
     background-color: #1e293b !important;
     color: #f8fafc !important;
 
@@ -118,13 +146,13 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
       background-color: #0f172a !important;
     }
 
-    th {
+    th, mat-header-cell {
       background-color: #0f172a !important;
       color: #94a3b8 !important;
       border-bottom: 2px solid #334155 !important;
     }
 
-    td {
+    td, mat-cell {
       border-bottom: 1px solid #334155 !important;
       color: #f8fafc !important;
     }
@@ -134,20 +162,108 @@ body.dark-mode, [data-theme="dark"], html.dark-mode {
     }
   }
 
-  /* Ajuste de Barra Lateral */
-  .sidebar {
+  /* 9. Barra Lateral (Sidebar) */
+  .sidebar, aside {
     background: linear-gradient(180deg, #020617, #0f172a) !important;
     border-right: 1px solid #1e293b !important;
+
+    .sidebar-header, .sidebar-link, .nav-item {
+      color: #e2e8f0 !important;
+
+      &:hover, &.active {
+        background-color: #1e293b !important;
+        color: #ffffff !important;
+      }
+    }
   }
 
-  /* Pie de Página */
-  .footer {
+  /* 10. Pie de Página (Footer) */
+  .footer, footer {
     background-color: #0f172a !important;
     border-top: 1px solid #334155 !important;
     color: #94a3b8 !important;
 
-    h3, p, span, div {
+    h3, p, span, div, a {
       color: #cbd5e1 !important;
+    }
+  }
+
+  /* 11. Modales y Ventanas Emergentes */
+  .modal-backdrop, .modal-overlay {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+  }
+
+  .modal-container, .modal-content, .dialog-container {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    border: 1px solid #334155 !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7) !important;
+  }
+
+  .modal-header {
+    border-bottom: 1px solid #334155 !important;
+    h1, h2, h3, h4, p, span {
+      color: #f8fafc !important;
+    }
+  }
+
+  .modal-footer {
+    border-top: 1px solid #334155 !important;
+  }
+
+  /* 12. Botones Secundarios y Cierre */
+  .btn-secondary, .btn-light, .btn-close, button.close {
+    background-color: #334155 !important;
+    color: #f8fafc !important;
+    border: 1px solid #475569 !important;
+
+    &:hover {
+      background-color: #475569 !important;
+      color: #ffffff !important;
+    }
+  }
+
+  /* 13. Badges, Chips y Etiquetas de Estado */
+  .badge, .tag, .status-badge, .badge-status, .chip {
+    &.success, &.aprobado, &.presente {
+      background-color: rgba(34, 197, 94, 0.2) !important;
+      color: #4ade80 !important;
+      border: 1px solid rgba(34, 197, 94, 0.4) !important;
+    }
+    &.warning, &.pendiente, &.atraso {
+      background-color: rgba(245, 158, 11, 0.2) !important;
+      color: #fbbf24 !important;
+      border: 1px solid rgba(245, 158, 11, 0.4) !important;
+    }
+    &.danger, &.rechazado, &.ausente, &.falta {
+      background-color: rgba(239, 68, 68, 0.2) !important;
+      color: #f87171 !important;
+      border: 1px solid rgba(239, 68, 68, 0.4) !important;
+    }
+    &.primary, &.info, &.justificado {
+      background-color: rgba(59, 130, 246, 0.2) !important;
+      color: #60a5fa !important;
+      border: 1px solid rgba(59, 130, 246, 0.4) !important;
+    }
+  }
+
+  /* 14. Gráficos (ApexCharts / Canvas / SVG) */
+  .apexcharts-canvas, .chart-container, .chart-wrapper {
+    text {
+      fill: #cbd5e1 !important;
+    }
+    .apexcharts-tooltip {
+      background-color: #1e293b !important;
+      color: #f8fafc !important;
+      border-color: #475569 !important;
+    }
+    .apexcharts-menu {
+      background-color: #1e293b !important;
+      border-color: #475569 !important;
+      color: #f8fafc !important;
+    }
+    .apexcharts-gridline, .apexcharts-xaxis-tick {
+      stroke: #334155 !important;
     }
   }
 }

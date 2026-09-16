@@ -8,22 +8,23 @@ Aplicación full stack con Angular en el frontend y NestJS en el backend.
 - `backend/`: API NestJS.
 - `n8n/`: flujos y automatizaciones.
 
-## Ejecutar el frontend
+## 🚀 Ejecución Única con Docker (Localhost)
+
+Para iniciar todos los servicios del sistema (Frontend, Backend, Base de Datos PostgreSQL y n8n) en entorno local:
 
 ```bash
-cd frontend
-npm install
-npm start
+docker-compose up -d --build
 ```
 
-Disponible en `http://localhost:4200/`.
+### 📍 Servicios disponibles en Localhost:
+- **Frontend App (Angular)**: `http://localhost:4200`
+- **Backend API (NestJS)**: `http://localhost:5000`
+- **Base de Datos (PostgreSQL)**: `localhost:5432`
+- **Automatizaciones (n8n)**: `http://localhost:5678`
 
-## Ejecutar el backend
-
+### 🛑 Detener el sistema:
 ```bash
-cd backend
-npm install
-npm run start:dev
+docker-compose down
 ```
 
 
@@ -398,19 +399,19 @@ Pendientes:
 ⬜ Dashboard estudiante con datos reales
 ⬜ Revisión de justificaciones con datos reales
 
-▶️ Ejecución del proyecto
+▶️ Ejecución del proyecto (Docker)
 
-Instalar dependencias:
+Iniciar el entorno completo:
 
-npm install
+```bash
+docker-compose up -d --build
+```
 
-Ejecutar servidor Angular:
+Servicios disponibles en Localhost:
+- Frontend: `http://localhost:4200`
+- Backend: `http://localhost:5000`
+- n8n: `http://localhost:5678`
 
-ng serve
-
-Proyecto disponible en:
-
-http://localhost:4200
 👥 Equipo de desarrollo
 
 Proyecto:

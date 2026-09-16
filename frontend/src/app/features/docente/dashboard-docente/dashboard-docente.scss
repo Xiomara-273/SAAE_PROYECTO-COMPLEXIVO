@@ -831,3 +831,22 @@ align-items:flex-start;
 
 
 }
+
+:host-context(.dark-mode) {
+  .dashboard-docente {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+  }
+  .welcome-card, .panel, .quick-actions, .table-card, .stat-card {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  }
+  h1, h2, h3, h4, .panel-header h2, .welcome-text h1 {
+    color: #f8fafc !important;
+  }
+  p, span, small, label, td, th {
+    color: #cbd5e1 !important;
+  }
+}

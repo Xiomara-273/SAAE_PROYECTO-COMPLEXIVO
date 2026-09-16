@@ -432,3 +432,22 @@ gap:25px;
 
 
 }
+
+:host-context(.dark-mode) {
+  .student-dashboard {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+  }
+  .profile-card, .section-card, .table-card, .metric-card {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  }
+  h1, h2, h3, h4, .metric-value {
+    color: #f8fafc !important;
+  }
+  p, span, small, label, td, th, .metric-label {
+    color: #cbd5e1 !important;
+  }
+}

@@ -848,3 +848,29 @@
 
 
 }
+
+:host-context(.dark-mode) {
+  .nosotros-container {
+    background: #0f172a !important;
+    color: #f8fafc !important;
+  }
+  .hero, .section-card, .contact-section, .mission-card, .item-card, .tech-card, .benefit, .benefit-card {
+    background: #1e293b !important;
+    color: #f8fafc !important;
+    border-color: #334155 !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+  }
+  h1, h2, h3, h4, .section-title h2, .hero h1 {
+    color: #f8fafc !important;
+  }
+  p, span, small, .section-card p, .benefit p, .item-card p, .tech-card {
+    color: #cbd5e1 !important;
+  }
+  .benefit p {
+    color: #f8fafc !important;
+  }
+  .benefit span {
+    background: #2563eb !important;
+    color: #ffffff !important;
+  }
+}

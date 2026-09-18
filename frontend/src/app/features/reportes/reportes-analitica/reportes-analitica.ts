@@ -200,104 +200,42 @@ export class ReportesAnalitica implements AfterViewInit {
 
 
 
-  ngAfterViewInit():void{
-
+  ngAfterViewInit(): void {
     if (typeof document === 'undefined') return;
-
     this.crearGraficoLinea();
-
     this.crearGraficoMateria();
-
-
+    this.generarReporte();
   }
 
-
-
-
-
-
-
-
-  generarReporte():void{
-
-
-
+  generarReporte(): void {
     this.reportesService
+      .obtenerReporte(this.filtros)
+      .subscribe({
+        next: (respuesta: any) => {
+          if (respuesta.indicadores) {
+            this.indicadores = respuesta.indicadores;
+          }
 
-    .obtenerReporte(this.filtros)
+          if (respuesta.detalle) {
+            this.reportes = respuesta.detalle.map((item: any) => ({
+              estudiante: item.estudiante,
+              carrera: item.carrera,
+              curso: item.curso,
+              asistencia: item.asistencia,
+              estado: item.estado === 'Riesgo' ? 'Riesgo' : 'Normal'
+            }));
+          }
 
-    .subscribe({
-
-
-
-      next:(respuesta)=>{
-
-
-
-        this.indicadores =
-        respuesta.indicadores;
-
-
-
-        this.reportes =
-        respuesta.detalle.map((item)=>({
-
-
-          estudiante:item.estudiante,
-
-          carrera:item.carrera,
-
-          curso:item.curso,
-
-          asistencia:item.asistencia,
-
-          estado:
-          item.estado === 'Riesgo'
-          ? 'Riesgo'
-          : 'Normal'
-
-
-        }));
-
-
-        this.actualizarGraficos();
-
-
-
-        alert(
-
-          'Reporte generado correctamente'
-
-        );
-
-
-
-      },
-
-
-
-      error:(error)=>{
-
-
-        console.error(error);
-
-
-        alert(
-
-          'Error al conectar con el servidor'
-
-        );
-
-
-      }
-
-
-
-    });
-
-
-
+          if (respuesta.distribucion) {
+            this.actualizarGraficosConDatos(respuesta.distribucion);
+          }
+        },
+        error: (error) => {
+          console.error('Error al obtener reporte:', error);
+        }
+      });
   }
+
 
 
 
@@ -491,31 +429,27 @@ export class ReportesAnalitica implements AfterViewInit {
 
 
 
-  actualizarGraficos():void{
-
-
-
-    if(this.graficoLinea){
-
-
-      this.graficoLinea.update();
-
-
-    }
-
-
-
-    if(this.graficoMateria){
-
-
+  actualizarGraficosConDatos(distribucion: { presentes: number; atrasos: number; faltas: number }): void {
+    if (this.graficoMateria) {
+      this.graficoMateria.data.labels = ['Presentes', 'Atrasos', 'Faltas'];
+      this.graficoMateria.data.datasets[0].data = [
+        distribucion.presentes || 0,
+        distribucion.atrasos || 0,
+        distribucion.faltas || 0
+      ];
       this.graficoMateria.update();
-
-
     }
-
-
-
   }
+
+  actualizarGraficos(): void {
+    if (this.graficoLinea) {
+      this.graficoLinea.update();
+    }
+    if (this.graficoMateria) {
+      this.graficoMateria.update();
+    }
+  }
+
 
 
 

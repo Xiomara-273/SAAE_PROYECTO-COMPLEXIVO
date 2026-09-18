@@ -4,262 +4,91 @@ import { RouterModule } from '@angular/router';
 import { TranslatePipe } from '../../../core/services/translation.service';
 
 import { DashboardEstudianteService } from '../../../core/services/dashboard-estudiante.service';
+import { Auth } from '../../../core/services/auth';
 
 interface MateriaAsistencia {
-
-  materia:string;
-  docente:string;
-  porcentaje:number;
-  estado:string;
-
+  materia: string;
+  docente: string;
+  porcentaje: number;
+  estado: string;
 }
 
 interface AlertaEstudiante {
-
-  tipo:string;
-  mensaje:string;
-
+  tipo: string;
+  mensaje: string;
 }
 
 @Component({
-
-  selector:'app-dashboard-estudiante',
-
-  standalone:true,
-
-  imports:[
+  selector: 'app-dashboard-estudiante',
+  standalone: true,
+  imports: [
     CommonModule,
     RouterModule,
     TranslatePipe
   ],
-
-  templateUrl:'./dashboard-estudiante.html',
-
-  styleUrl:'./dashboard-estudiante.scss'
-
+  templateUrl: './dashboard-estudiante.html',
+  styleUrl: './dashboard-estudiante.scss'
 })
-
 
 
 export class DashboardEstudianteComponent implements OnInit {
 
+  private dashboardService = inject(DashboardEstudianteService);
+  private authService = inject(Auth);
 
+  nombreEstudiante: string = '';
+  carrera: string = '';
+  semestre: string = '';
+  asistenciaGeneral: number = 0;
+  materias: MateriaAsistencia[] = [];
+  alertas: AlertaEstudiante[] = [];
 
-  private dashboardService = inject(
-    DashboardEstudianteService
-  );
+  cargando: boolean = false;
+  mensajeError: string = '';
 
 
-
-
-
-  nombreEstudiante:string = 'Mendez Xiomara';
-
-
-  carrera:string = 'Desarrollo de Software';
-
-
-  semestre:string = 'Quinto Semestre';
-
-
-
-  asistenciaGeneral:number = 86;
-
-
-
-
-
-  materias:MateriaAsistencia[]=[
-
-
-
-    {
-
-      materia:'Desarrollo de Software V',
-
-      docente:'Ing. Carlos Almeida',
-
-      porcentaje:92,
-
-      estado:'Excelente'
-
-    },
-
-
-
-    {
-
-      materia:'Arquitectura de Sistemas',
-
-      docente:'Ing. María López',
-
-      porcentaje:71,
-
-      estado:'Riesgo'
-
-    },
-
-
-
-    {
-
-      materia:'Base de Datos Avanzada',
-
-      docente:'Ing. Juan Pérez',
-
-      porcentaje:88,
-
-      estado:'Bueno'
-
-    }
-
-
-
-  ];
-
-
-
-
-
-
-
-  alertas:AlertaEstudiante[]=[
-
-
-
-    {
-
-      tipo:'warning',
-
-      mensaje:'Tu asistencia en Arquitectura de Sistemas está cerca del límite permitido.'
-
-    },
-
-
-
-    {
-
-      tipo:'success',
-
-      mensaje:'Mantienes una asistencia general superior al 80%.'
-
-    }
-
-
-
-  ];
-
-
-
-
-
-
-
-  ngOnInit():void{
-
-
+  ngOnInit(): void {
     this.cargarDashboard();
-
-
   }
 
 
+  cargarDashboard(): void {
 
+    const usuario = this.authService.obtenerUsuario();
 
+    if (!usuario) {
+      this.mensajeError = 'No hay sesión activa. Por favor inicie sesión.';
+      return;
+    }
 
+    const estudianteId = usuario.id;
+    this.cargando = true;
 
+    this.dashboardService.obtenerDashboard(estudianteId).subscribe({
 
-  cargarDashboard(){
-
-
-
-    const estudianteId = 1;
-
-
-
-    this.dashboardService
-    .obtenerDashboard(estudianteId)
-    .subscribe({
-
-
-
-      next:(data)=>{
-
-
-
-        this.nombreEstudiante =
-        data.nombreEstudiante;
-
-
-
-        this.carrera =
-        data.carrera;
-
-
-
-        this.semestre =
-        data.semestre;
-
-
-
-        this.asistenciaGeneral =
-        data.asistenciaGeneral;
-
-
-
-        this.materias =
-        data.materias;
-
-
-
-        this.alertas =
-        data.alertas;
-
-
-
+      next: (data) => {
+        this.cargando = false;
+        this.nombreEstudiante = data.nombreEstudiante;
+        this.carrera = data.carrera;
+        this.semestre = data.semestre;
+        this.asistenciaGeneral = data.asistenciaGeneral;
+        this.materias = data.materias;
+        this.alertas = data.alertas;
       },
 
-
-
-      error:(error)=>{
-
-
-
-        console.warn(
-          'No hay conexión con dashboard estudiante',
-          error
-        );
-
-
-
+      error: (err) => {
+        this.cargando = false;
+        console.warn('No hay conexión con dashboard estudiante:', err);
+        this.mensajeError = 'Error al cargar el dashboard. Verifique la conexión con el servidor.';
       }
-
-
 
     });
 
-
-
   }
 
 
-
-
-
-
-
-  solicitarJustificacion(){
-
-
-
-    console.log(
-      'Redirigiendo a formulario de justificación'
-    );
-
-
-
+  solicitarJustificacion(): void {
+    console.log('Redirigiendo a formulario de justificación');
   }
-
-
 
 }

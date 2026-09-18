@@ -3,6 +3,212 @@
   "nodes": [
     {
       "parameters": {
+        "httpMethod": "POST",
+        "path": "saae-eventos",
+        "options": {}
+      },
+      "id": "node-webhook-entrante",
+      "name": "Webhook SAAE (Alerta Asistencia)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 150]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.body?.evento || $json.body?.tipo }}",
+              "value2": "ALERTA_ASISTENCIA"
+            }
+          ]
+        }
+      },
+      "id": "node-filtrar-evento",
+      "name": "¿Es Alerta de Asistencia?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [480, 150]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "mensajeNotificacion",
+              "value": "=ALERTA SAAE: El estudiante {{ $json.body?.data?.estudiante || 'Sin datos disponibles' }} ha registrado estado {{ $json.body?.data?.estado || 'Sin datos disponibles' }} en la materia {{ $json.body?.data?.materia || 'Sin datos disponibles' }} el {{ $json.body?.data?.fecha || 'Sin datos disponibles' }}."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-formatear-mensaje",
+      "name": "Formatear Notificación",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [700, 100]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://backend:5000/api/n8n/webhook",
+        "options": {
+          "continueOnFail": true
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "SAAE_N8N_SECRET_KEY_2026"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"accion\": \"REGISTRAR_ALERTA_ASISTENCIA\",\n  \"datos\": {\n    \"estudiante\": \"{{ $json.body?.data?.estudiante || 'Sin datos disponibles' }}\",\n    \"docente\": \"{{ $json.body?.data?.docente || 'Sin datos disponibles' }}\",\n    \"cursoParalelo\": \"{{ $json.body?.data?.curso || $json.body?.data?.paralelo || 'Sin datos disponibles' }}\",\n    \"fecha\": \"{{ $json.body?.data?.fecha || 'Sin datos disponibles' }}\",\n    \"hora\": \"{{ $json.body?.data?.hora || 'Sin datos disponibles' }}\",\n    \"tipoAlerta\": \"{{ $json.body?.data?.tipoAlerta || $json.body?.data?.estado || 'Sin datos disponibles' }}\",\n    \"motivo\": \"{{ $json.body?.data?.motivo || 'Sin datos disponibles' }}\",\n    \"estado\": \"{{ $json.body?.data?.estado || 'Sin datos disponibles' }}\",\n    \"timestamp\": \"{{ $now.toISOString() }}\"\n  }\n}"
+      },
+      "id": "node-registrar-alerta",
+      "name": "Registrar alerta en backend/analítica",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [930, 100]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://backend:5000/api/n8n/webhook",
+        "options": {
+          "continueOnFail": true
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "SAAE_N8N_SECRET_KEY_2026"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"accion\": \"CONFIRMAR_NOTIFICACION_ENVIADA\",\n  \"datos\": {\n    \"estudiante\": \"{{ $json.body?.data?.estudiante || 'Sin datos disponibles' }}\",\n    \"mensaje\": \"{{ $json.mensajeNotificacion || 'Sin datos disponibles' }}\",\n    \"fechaEnvio\": \"{{ $now.toISOString() }}\"\n  }\n}"
+      },
+      "id": "node-responder-backend",
+      "name": "Respuesta Confirmación a SAAE",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1160, 100]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "resultado",
+              "value": "=No es una alerta de asistencia, se descarta el evento."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-evento-no-alerta",
+      "name": "No es alerta de asistencia",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [700, 240]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "saae-justificaciones",
+        "options": {}
+      },
+      "id": "node-webhook-justificacion",
+      "name": "Webhook Justificación Creada",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 450]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "resumenJustificacion",
+              "value": "=Nueva solicitud de justificación recibida. Estudiante: {{ $json.body?.data?.estudiante || 'Sin datos disponibles' }} (Correo: {{ $json.body?.data?.correoEstudiante || 'Sin datos disponibles' }}). Motivo: {{ $json.body?.data?.motivo || 'Sin datos disponibles' }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-formatear-justificacion",
+      "name": "Formatear Aviso para Docente",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [480, 450]
+    },
+    {
+      "parameters": {
+        "requestMethod": "GET",
+        "url": "=http://backend:5000/api/justificaciones?estudianteId={{ $json.body?.data?.estudianteId || $json.body?.data?.idJustificacion || 0 }}",
+        "options": {
+          "continueOnFail": true,
+          "timeout": 30000
+        }
+      },
+      "id": "node-consultar-detalles",
+      "name": "Consultar Detalles de la Justificación",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [700, 450]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://backend:5000/api/n8n/webhook",
+        "options": {
+          "continueOnFail": true
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "SAAE_N8N_SECRET_KEY_2026"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"accion\": \"REGISTRAR_JUSTIFICACION\",\n  \"datos\": {\n    \"estudiante\": \"{{ $json.body?.data?.estudiante || 'Sin datos disponibles' }}\",\n    \"docente\": \"{{ $json.body?.data?.docente || 'Sin datos disponibles' }}\",\n    \"cursoParalelo\": \"{{ $json.body?.data?.curso || $json.body?.data?.paralelo || 'Sin datos disponibles' }}\",\n    \"fechaJustificacion\": \"{{ $json.body?.data?.fechaJustificacion || $json.body?.data?.fechaSolicitud || $json.body?.data?.fecha || 'Sin datos disponibles' }}\",\n    \"motivo\": \"{{ $json.body?.data?.motivo || 'Sin datos disponibles' }}\",\n    \"estado\": \"{{ $json.body?.data?.estado || 'PENDIENTE' }}\",\n    \"observaciones\": \"{{ $json.body?.data?.observaciones || $json.body?.data?.observacion || 'Sin datos disponibles' }}\",\n    \"timestamp\": \"{{ $now.toISOString() }}\"\n  }\n}"
+      },
+      "id": "node-registrar-justificacion",
+      "name": "Registrar justificación en backend/analítica",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [930, 450]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://backend:5000/api/n8n/webhook",
+        "options": {
+          "continueOnFail": true
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "SAAE_N8N_SECRET_KEY_2026"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"accion\": \"NOTIFICAR_DOCENTE_JUSTIFICACION\",\n  \"datos\": {\n    \"docente\": \"{{ $json.body?.data?.docente || 'Sin datos disponibles' }}\",\n    \"estudiante\": \"{{ $json.body?.data?.estudiante || 'Sin datos disponibles' }}\",\n    \"motivo\": \"{{ $json.body?.data?.motivo || 'Sin datos disponibles' }}\",\n    \"mensaje\": \"{{ $json.resumenJustificacion || 'Sin datos disponibles' }}\"\n  }\n}"
+      },
+      "id": "node-aviso-docente",
+      "name": "Enviar Aviso al Docente",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1160, 450]
+    },
+    {
+      "parameters": {
         "rule": {
           "interval": [
             {
@@ -16,27 +222,49 @@
       "name": "Disparador Diario (Cron 24h)",
       "type": "n8n-nodes-base.cron",
       "typeVersion": 1,
-      "position": [250, 300]
+      "position": [250, 750]
     },
     {
       "parameters": {
         "requestMethod": "GET",
         "url": "http://backend:5000/api/reportes/analitica",
-        "options": {}
+        "options": {
+          "continueOnFail": true,
+          "timeout": 30000
+        },
+        "responseFormat": "json"
       },
       "id": "node-obtener-analitica",
       "name": "Obtener Métricas de Analítica SAAE",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
-      "position": [480, 300]
+      "position": [480, 750]
     },
     {
       "parameters": {
         "values": {
           "string": [
             {
-              "name": "resumenInforme",
-              "value": "=INFORME DIARIO DE ASISTENCIA SAAE: Porcentaje de Asistencia: {{ $json.indicadores.asistencia }}%, Estudiantes Registrados: {{ $json.indicadores.estudiantes }}, Casos en Riesgo (Faltas): {{ $json.indicadores.riesgo }}, Justificaciones Pendientes: {{ $json.indicadores.justificaciones }}."
+              "name": "promptEjecutivo",
+              "value": "=Analiza únicamente estas métricas del período acumulado de SAAE: {{ JSON.stringify($json) }}. Genera un análisis ejecutivo diario que identifique estrictamente: 1) Resumen general, 2) Comportamiento de asistencia, 3) Inasistencias y atrasos, 4) Alertas relevantes, 5) Situación de las justificaciones, 6) Cursos o estudiantes con incidencias relevantes, 7) Tendencias detectadas, 8) Observaciones, 9) Recomendaciones administrativas basadas únicamente en los datos. REGLAS ESTRICTAS: NO inventar información. NO crear estudiantes inexistentes. NO modificar números. Si un dato no existe, indicar 'Sin datos disponibles'."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-message-model",
+      "name": "Message a model",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [700, 750]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "reporteFinal",
+              "value": "=REPORTE DIARIO DE ANALÍTICA SAAE\nFecha: {{ $now.format('YYYY-MM-DD') }}\nPeríodo analizado: {{ $json.periodo || 'Últimas 24 horas' }}\n\n1. RESUMEN EJECUTIVO\n{{ $json.resumen?.resumenGeneral || 'Sin datos disponibles' }}\n\n2. MÉTRICAS PRINCIPALES\n- Total de estudiantes: {{ $json.indicadores?.estudiantes ?? $json.metricas?.totalEstudiantes ?? 'Sin datos disponibles' }}\n- Total de asistencias: {{ $json.distribucion?.presentes ?? $json.metricas?.totalAsistencias ?? 'Sin datos disponibles' }}\n- Total de inasistencias: {{ $json.distribucion?.faltas ?? $json.metricas?.totalInasistencias ?? 'Sin datos disponibles' }}\n- Total de atrasos: {{ $json.distribucion?.atrasos ?? $json.metricas?.totalAtrasos ?? 'Sin datos disponibles' }}\n- Total de alertas: {{ $json.indicadores?.riesgo ?? $json.metricas?.totalAlertas ?? 'Sin datos disponibles' }}\n- Total de justificaciones: {{ $json.indicadores?.justificaciones ?? $json.metricas?.totalJustificaciones ?? 'Sin datos disponibles' }}\n- Justificaciones aprobadas: {{ $json.metricas?.justificacionesAprobadas ?? 'Sin datos disponibles' }}\n- Justificaciones pendientes: {{ $json.indicadores?.justificaciones ?? $json.metricas?.justificacionesPendientes ?? 'Sin datos disponibles' }}\n- Justificaciones rechazadas: {{ $json.metricas?.justificacionesRechazadas ?? 'Sin datos disponibles' }}\n- Porcentaje de asistencia: {{ $json.indicadores?.asistencia ?? $json.metricas?.porcentajeAsistencia ?? 'Sin datos disponibles' }}%\n- Porcentaje de inasistencia: {{ $json.metricas?.porcentajeInasistencia ?? 'Sin datos disponibles' }}%\n\n3. ASISTENCIA\n{{ $json.resumen?.comportamientoAsistencia || 'Sin datos disponibles' }}\n\n4. INASISTENCIAS Y ATRASOS\n- Inasistencias: {{ $json.distribucion?.faltas ?? $json.metricas?.totalInasistencias ?? 'Sin datos disponibles' }}\n- Atrasos: {{ $json.distribucion?.atrasos ?? $json.metricas?.totalAtrasos ?? 'Sin datos disponibles' }}\n- Alertas: {{ $json.indicadores?.riesgo ?? $json.metricas?.totalAlertas ?? 'Sin datos disponibles' }}\n\n5. ALERTAS\n{{ $json.resumen?.alertasRelevantes || 'Sin datos disponibles' }}\n\n6. JUSTIFICACIONES\n- Aprobadas: {{ $json.metricas?.justificacionesAprobadas ?? 'Sin datos disponibles' }}\n- Pendientes: {{ $json.indicadores?.justificaciones ?? $json.metricas?.justificacionesPendientes ?? 'Sin datos disponibles' }}\n- Rechazadas: {{ $json.metricas?.justificacionesRechazadas ?? 'Sin datos disponibles' }}\n\n7. INCIDENCIAS RELEVANTES\n- Estudiantes con mayor cantidad de incidencias: {{ JSON.stringify($json.metricas?.estudiantesConMayorCantidadDeIncidencias) || 'Sin datos disponibles' }}\n- Cursos con mayor cantidad de incidencias: {{ JSON.stringify($json.metricas?.cursosConMayorCantidadDeIncidencias) || 'Sin datos disponibles' }}\n\n8. TENDENCIAS\n- Asistencia: {{ $json.tendencias?.asistencia || 'Sin datos disponibles' }}\n- Alertas: {{ $json.tendencias?.alertas || 'Sin datos disponibles' }}\n- Justificaciones: {{ $json.tendencias?.justificaciones || 'Sin datos disponibles' }}\n\n9. OBSERVACIONES\n{{ $json.observaciones || 'Sin datos disponibles' }}\n\n10. RECOMENDACIONES\n{{ $json.recomendaciones || 'Se recomienda revisar los cursos y estudiantes con incidencias relevantes y confirmar la gestión de justificaciones pendientes.' }}"
             }
           ]
         },
@@ -46,10 +274,129 @@
       "name": "Formatear Informe Ejecutivo",
       "type": "n8n-nodes-base.set",
       "typeVersion": 1,
-      "position": [700, 300]
+      "position": [930, 750]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://backend:5000/api/n8n/webhook",
+        "options": {
+          "continueOnFail": true
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "SAAE_N8N_SECRET_KEY_2026"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"accion\": \"ENVIAR_INFORME_ANALITICA\",\n  \"datos\": {\n    \"destinatario\": \"{{ $json.destinatario || 'coordinacion@saae.edu.ec' }}\",\n    \"asunto\": \"REPORTE DIARIO DE ANALÍTICA SAAE\",\n    \"contenido\": \"{{ $json.reporteFinal || 'Sin datos disponibles' }}\",\n    \"timestamp\": \"{{ $now.toISOString() }}\"\n  }\n}"
+      },
+      "id": "node-enviar-informe",
+      "name": "Enviar Informe",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1160, 750]
     }
   ],
   "connections": {
+    "Webhook SAAE (Alerta Asistencia)": {
+      "main": [
+        [
+          {
+            "node": "¿Es Alerta de Asistencia?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Es Alerta de Asistencia?": {
+      "main": [
+        [
+          {
+            "node": "Formatear Notificación",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "No es alerta de asistencia",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear Notificación": {
+      "main": [
+        [
+          {
+            "node": "Registrar alerta en backend/analítica",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registrar alerta en backend/analítica": {
+      "main": [
+        [
+          {
+            "node": "Respuesta Confirmación a SAAE",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook Justificación Creada": {
+      "main": [
+        [
+          {
+            "node": "Formatear Aviso para Docente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear Aviso para Docente": {
+      "main": [
+        [
+          {
+            "node": "Consultar Detalles de la Justificación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consultar Detalles de la Justificación": {
+      "main": [
+        [
+          {
+            "node": "Registrar justificación en backend/analítica",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registrar justificación en backend/analítica": {
+      "main": [
+        [
+          {
+            "node": "Enviar Aviso al Docente",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
     "Disparador Diario (Cron 24h)": {
       "main": [
         [
@@ -65,7 +412,29 @@
       "main": [
         [
           {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
             "node": "Formatear Informe Ejecutivo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear Informe Ejecutivo": {
+      "main": [
+        [
+          {
+            "node": "Enviar Informe",
             "type": "main",
             "index": 0
           }

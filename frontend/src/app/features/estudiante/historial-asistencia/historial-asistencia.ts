@@ -1,162 +1,127 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
+import { AsistenciaService } from '../../../core/services/asistencia';
+import { Auth } from '../../../core/services/auth';
+
 interface RegistroHistorial {
-
   fecha: string;
-
   materia: string;
-
   docente: string;
-
   estado: 'Presente' | 'Atraso' | 'Falta';
-
   observacion: string;
-
 }
 
 @Component({
-
   selector: 'app-historial-asistencia',
-
   standalone: true,
-
   imports: [
     CommonModule,
     FormsModule
   ],
-
   templateUrl: './historial-asistencia.html',
-
   styleUrl: './historial-asistencia.scss'
-
 })
 
-export class HistorialAsistenciaComponent {
+export class HistorialAsistenciaComponent implements OnInit {
+
+  private asistenciaService = inject(AsistenciaService);
+  private authService = inject(Auth);
 
   // ===============================
   // DATOS DEL ESTUDIANTE
   // ===============================
 
-  nombreEstudiante: string =
-    'Mendez Xiomara';
+  nombreEstudiante: string = '';
 
   // ===============================
   // FILTROS
   // ===============================
 
-  materias: string[] = [
-
-    'Desarrollo de Software V',
-
-    'Arquitectura de Sistemas',
-
-    'Base de Datos Avanzada'
-
-  ];
-
-  materiaSeleccionada: string =
-    'Todas';
+  materias: string[] = [];
+  materiaSeleccionada: string = 'Todas';
 
   // ===============================
   // KPIs
   // ===============================
 
   porcentajeTotal: number = 0;
-
   presentes: number = 0;
-
   atrasos: number = 0;
-
   faltas: number = 0;
 
   // ===============================
   // HISTORIAL
   // ===============================
 
-  historial: RegistroHistorial[] = [
+  historial: RegistroHistorial[] = [];
+  historialFiltrado: RegistroHistorial[] = [];
 
-    {
+  cargando: boolean = false;
+  mensajeError: string = '';
 
-      fecha: '21/07/2026',
+  // ===============================
+  // INIT
+  // ===============================
 
-      materia: 'Desarrollo de Software V',
-
-      docente: 'Ing. Carlos Almeida',
-
-      estado: 'Presente',
-
-      observacion: ''
-
-    },
-
-    {
-
-      fecha: '20/07/2026',
-
-      materia: 'Arquitectura de Sistemas',
-
-      docente: 'Ing. María López',
-
-      estado: 'Falta',
-
-      observacion: 'Sin justificación'
-
-    },
-
-    {
-
-      fecha: '19/07/2026',
-
-      materia: 'Base de Datos Avanzada',
-
-      docente: 'Ing. Juan Pérez',
-
-      estado: 'Presente',
-
-      observacion: ''
-
-    },
-
-    {
-
-      fecha: '18/07/2026',
-
-      materia: 'Arquitectura de Sistemas',
-
-      docente: 'Ing. María López',
-
-      estado: 'Atraso',
-
-      observacion: 'Llegó tarde'
-
-    },
-
-    {
-
-      fecha: '17/07/2026',
-
-      materia: 'Desarrollo de Software V',
-
-      docente: 'Ing. Carlos Almeida',
-
-      estado: 'Presente',
-
-      observacion: ''
-
+  ngOnInit(): void {
+    const usuario = this.authService.obtenerUsuario();
+    if (usuario) {
+      this.nombreEstudiante = `${usuario.nombres} ${usuario.apellidos}`;
+      this.cargarHistorial(usuario.id);
+    } else {
+      this.mensajeError = 'No hay sesión activa. Por favor inicie sesión.';
     }
+  }
 
-  ];
+  // ===============================
+  // CARGAR HISTORIAL DESDE BACKEND
+  // ===============================
 
-  historialFiltrado: RegistroHistorial[] = [
-    ...this.historial
-  ];
+  cargarHistorial(estudianteId: number): void {
+    this.cargando = true;
 
-  constructor() {
+    this.asistenciaService.obtenerAsistencia().subscribe({
 
-    this.calcularMetricas();
+      next: (data: any) => {
+        this.cargando = false;
+        // Mapear respuesta del backend al formato del historial
+        const registros = Array.isArray(data) ? data : [];
+        this.historial = registros.map((r: any) => ({
+          fecha: r.fecha || '',
+          materia: r.curso?.materia?.nombre || r.materia || '',
+          docente: r.curso?.docente
+            ? `${r.curso.docente.nombres} ${r.curso.docente.apellidos}`
+            : '',
+          estado: this.mapearEstado(r.estado),
+          observacion: r.observacion || ''
+        }));
 
+        // Extraer lista de materias únicas para el filtro
+        const materiasUnicas = [...new Set(this.historial.map(r => r.materia))].filter(Boolean);
+        this.materias = materiasUnicas;
+
+        this.historialFiltrado = [...this.historial];
+        this.calcularMetricas();
+      },
+
+      error: (err) => {
+        this.cargando = false;
+        console.warn('Error al cargar historial:', err);
+        this.mensajeError = 'Error al cargar el historial. Verifique la conexión con el servidor.';
+      }
+
+    });
+  }
+
+  private mapearEstado(estadoBackend: string): 'Presente' | 'Atraso' | 'Falta' {
+    const mapa: Record<string, 'Presente' | 'Atraso' | 'Falta'> = {
+      'PRESENTE': 'Presente',
+      'ATRASO': 'Atraso',
+      'FALTA': 'Falta'
+    };
+    return mapa[estadoBackend] || 'Presente';
   }
 
   // ===============================
@@ -164,27 +129,14 @@ export class HistorialAsistenciaComponent {
   // ===============================
 
   filtrarHistorial(): void {
-
     if (this.materiaSeleccionada === 'Todas') {
-
-      this.historialFiltrado = [
-        ...this.historial
-      ];
-
+      this.historialFiltrado = [...this.historial];
     } else {
-
-      this.historialFiltrado =
-        this.historial.filter(
-
-          registro =>
-            registro.materia === this.materiaSeleccionada
-
-        );
-
+      this.historialFiltrado = this.historial.filter(
+        registro => registro.materia === this.materiaSeleccionada
+      );
     }
-
     this.calcularMetricas();
-
   }
 
   // ===============================
@@ -192,38 +144,14 @@ export class HistorialAsistenciaComponent {
   // ===============================
 
   calcularMetricas(): void {
-
     const total = this.historialFiltrado.length;
 
-    this.presentes =
-      this.historialFiltrado.filter(
+    this.presentes = this.historialFiltrado.filter(r => r.estado === 'Presente').length;
+    this.atrasos = this.historialFiltrado.filter(r => r.estado === 'Atraso').length;
+    this.faltas = this.historialFiltrado.filter(r => r.estado === 'Falta').length;
 
-        registro => registro.estado === 'Presente'
-
-      ).length;
-
-    this.atrasos =
-      this.historialFiltrado.filter(
-
-        registro => registro.estado === 'Atraso'
-
-      ).length;
-
-    this.faltas =
-      this.historialFiltrado.filter(
-
-        registro => registro.estado === 'Falta'
-
-      ).length;
-
-    const puntaje =
-      this.presentes + (this.atrasos * 0.5);
-
-    this.porcentajeTotal =
-      total > 0
-        ? Math.round((puntaje / total) * 100)
-        : 0;
-
+    const puntaje = this.presentes + (this.atrasos * 0.5);
+    this.porcentajeTotal = total > 0 ? Math.round((puntaje / total) * 100) : 0;
   }
 
 }

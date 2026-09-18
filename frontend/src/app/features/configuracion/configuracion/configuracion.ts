@@ -9,6 +9,7 @@ import {
 } from '../../../core/services/configuracion';
 import { TranslationService, TranslatePipe, Idioma } from '../../../core/services/translation.service';
 import { ThemeService } from '../../../core/services/theme.service';
+import { Auth } from '../../../core/services/auth';
 
 
 
@@ -146,6 +147,8 @@ export class Configuracion implements OnInit {
 
 
 
+  private authService = inject(Auth);
+
   // ==================================
   // OBTENER PERFIL
   // ==================================
@@ -182,23 +185,16 @@ export class Configuracion implements OnInit {
         );
 
 
-        // Datos temporales mientras existe backend
-
-        this.perfil = {
-
-
-          nombre:'Xiomara',
-
-          apellido:'Mendez',
-
-          correo:'usuario@yavirac.edu.ec',
-
-          telefono:'0999999999',
-
-          rol:'Estudiante'
-
-
-        };
+        const u = this.authService.obtenerUsuario();
+        if (u) {
+          this.perfil = {
+            nombre: u.nombres || '',
+            apellido: u.apellidos || '',
+            correo: u.correo || '',
+            telefono: '',
+            rol: u.rol || ''
+          };
+        }
 
 
       }

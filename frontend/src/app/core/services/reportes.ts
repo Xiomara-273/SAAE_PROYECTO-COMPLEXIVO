@@ -100,7 +100,7 @@ export class Reportes {
   */
 
 
-  private apiUrl = 'http://localhost:5000/api/reportes';
+  private apiUrl = 'http://localhost:5000/api/reportes/analitica';
 
 
 

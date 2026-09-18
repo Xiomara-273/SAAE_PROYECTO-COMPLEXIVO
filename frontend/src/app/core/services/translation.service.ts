@@ -71,6 +71,7 @@ const DICCIONARIO: Record<Idioma, Record<string, string>> = {
     'dash.requiere_seguimiento': 'Requiere seguimiento',
     'dash.justificaciones_pendientes': 'Justificaciones pendientes',
     'dash.solicitudes_revisar': 'Solicitudes por revisar',
+    'dash.total_estudiantes': 'Total Estudiantes',
     'dash.ausentismo_semanal': 'Índice de ausentismo semanal',
     'dash.inasistencia_materia': 'Inasistencia por materia',
     'dash.estado_asistencia': 'Estado actual de asistencia',

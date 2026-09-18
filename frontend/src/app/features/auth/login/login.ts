@@ -13,6 +13,8 @@ import {
   RouterModule
 } from '@angular/router';
 
+import { Auth } from '../../../core/services/auth';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -29,6 +31,7 @@ export class LoginComponent implements OnInit {
 
   private fb = inject(FormBuilder);
   private router = inject(Router);
+  private authService = inject(Auth);
 
   loginForm!: FormGroup;
 
@@ -64,73 +67,55 @@ export class LoginComponent implements OnInit {
   }
 
   abrirRecuperar(): void {
-
     this.mostrarRecuperar = true;
-
   }
 
   cerrarRecuperar(): void {
-
     this.mostrarRecuperar = false;
-
   }
 
   enviarCodigo(): void {
-
-    alert(
-      'Se enviará el código de recuperación al correo institucional.'
-    );
-
+    alert('Se enviará el código de recuperación al correo institucional.');
     this.cerrarRecuperar();
-
   }
 
   onSubmit(): void {
 
     if (this.loginForm.invalid) {
-
       this.loginForm.markAllAsTouched();
-
       return;
-
     }
 
     this.cargando = true;
-
     this.mensajeError = '';
 
-    setTimeout(() => {
+    const datos = {
+      correo: this.loginForm.value.email,
+      password: this.loginForm.value.password
+    };
 
-      this.cargando = false;
+    this.authService.login(datos).subscribe({
 
-      const email =
-        this.loginForm.value.email.toLowerCase();
+      next: (res) => {
+        this.cargando = false;
+        const rol = res.usuario?.rol;
 
-      if (email.includes('docente')) {
+        if (rol === 'ESTUDIANTE') {
+          this.router.navigate(['/estudiante/dashboard']);
+        } else {
+          // DOCENTE y ADMIN van al dashboard docente
+          this.router.navigate(['/docente/dashboard']);
+        }
+      },
 
-        this.router.navigate([
-          '/docente/dashboard'
-        ]);
-
-        return;
-
+      error: (err) => {
+        this.cargando = false;
+        this.mensajeError =
+          err?.error?.message ||
+          'Correo o contraseña incorrectos. Intente nuevamente.';
       }
 
-      if (email.includes('estudiante')) {
-
-        this.router.navigate([
-          '/estudiante/dashboard'
-        ]);
-
-        return;
-
-      }
-
-      this.router.navigate([
-        '/docente/dashboard'
-      ]);
-
-    }, 1000);
+    });
 
   }
 

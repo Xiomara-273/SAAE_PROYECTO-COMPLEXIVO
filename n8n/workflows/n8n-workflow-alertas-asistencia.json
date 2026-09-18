@@ -36,7 +36,7 @@
           "string": [
             {
               "name": "mensajeNotificacion",
-              "value": "=ALERTA SAAE: El estudiante {{ $json.body.data.estudiante }} ha registrado estado {{ $json.body.data.estado }} en la materia {{ $json.body.data.materia }} el {{ $json.body.data.fecha }}."
+              "value": "=ALERTA SAAE: El estudiante {{ $json.body.data.estudiante || 'Sin datos disponibles' }} ha registrado estado {{ $json.body.data.estado || 'Sin datos disponibles' }} en la materia {{ $json.body.data.materia || 'Sin datos disponibles' }} el {{ $json.body.data.fecha || 'Sin datos disponibles' }}."
             }
           ]
         },
@@ -52,7 +52,9 @@
       "parameters": {
         "requestMethod": "POST",
         "url": "http://backend:5000/api/n8n/webhook",
-        "options": {},
+        "options": {
+          "continueOnFail": true
+        },
         "headerParametersUi": {
           "parameter": [
             {
@@ -62,13 +64,55 @@
           ]
         },
         "jsonParameters": true,
-        "bodyParametersJson": "={\n  \"accion\": \"CONFIRMAR_NOTIFICACION_ENVIADA\",\n  \"datos\": {\n    \"estudiante\": \"{{ $json.mensajeNotificacion }}\",\n    \"fechaEnvio\": \"{{ $now.toISOString() }}\"\n  }\n}"
+        "bodyParametersJson": "={\n  \"accion\": \"REGISTRAR_ALERTA_ASISTENCIA\",\n  \"datos\": {\n    \"estudiante\": \"{{ $json.body.data.estudiante || 'Sin datos disponibles' }}\",\n    \"docente\": \"{{ $json.body.data.docente || 'Sin datos disponibles' }}\",\n    \"cursoParalelo\": \"{{ $json.body.data.curso || $json.body.data.paralelo || 'Sin datos disponibles' }}\",\n    \"fecha\": \"{{ $json.body.data.fecha || 'Sin datos disponibles' }}\",\n    \"hora\": \"{{ $json.body.data.hora || 'Sin datos disponibles' }}\",\n    \"tipoAlerta\": \"{{ $json.body.data.tipoAlerta || $json.body.data.estado || 'Sin datos disponibles' }}\",\n    \"motivo\": \"{{ $json.body.data.motivo || 'Sin datos disponibles' }}\",\n    \"estado\": \"{{ $json.body.data.estado || 'Sin datos disponibles' }}\",\n    \"timestamp\": \"{{ $now.toISOString() }}\"\n  }\n}"
       },
-      "id": "node-responder-backend",
-      "name": "Respuesta de Confirmación a SAAE Backend",
+      "id": "node-registrar-alerta",
+      "name": "Registrar alerta en backend/analítica",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
-      "position": [920, 200]
+      "position": [930, 120]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://backend:5000/api/n8n/webhook",
+        "options": {
+          "continueOnFail": true
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "SAAE_N8N_SECRET_KEY_2026"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"accion\": \"CONFIRMAR_NOTIFICACION_ENVIADA\",\n  \"datos\": {\n    \"estudiante\": \"{{ $json.body.data.estudiante || 'Sin datos disponibles' }}\",\n    \"mensaje\": \"{{ $json.mensajeNotificacion || 'Sin datos disponibles' }}\",\n    \"fechaEnvio\": \"{{ $now.toISOString() }}\"\n  }\n}"
+      },
+      "id": "node-responder-backend",
+      "name": "Respuesta Confirmación a SAAE",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1160, 200]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "resultado",
+              "value": "=No es una alerta de asistencia, se descarta el evento."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "node-evento-no-alerta",
+      "name": "No es alerta de asistencia",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 1,
+      "position": [700, 420]
     }
   ],
   "connections": {
@@ -91,6 +135,13 @@
             "type": "main",
             "index": 0
           }
+        ],
+        [
+          {
+            "node": "No es alerta de asistencia",
+            "type": "main",
+            "index": 0
+          }
         ]
       ]
     },
@@ -98,7 +149,18 @@
       "main": [
         [
           {
-            "node": "Respuesta de Confirmación a SAAE Backend",
+            "node": "Registrar alerta en backend/analítica",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registrar alerta en backend/analítica": {
+      "main": [
+        [
+          {
+            "node": "Respuesta Confirmación a SAAE",
             "type": "main",
             "index": 0
           }

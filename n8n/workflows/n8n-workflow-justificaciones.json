@@ -19,7 +19,7 @@
           "string": [
             {
               "name": "resumenJustificacion",
-              "value": "=Nueva solicitud de justificación recibida. Estudiante: {{ $json.body.data.estudiante }} (Correo: {{ $json.body.data.correoEstudiante }}). Motivo: {{ $json.body.data.motivo }}"
+              "value": "=Nueva solicitud de justificación recibida. Estudiante: {{ $json.body.data.estudiante || 'Sin datos disponibles' }} (Correo: {{ $json.body.data.correoEstudiante || 'Sin datos disponibles' }}). Motivo: {{ $json.body.data.motivo || 'Sin datos disponibles' }}"
             }
           ]
         },
@@ -34,14 +34,65 @@
     {
       "parameters": {
         "requestMethod": "GET",
-        "url": "=http://backend:5000/api/justificaciones?estudianteId={{ $json.body.data.idJustificacion }}",
-        "options": {}
+        "url": "=http://backend:5000/api/justificaciones?estudianteId={{ $json.body.data.idJustificacion || 0 }}",
+        "options": {
+          "continueOnFail": true,
+          "timeout": 30000
+        }
       },
       "id": "node-consultar-detalles",
       "name": "Consultar Detalles de la Justificación",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://backend:5000/api/n8n/webhook",
+        "options": {
+          "continueOnFail": true
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "SAAE_N8N_SECRET_KEY_2026"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"accion\": \"REGISTRAR_JUSTIFICACION\",\n  \"datos\": {\n    \"estudiante\": \"{{ $json.body.data.estudiante || 'Sin datos disponibles' }}\",\n    \"docente\": \"{{ $json.body.data.docente || 'Sin datos disponibles' }}\",\n    \"cursoParalelo\": \"{{ $json.body.data.curso || $json.body.data.paralelo || 'Sin datos disponibles' }}\",\n    \"fechaJustificacion\": \"{{ $json.body.data.fechaSolicitud || $json.body.data.fecha || 'Sin datos disponibles' }}\",\n    \"motivo\": \"{{ $json.body.data.motivo || 'Sin datos disponibles' }}\",\n    \"estado\": \"{{ $json.body.data.estado || 'PENDIENTE' }}\",\n    \"observaciones\": \"{{ $json.body.data.observacion || $json.body.data.observaciones || 'Sin datos disponibles' }}\",\n    \"timestamp\": \"{{ $now.toISOString() }}\"\n  }\n}"
+      },
+      "id": "node-registrar-justificacion",
+      "name": "Registrar justificación en backend/analítica",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [930, 220]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://backend:5000/api/n8n/webhook",
+        "options": {
+          "continueOnFail": true
+        },
+        "headerParametersUi": {
+          "parameter": [
+            {
+              "name": "X-N8N-API-KEY",
+              "value": "SAAE_N8N_SECRET_KEY_2026"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"accion\": \"NOTIFICAR_DOCENTE_JUSTIFICACION\",\n  \"datos\": {\n    \"docente\": \"{{ $json.body.data.docente || 'Sin datos disponibles' }}\",\n    \"estudiante\": \"{{ $json.body.data.estudiante || 'Sin datos disponibles' }}\",\n    \"motivo\": \"{{ $json.body.data.motivo || 'Sin datos disponibles' }}\",\n    \"mensaje\": \"{{ $json.resumenJustificacion || 'Sin datos disponibles' }}\"\n  }\n}"
+      },
+      "id": "node-aviso-docente",
+      "name": "Enviar Aviso al Docente",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [1160, 300]
     }
   ],
   "connections": {
@@ -61,6 +112,28 @@
         [
           {
             "node": "Consultar Detalles de la Justificación",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consultar Detalles de la Justificación": {
+      "main": [
+        [
+          {
+            "node": "Registrar justificación en backend/analítica",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Registrar justificación en backend/analítica": {
+      "main": [
+        [
+          {
+            "node": "Enviar Aviso al Docente",
             "type": "main",
             "index": 0
           }

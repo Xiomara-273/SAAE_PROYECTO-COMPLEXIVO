@@ -38,18 +38,12 @@ export class DashboardDocente implements OnInit {
 
 
 
-  asistenciaGlobal:string =
-  '84.5%';
+  asistenciaGlobal: string = '--';
 
+  totalEstudiantesRiesgo: number = 0;
 
+  justificacionesPendientes: number = 0;
 
-  totalEstudiantesRiesgo:number =
-  5;
-
-
-
-  justificacionesPendientes:number =
-  3;
 
 
 
@@ -120,9 +114,6 @@ export class DashboardDocente implements OnInit {
         );
 
 
-        this.cargarDatosDemo();
-
-
       }
 
 
@@ -138,70 +129,7 @@ export class DashboardDocente implements OnInit {
 
 
 
-  cargarDatosDemo():void {
-
-
-
-    this.asistenciaGlobal =
-    '84.5%';
-
-
-
-    this.totalEstudiantesRiesgo =
-    5;
-
-
-
-    this.justificacionesPendientes =
-    3;
-
-
-
-    this.alertasCriticas = [
-
-
-
-      {
-
-        estudiante:'Mendez Xiomara',
-
-        materia:'Arquitectura de Sistemas',
-
-        porcentaje:71.4,
-
-        tipo:'danger',
-
-        detalle:'Asistencia bajo el mínimo permitido',
-
-        tiempo:'Hace 5 minutos'
-
-      },
-
-
-
-      {
-
-        estudiante:'Flores Byron',
-
-        materia:'Desarrollo de Software V',
-
-        porcentaje:78,
-
-        tipo:'warning',
-
-        detalle:'Tres atrasos consecutivos',
-
-        tiempo:'Hace 1 hora'
-
-      }
-
-
-
-    ];
-
-
-
-  }
+  errorMetricas: string = '';
 
 
 

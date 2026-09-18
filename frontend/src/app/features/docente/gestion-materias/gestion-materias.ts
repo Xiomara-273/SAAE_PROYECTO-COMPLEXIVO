@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
+import { MateriasService } from '../../../core/services/materias';
+import { Carreras } from '../../../core/services/carreras';
 
 
 // ===============================
@@ -8,774 +11,307 @@ import { FormsModule } from '@angular/forms';
 // ===============================
 
 interface Materia {
-
-
   id: number;
-
   codigo: string;
-
   nombre: string;
-
   descripcion: string;
-
   carrera: string;
-
   docente: string;
-
   curso: string;
-
   horario: string;
-
   aula: string;
-
   estado: string;
-
-
 }
 
 
 
-
-
-
 @Component({
-
   selector: 'app-gestion-materias',
-
   standalone: true,
-
   imports: [
-
     CommonModule,
-
     FormsModule
-
   ],
-
   templateUrl: './gestion-materias.html',
-
   styleUrl: './gestion-materias.scss'
-
-
 })
 
+export class GestionMateriasComponent implements OnInit {
 
-export class GestionMateriasComponent {
-
+  private materiasService = inject(MateriasService);
+  private carrerasService = inject(Carreras);
 
 
   // ===============================
   // VARIABLES PRINCIPALES
   // ===============================
 
-
-  materias: Materia[] = [
-
-
-
-    {
-
-
-      id:1,
-
-      codigo:'MAT-001',
-
-      nombre:'Programación Web',
-
-      descripcion:'Desarrollo de aplicaciones web con tecnologías modernas.',
-
-      carrera:'Desarrollo de Software',
-
-      docente:'Ing. Carlos Ramírez',
-
-      curso:'3ro A',
-
-      horario:'Lunes 08:00 - 10:00',
-
-      aula:'Laboratorio 1',
-
-      estado:'Activo'
-
-
-    },
-
-
-
-
-
-
-    {
-
-
-      id:2,
-
-      codigo:'MAT-002',
-
-      nombre:'Base de Datos',
-
-      descripcion:'Diseño y administración de bases de datos relacionales.',
-
-      carrera:'Desarrollo de Software',
-
-      docente:'Ing. María López',
-
-      curso:'2do B',
-
-      horario:'Martes 10:00 - 12:00',
-
-      aula:'Laboratorio 2',
-
-      estado:'Activo'
-
-
-    },
-
-
-
-
-
-
-
-    {
-
-
-      id:3,
-
-      codigo:'MAT-003',
-
-      nombre:'Análisis de Sistemas',
-
-      descripcion:'Modelado y análisis de requerimientos.',
-
-      carrera:'Tecnologías de la Información',
-
-      docente:'Ing. José Morales',
-
-      curso:'4to A',
-
-      horario:'Miércoles 14:00 - 16:00',
-
-      aula:'Aula 203',
-
-      estado:'Inactivo'
-
-
-    }
-
-
-
-  ];
-
-
-
-
-
+  materias: Materia[] = [];
+
+  cargando: boolean = false;
+  mensajeExito: string = '';
+  mensajeError: string = '';
 
 
   // ===============================
-  // LISTAS SELECT
+  // LISTAS SELECT (desde backend)
   // ===============================
 
-
-  carreras:string[]=[
-
-
-    'Desarrollo de Software',
-
-    'Tecnologías de la Información',
-
-    'Administración'
-
-
-  ];
-
-
-
-
-
-
-
-  cursos:string[]=[
-
-
-    '1ro A',
-
-    '2do A',
-
-    '2do B',
-
-    '3ro A',
-
-    '4to A'
-
-
-  ];
-
-
-
-
-
-
-
-  docentes:string[]=[
-
-
-    'Ing. Carlos Ramírez',
-
-    'Ing. María López',
-
-    'Ing. José Morales'
-
-
-  ];
-
-
-
-
-
+  carreras: any[] = [];
+  cursos: string[] = [];
+  docentes: string[] = [];
 
 
   // ===============================
   // FILTROS
   // ===============================
 
-
-  materiasFiltradas: Materia[]=[];
-
-
-
-  textoBusqueda:string='';
-
-
-
-  carreraSeleccionada:string='';
-
-
-
-  estadoSeleccionado:string='';
-
-
-
-
-
+  materiasFiltradas: Materia[] = [];
+  textoBusqueda: string = '';
+  carreraSeleccionada: string = '';
+  estadoSeleccionado: string = '';
 
 
   // ===============================
   // MODALES
   // ===============================
 
+  mostrarModal: boolean = false;
+  mostrarDetalles: boolean = false;
+  modoEdicion: boolean = false;
 
-  mostrarModal:boolean=false;
+  materiaSeleccionada!: Materia;
 
-
-
-  mostrarDetalles:boolean=false;
-
-
-
-  modoEdicion:boolean=false;
-
-
-
-
-
-
-
-  materiaSeleccionada!:Materia;
-
-
-
-
-
-
-
-  materiaActual:Materia={
-
-
-
-    id:0,
-
-    codigo:'',
-
-    nombre:'',
-
-    descripcion:'',
-
-    carrera:'',
-
-    docente:'',
-
-    curso:'',
-
-    horario:'',
-
-    aula:'',
-
-    estado:'Activo'
-
-
+  materiaActual: Materia = {
+    id: 0,
+    codigo: '',
+    nombre: '',
+    descripcion: '',
+    carrera: '',
+    docente: '',
+    curso: '',
+    horario: '',
+    aula: '',
+    estado: 'Activo'
   };
-
-
-
-
-
-
-
-  constructor(){
-
-
-    this.materiasFiltradas=[...this.materias];
-
-
-  }
-
-
-
-
-
 
 
   // ===============================
   // KPI
   // ===============================
 
+  get docentesActivos() {
+    return [...new Set(this.materias.map(m => m.docente))].length;
+  }
 
-  get docentesActivos(){
-
-
-    return this.docentes.length;
-
-
+  get cursosActivos() {
+    return [...new Set(this.materias.map(m => m.curso))].length;
   }
 
 
-
-
-  get cursosActivos(){
-
-
-    return this.cursos.length;
-
-
-  }
   // ===============================
-// FILTROS Y BUSQUEDA
-// ===============================
-
-
-filtrarMaterias(){
-
-
-  this.materiasFiltradas = this.materias.filter((materia)=>{
-
-
-
-    const texto = this.textoBusqueda
-      .toLowerCase()
-      .trim();
-
-
-
-    const coincideTexto =
-
-      materia.nombre
-      .toLowerCase()
-      .includes(texto)
-
-      ||
-
-      materia.codigo
-      .toLowerCase()
-      .includes(texto)
-
-      ||
-
-      materia.docente
-      .toLowerCase()
-      .includes(texto);
-
-
-
-
-
-    const coincideCarrera =
-
-      this.carreraSeleccionada === ''
-
-      ||
-
-      materia.carrera === this.carreraSeleccionada;
-
-
-
-
-
-
-    const coincideEstado =
-
-
-      this.estadoSeleccionado === ''
-
-      ||
-
-      materia.estado === this.estadoSeleccionado;
-
-
-
-
-
-
-
-    return (
-
-      coincideTexto
-
-      &&
-
-      coincideCarrera
-
-      &&
-
-      coincideEstado
-
-    );
-
-
-
-  });
-
-
-
-}
-
-
-
-
-
-
-
-
-// ===============================
-// ABRIR MODAL CREAR
-// ===============================
-
-
-abrirModalCrear(){
-
-
-
-  this.modoEdicion=false;
-
-
-
-  this.materiaActual={
-
-
-    id:0,
-
-    codigo:'',
-
-    nombre:'',
-
-    descripcion:'',
-
-    carrera:'',
-
-    docente:'',
-
-    curso:'',
-
-    horario:'',
-
-    aula:'',
-
-    estado:'Activo'
-
-
-  };
-
-
-
-  this.mostrarModal=true;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// ===============================
-// CERRAR MODAL
-// ===============================
-
-
-cerrarModal(){
-
-
-  this.mostrarModal=false;
-
-
-}
-
-
-
-
-
-
-
-
-
-// ===============================
-// GUARDAR MATERIA
-// ===============================
-
-
-guardarMateria(){
-
-
-
-  if(this.modoEdicion){
-
-
-
-    const index = this.materias.findIndex(
-
-
-      m => m.id === this.materiaActual.id
-
-
-    );
-
-
-
-
-
-    if(index !== -1){
-
-
-      this.materias[index] = {
-
-
-        ...this.materiaActual
-
-
-      };
-
+  // INIT
+  // ===============================
+
+  ngOnInit(): void {
+    this.cargarMaterias();
+    this.cargarCarreras();
+  }
+
+
+  // ===============================
+  // CARGAR MATERIAS DESDE BACKEND
+  // ===============================
+
+  cargarMaterias(): void {
+    this.cargando = true;
+
+    this.materiasService.obtenerMaterias().subscribe({
+
+      next: (data: any) => {
+        this.cargando = false;
+        // El backend puede retornar array directo o un objeto con { materias: [] }
+        const lista = Array.isArray(data) ? data : (data.materias || []);
+        this.materias = lista.map((m: any) => ({
+          id: m.id,
+          codigo: m.codigo || '',
+          nombre: m.nombre || '',
+          descripcion: m.descripcion || '',
+          carrera: m.carrera?.nombre || m.carrera || '',
+          docente: '',
+          curso: '',
+          horario: '',
+          aula: '',
+          estado: m.estado ? 'Activo' : 'Inactivo'
+        }));
+        this.filtrarMaterias();
+      },
+
+      error: (err) => {
+        this.cargando = false;
+        console.warn('Error al cargar materias:', err);
+        this.mensajeError = 'Error al cargar las materias. Verifique la conexión con el servidor.';
+        setTimeout(() => this.mensajeError = '', 5000);
+      }
+
+    });
+  }
+
+
+  // ===============================
+  // CARGAR CARRERAS PARA SELECT
+  // ===============================
+
+  cargarCarreras(): void {
+    this.carrerasService.obtenerCarreras().subscribe({
+      next: (data: any[]) => {
+        this.carreras = data;
+      },
+      error: (err) => {
+        console.warn('Error al cargar carreras:', err);
+      }
+    });
+  }
+
+
+  // ===============================
+  // FILTROS Y BÚSQUEDA
+  // ===============================
+
+  filtrarMaterias(): void {
+    this.materiasFiltradas = this.materias.filter(materia => {
+
+      const texto = this.textoBusqueda.toLowerCase().trim();
+
+      const coincideTexto =
+        materia.nombre.toLowerCase().includes(texto) ||
+        materia.codigo.toLowerCase().includes(texto) ||
+        materia.docente.toLowerCase().includes(texto);
+
+      const coincideCarrera =
+        this.carreraSeleccionada === '' ||
+        materia.carrera === this.carreraSeleccionada;
+
+      const coincideEstado =
+        this.estadoSeleccionado === '' ||
+        materia.estado === this.estadoSeleccionado;
+
+      return coincideTexto && coincideCarrera && coincideEstado;
+
+    });
+  }
+
+
+  // ===============================
+  // ABRIR MODAL CREAR
+  // ===============================
+
+  abrirModalCrear(): void {
+    this.modoEdicion = false;
+    this.materiaActual = {
+      id: 0, codigo: '', nombre: '', descripcion: '',
+      carrera: '', docente: '', curso: '',
+      horario: '', aula: '', estado: 'Activo'
+    };
+    this.mostrarModal = true;
+  }
+
+
+  // ===============================
+  // CERRAR MODAL
+  // ===============================
+
+  cerrarModal(): void {
+    this.mostrarModal = false;
+  }
+
+
+  // ===============================
+  // GUARDAR MATERIA (CREAR O ACTUALIZAR)
+  // ===============================
+
+  guardarMateria(): void {
+    this.mensajeExito = '';
+    this.mensajeError = '';
+
+    if (this.modoEdicion) {
+
+      this.materiasService.actualizarMateria(this.materiaActual.id, this.materiaActual).subscribe({
+        next: () => {
+          this.mensajeExito = 'Materia actualizada correctamente.';
+          this.cargarMaterias();
+          this.cerrarModal();
+          setTimeout(() => this.mensajeExito = '', 4000);
+        },
+        error: (err) => {
+          this.mensajeError = err?.error?.message || 'Error al actualizar la materia.';
+          setTimeout(() => this.mensajeError = '', 5000);
+        }
+      });
+
+    } else {
+
+      this.materiasService.crearMateria(this.materiaActual).subscribe({
+        next: () => {
+          this.mensajeExito = 'Materia creada correctamente.';
+          this.cargarMaterias();
+          this.cerrarModal();
+          setTimeout(() => this.mensajeExito = '', 4000);
+        },
+        error: (err) => {
+          this.mensajeError = err?.error?.message || 'Error al crear la materia.';
+          setTimeout(() => this.mensajeError = '', 5000);
+        }
+      });
 
     }
-
-
-
-
-
-  }
-
-  else{
-
-
-
-    const nuevaMateria:Materia={
-
-
-
-      ...this.materiaActual,
-
-      id:
-
-      this.materias.length + 1
-
-
-
-    };
-
-
-
-
-
-    this.materias.push(nuevaMateria);
-
-
-
   }
 
 
-
-
-
-  this.filtrarMaterias();
-
-
-
-  this.cerrarModal();
-
-
-
-}
-
-
-
-
-
-
-
-
-// ===============================
-// EDITAR
-// ===============================
-
-
-editarMateria(materia:Materia){
-
-
-
-  this.modoEdicion=true;
-
-
-
-  this.materiaActual={
-
-
-
-    ...materia
-
-
-
-  };
-
-
-
-
-  this.mostrarModal=true;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-// ===============================
-// ELIMINAR
-// ===============================
-
-
-eliminarMateria(id:number){
-
-
-
-  const confirmar = confirm(
-
-    '¿Está seguro de eliminar esta materia?'
-
-  );
-
-
-
-
-
-  if(confirmar){
-
-
-
-    this.materias = this.materias.filter(
-
-
-      materia => materia.id !== id
-
-
-    );
-
-
-
-
-
-    this.filtrarMaterias();
-
-
-
+  // ===============================
+  // EDITAR
+  // ===============================
+
+  editarMateria(materia: Materia): void {
+    this.modoEdicion = true;
+    this.materiaActual = { ...materia };
+    this.mostrarModal = true;
   }
 
 
+  // ===============================
+  // ELIMINAR
+  // ===============================
 
-}
+  eliminarMateria(id: number): void {
+    const confirmar = confirm('¿Está seguro de eliminar esta materia?');
+    if (!confirmar) return;
 
-
-
-
-
-
-
-
-
-// ===============================
-// DETALLES
-// ===============================
-
-
-verDetalles(materia:Materia){
-
-
-
-  this.materiaSeleccionada = {
-
-
-    ...materia
+    this.materiasService.eliminarMateria(id).subscribe({
+      next: () => {
+        this.mensajeExito = 'Materia eliminada correctamente.';
+        this.cargarMaterias();
+        setTimeout(() => this.mensajeExito = '', 4000);
+      },
+      error: (err) => {
+        this.mensajeError = err?.error?.message || 'Error al eliminar la materia.';
+        setTimeout(() => this.mensajeError = '', 5000);
+      }
+    });
+  }
 
 
-  };
+  // ===============================
+  // DETALLES
+  // ===============================
 
+  verDetalles(materia: Materia): void {
+    this.materiaSeleccionada = { ...materia };
+    this.mostrarDetalles = true;
+  }
 
-
-
-  this.mostrarDetalles=true;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-cerrarDetalles(){
-
-
-  this.mostrarDetalles=false;
-
-
-}
-// ===============================
-// CICLO DE VIDA
-// ===============================
-
-
-ngOnInit(){
-
-
-  this.filtrarMaterias();
-
-
-}
-
-
-
-
-
+  cerrarDetalles(): void {
+    this.mostrarDetalles = false;
+  }
 
 }
